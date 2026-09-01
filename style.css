@@ -1,0 +1,318 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'main',sans-serif;
+    text-decoration: none;
+}
+html,body{
+    height: 100%;
+    width: 100%;
+}
+body{
+    /* overflow-x: hidden; */
+}
+@font-face {
+  font-family: 'main';
+  src: url('components/fonts/futuralt-1.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* Improves performance */
+}
+@font-face {
+  font-family: 'ss';
+  src: url('components/fonts/LCALLIG.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* Improves performance */
+}
+
+
+/* home------------------------------------  */
+main{
+    
+}
+.home{
+    height: 100vh;
+    width: 100%;
+    background: url('components/hero-images/hero-bg.png');
+    background-size: cover;
+    background-position: center;
+    padding: 1.7vw 4vw 0 4vw;
+    position: relative;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 1.7vw 4vw;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+nav .section{
+    display: flex;
+    gap: 2vw;
+}
+
+nav a{
+    color: inherit;
+    font-size: 1.2rem;
+}
+.section a{
+  transition: 0.5s ease-in-out;
+}
+.section a:hover{
+    background-image: url("components/web-images/blue.jpg");
+
+  background-size: cover;
+  background-position: top;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.home h1{
+    position: absolute;
+    bottom: 3vw;
+    left: 50%;
+    transform: translate(-50%,0);
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+
+
+    line-height: 2.2vw;
+    text-align: center;
+    font-weight: 700;
+    font-size: 5.1vw;
+}
+
+/* about -----------------------------------------  */
+
+.about{
+    height: 100vh;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+}
+.about1{
+    height: 100vh;
+    width: 100%;
+    
+    flex-shrink: 0;
+    padding: 0 4vw 0 4vw;
+    display: flex;
+    color: black;
+}
+.about1 .left{
+    height: 100%;
+    width: 40%;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+    padding: 6vw 1vw 1vw 1vw;
+}
+.about1 .left .about-img{
+    height: 400px;
+    width: 100%;
+    border-radius: 2rem;
+    overflow: hidden;
+
+}
+.about1 .left .about-img img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.about1 .left p{
+    z-index: 99;
+    font-size: 1vw;
+}
+.about1 .right{
+    height: 100%;
+    width: 60%;
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+    
+    padding: 2vw 3vw 1vw 3vw;
+}
+/* eyes--------------------------------------------- */
+/* main container – no text, no bg, only eyes */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem 6rem;          /* space between eyes */
+            padding: 2rem;
+            background: transparent;  /* fully transparent */
+            backdrop-filter: none;
+            box-shadow: none;
+            border: none;
+        }
+
+        /* ── eye shell ── */
+        .eye {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle at 30% 30%, #f8faff, #dce4ef);
+            border-radius: 50%;
+            box-shadow: 
+                inset 0 -8px 12px rgba(0,0,0,0.15),
+                0 15px 30px rgba(0,0,0,0.25),
+                0 0 0 6px #2d3b52,
+                0 0 0 12px #1e2a3a;
+            transition: box-shadow 0.2s;
+            cursor: default;
+            /* no text inside */
+        }
+
+        /* subtle wet shine (no text) */
+        .eye::after {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 20px;
+            width: 5px;
+            height: 5px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 5%, rgba(255, 255, 255, 0) 80%);
+            border-radius: 50%;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* ── pupil ── */
+        .pupil {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle at 40% 35%, #1a2634, #0b0f14);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 4px 8px rgba(0,0,0,0.6);
+            transition: all 0.08s ease-out;
+            will-change: transform;
+        }
+
+        /* inner reflections (purely decorative, no text) */
+        .pupil::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, #f0f4ff 10%, rgba(255, 255, 255, 0.3) 70%);
+            border-radius: 50%;
+            opacity: 0.7;
+            filter: blur(0.5px);
+        }
+
+        .pupil::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            filter: blur(1px);
+        }
+
+        /* extra reflection on the eyeball (no text) */
+        .eye .reflection {
+            position: absolute;
+            top: 10%;
+            left: 15%;
+            width: 15%;
+            height: 10%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 80%);
+            border-radius: 50%;
+            opacity: 0.4;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        /* ── remove any possible text or label ── */
+        .eye-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            background: transparent;
+        }
+
+        /* no label – we hide anything that might appear */
+        .eye-label {
+            display: none;
+        }
+
+        /* responsive: smaller on narrow screens */
+        @media (max-width: 500px) {
+            .eye {
+                width: 120px;
+                height: 120px;
+            }
+            .pupil {
+                width: 48px;
+                height: 48px;
+            }
+            .container {
+                gap: 2.5rem 3.5rem;
+                padding: 1rem;
+            }
+        }
+/* eyes--------------------------------------------- */
+
+.about1 .right h1{
+    text-transform: uppercase;
+    font-size: 1.8vw;
+    
+}
+.about1 .right h4{
+    font-size: 2.1vw;
+    font-weight: 300;
+    line-height: 2.8vw;
+}
+.about1 .right p{
+    font-size: 2vw;
+    font-weight: 300;
+    line-height: 2.8vw;
+    margin-top: 4rem;
+    text-transform: uppercase;
+}
+
+
+
+
+
+
+
+
+
+
+.about2{
+    height: 100vh;
+    width: 100%;
+    background-color: #006ead;
+    flex-shrink: 0;
+}
