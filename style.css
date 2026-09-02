@@ -29,6 +29,13 @@ body{
   font-style: normal;
   font-display: swap; /* Improves performance */
 }
+@font-face {
+  font-family: 'cap';
+  src: url('components/fonts/TestFoundersGrotesk-Bold-BF66175e9700615.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* Improves performance */
+}
 
 
 /* home------------------------------------  */
@@ -375,7 +382,34 @@ nav a{
 
 
 .works{
-    
+    width: 100%;
+    background-color: #222;
+}
+
+.works-wrapper{
+    position: relative;
+    width: 100%;
+    height: 300vh; /* total scroll length for sticky effect */
+}
+
+.pro {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.pro1{
+    background-color: rgb(1, 99, 155);
+}
+
+.pro2{
+    background-color: rgb(3, 109, 74);
+}
+
+.pro3{
+    background-color: rgb(85, 0, 124);
 }
 
 
@@ -385,17 +419,107 @@ nav a{
 
 
 
+.contact{
+    /* background-color:#c75a5a; */
+    min-height: 100vh;
+    width: 100%;
+    padding: 4vw 3.7vw 0 3.7vw;
+    display: flex;
+    flex-direction: column;
+    gap: 4vw;
+}
 
+.contact .con-top h1{
+    color: #222;
+    font-size: 7vw;
+    line-height: 5.5vw;
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-family: 'cap';
+    letter-spacing: -0.4rem;
+    
+}
+.contact .con-top .box{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* background-color: blueviolet; */
+    
 
+    white-space: nowrap;
+}
+.contact .con-top img{
+    height: 5vw;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin-top:1vw ;
+    border-radius: 10px;
+    
+}
 
+.con-bottom{
+    /* background-color: burlywood; */
+    display: flex;
+    flex-direction: column;
+    text-transform: uppercase;
+    height: 60%;
+    position: relative;
+}
+.con-bottom .sec{
+    display: flex ;
+    margin-bottom: 1vw;
+}
+.con-bottom .sec span{
+    padding-right: 2vw;
+    text-align: right;
+    font-weight: 100;
+    color: #222;
+}
+.con-bottom .sec input{
+    border: none;
+    background: none;
+    font-family: 'cap';
+    font-size: 4vw;
+    outline: none;
+    color: #222;
 
+}
+input::placeholder,
+textarea::placeholder {
+  color: #acabab;
+}
+.con-bottom .sec .massage{
+    background: none;
+    font-family: 'cap';
+    font-size: 3vw;
+    outline: none;
+    width: 90%;
+    height: 10rem;
+    color: #222;
+}
 
-
-
-
-
-
-
+.con-bottom .send{
+    background-color: #222;
+    color: #fff;
+    border: none;
+    font-size: 2vw;
+    padding: 1vw 3vw;
+    border-radius: 1rem;
+    position: absolute;
+    bottom: -5rem;
+    right: 2vw;
+    cursor: pointer;
+    transition: 0.3s ease-out;
+}
+.con-bottom .send:hover{
+    transform: translateY(-3px) scale(1.05);
+    
+}
+.con-bottom .send:hover{
+    transform: translateY(3px) scale(0.95);
+    background-color: #353535;
+}
 
 
 
@@ -494,9 +618,9 @@ nav a{
     }
 
     .about2 .left1 .image {
-        height: 350px;
-        width: 100%;
-        max-width: 500px;
+        height: 150px;
+        width: auto;
+        /* max-width: 500px; */
     }
 
     .about2 .right1 {
@@ -524,12 +648,91 @@ nav a{
         width: 13px;
         height: 14px;
     }
+
+
+
+
+
+
+    .contact{
+    /* background-color:#c75a5a; */
+    height: 100vh;
+    width: 100%;
+    padding: 9vw 3.7vw 0 3.7vw;
+    display: flex;
+    flex-direction: column;
+    gap: 7vw;
+}
+
+    .con-bottom .send{
+    background-color: #222;
+    color: #fff;
+    border: none;
+    font-size: 2vw;
+    padding: 1vw 3vw;
+    border-radius: 1rem;
+    position: absolute;
+    bottom: 5vw;
+    right: 0rem;
+    cursor: pointer;
+    transition: 0.3s ease-out;
+}
 }
 
 
-/* Extra small screens */
 @media (max-width: 768px) {
+    .contact {
+        height: auto;
+        min-height: 100vh;
+        padding: 12vw 5vw 6vw;
+        gap: 2.5rem;
+    }
 
+    .contact .con-top h1 {
+        font-size: clamp(2.4rem, 8vw, 5rem);
+        line-height: 0.95;
+        letter-spacing: -0.12rem;
+    }
+
+    .contact .con-top .box {
+        flex-wrap: wrap;
+        gap: 0.7rem;
+    }
+
+    .contact .con-top img {
+        height: clamp(2rem, 5vw, 3.5rem);
+        margin-top: 0;
+    }
+
+    .con-bottom {
+        height: auto;
+        gap: 0.8rem;
+    }
+
+    .con-bottom .sec {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .con-bottom .sec span {
+        width: 100%;
+        padding-right: 0;
+        text-align: left;
+        font-size: 0.78rem;
+    }
+
+    .con-bottom .sec input,
+    .con-bottom .sec .massage {
+        width: 100%;
+        font-size: clamp(1.05rem, 2.8vw, 2rem);
+    }
+
+    .con-bottom .sec .massage {
+        min-height: 7rem;
+        height: 8rem;
+    }
 
     .home h1{
     bottom: 7vw;
@@ -590,9 +793,9 @@ nav a{
     }
 
     .about2 .left1 .image {
-        height: 250px;
+        height: 120px;
         width: 100%;
-        max-width: 420px;
+        /* max-width: 420px; */
     }
 
     .about2 .right1 h3 {
@@ -617,10 +820,53 @@ nav a{
         width: 14px;
         height: 14px;
     }
+
+
+
+    .con-bottom .send{
+    background-color: #222;
+    color: #fff;
+    border: none;
+    font-size: 3vw;
+    padding: 1vw 3vw;
+    border-radius: 1rem;
+    position: absolute;
+    bottom: -2rem;
+    right: 0rem;
+}
+
 }
 
 /* Small mobile */
 @media (max-width: 480px) {
+    .contact {
+        padding: 16vw 4vw 5vw;
+        gap: 2rem;
+    }
+
+    .contact .con-top h1 {
+        font-size: clamp(2rem, 12vw, 3rem);
+        letter-spacing: -0.08rem;
+        line-height: 0.9;
+    }
+
+    .contact .con-top .box {
+        align-items: center;
+    }
+
+    .con-bottom .sec {
+        margin-bottom: 1rem;
+    }
+
+    .con-bottom .sec span {
+        font-size: 0.72rem;
+    }
+
+    .con-bottom .sec input,
+    .con-bottom .sec .massage {
+        font-size: clamp(0.95rem, 4vw, 1.3rem);
+    }
+
     .about1{
         margin-top: 9vw;
     }
@@ -699,6 +945,29 @@ nav a{
         line-height: 1.6;
     }
     
+
+
+    .contact{
+    /* background-color:#c75a5a; */
+    height: 100vh;
+    width: 100%;
+    padding: 25vw 3.7vw 0 3.7vw;
+    display: flex;
+    flex-direction: column;
+    gap: 10vw;
+
+    .con-bottom .send{
+    background-color: #222;
+    color: #fff;
+    border: none;
+    font-size: 5vw;
+    padding: 1vw 3vw;
+    border-radius: 1rem;
+    position: absolute;
+    bottom: -2rem;
+    right: 0rem;
+}
+}
 
 }
 

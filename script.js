@@ -145,3 +145,16 @@ gsap.to(".about", {
         scrub: 1.5,
     }
 });
+
+
+// works--------------------------------------------------- 
+
+gsap.to(".works-wrapper",{
+    scrollTrigger:{
+        start: "top top",
+        end: () => `+=${window.innerWidth}`,
+        pin: true,
+        marker:true,
+        scrub: 1.5,
+    }
+})
