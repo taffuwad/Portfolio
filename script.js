@@ -135,6 +135,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 gsap.to(".about", {
     xPercent: -100,
     ease: "none",
+
     
 
     scrollTrigger: {
@@ -150,11 +151,14 @@ gsap.to(".about", {
 // works--------------------------------------------------- 
 
 gsap.to(".works-wrapper",{
+
     scrollTrigger:{
+        // trigger: ".works",
         start: "top top",
         end: () => `+=${window.innerWidth}`,
         pin: true,
-        marker:true,
+        
         scrub: 1.5,
+
     }
 })
