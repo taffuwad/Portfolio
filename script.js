@@ -162,3 +162,42 @@ gsap.to(".works-wrapper",{
 
     }
 })
+
+
+
+// Home----------------------------------------------------------- 
+const split = new SplitText(".home h1", {
+  type: "chars"
+});
+
+const tl = gsap.timeline();
+tl.fromTo(
+  ".home",
+  {
+    clipPath: "polygon(17% 38%, 60% 36%, 62% 79%, 16% 80%)",
+  },
+  {
+    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+    duration: 1.2,
+    ease: "power4.inOut",
+  }
+);
+
+tl.from(split.chars,{
+    y: 100,
+  opacity: 0,
+  duration: 1,
+  stagger: {
+    from: "random",
+    amount: 1
+  },
+  ease: "power4.out"
+})
+tl.from('nav ',{
+    y:-200,
+    stagger:0.05,
+    ease:"elastic.out"
+})
+
+// About--------------------------------------------------------------- 
+
