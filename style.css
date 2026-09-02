@@ -9,8 +9,11 @@ html,body{
     height: 100%;
     width: 100%;
 }
+html{
+    scroll-behavior: smooth;
+}
 body{
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
 }
 @font-face {
   font-family: 'main';
@@ -103,7 +106,12 @@ nav a{
     width: 100%;
     background-color: #fff;
     display: flex;
+    
+    /* transform: translateX(-100%); */
 }
+
+
+
 .about1{
     height: 100vh;
     width: 100%;
@@ -311,18 +319,64 @@ nav a{
 
 
 .about2{
-    height: 100vh;
     width: 100%;
-    background-color: #006ead;
+    min-height: 100vh;
     flex-shrink: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 2vw;
+    padding: 2vw 4vw 4vw;
+    box-sizing: border-box;
+}
+.about2 .left1{
+    width: 30%;
+    min-width: 220px;
+    padding: 5vw 2vw 0 2vw;
+    box-sizing: border-box;
+}
+.about2 .left1 h1{
+    padding-left: 1vw;
+    margin-bottom: 1vw;
+    font-size: clamp(1.5rem, 2vw, 2.5rem);
+}
+.about2 .left1 .image{
+    height: 450px;
+    width: 100%;
+    min-width: 40%;
+}
+.about2 .left1 .image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    clip-path: inset(0% 0% 0% 3%);
+}
+
+.about2 .right1{
+    width: 70%;
+    padding: 0 0 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 1.5vw;
+}
+.about2 .right1 .skill-cata{
+    border-bottom: 1px solid #222;
+    padding-bottom: 2vw;
+}
+.about2 .right1 h3{
+    text-transform: uppercase;
+    margin-bottom: 1vw;
+    font-size: clamp(1.2rem, 2vw, 2.2rem);
+}
+.about2 .right1 p{
+    font-size: clamp(0.9rem, 1.3vw, 1.5rem);
+    line-height: 1.7;
 }
 
 
-
-
-
-
-
+.works{
+    
+}
 
 
 
@@ -422,6 +476,41 @@ nav a{
         font-weight: 600;
     }
     
+
+    .about2 {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 8vw 4vw 5vw;
+    }
+
+    .about2 .left1,
+    .about2 .right1 {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .about2 .left1 {
+        padding: 0;
+    }
+
+    .about2 .left1 .image {
+        height: 350px;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .about2 .right1 {
+        gap: 1rem;
+    }
+
+    .about2 .right1 h3 {
+        font-size: clamp(1.3rem, 2.3vw, 2rem);
+    }
+
+    .about2 .right1 p {
+        font-size: clamp(0.95rem, 1.7vw, 1.2rem);
+    }
+
     .container {
         gap: 3rem 4rem;
     }
@@ -436,6 +525,7 @@ nav a{
         height: 14px;
     }
 }
+
 
 /* Extra small screens */
 @media (max-width: 768px) {
@@ -486,6 +576,33 @@ nav a{
         line-height: 1.6vw;
         margin-top: 3vw;
     }
+    .about2 {
+        padding: 7vw 4vw 5vw;
+    }
+
+    .about2 .left1 {
+        padding: 0;
+    }
+
+    .about2 .left1 h1 {
+        font-size: clamp(1.7rem, 5vw, 2.5rem);
+        margin-bottom: 1.2rem;
+    }
+
+    .about2 .left1 .image {
+        height: 250px;
+        width: 100%;
+        max-width: 420px;
+    }
+
+    .about2 .right1 h3 {
+        font-size: clamp(1.2rem, 4vw, 2rem);
+    }
+
+    .about2 .right1 p {
+        font-size: clamp(0.95rem, 2.4vw, 1.2rem);
+    }
+
     
     .container {
         gap: 2rem 3rem;
@@ -538,6 +655,48 @@ nav a{
         font-size: 3.1vw;
         line-height: 3.6vw;
         margin-top: 3vw;
+    }
+
+
+
+
+    .about2 {
+        padding: 8vw 4vw 6vw;
+        gap: 1.5rem;
+    }
+
+    .about2 .left1 {
+        width: 100%;
+        padding: 0;
+    }
+
+    .about2 .left1 h1 {
+        font-size: clamp(1.4rem, 7vw, 2.4rem);
+        margin-bottom: 1rem;
+    }
+
+    .about2 .left1 .image {
+        height: 280px;
+        max-width: 100%;
+    }
+
+    .about2 .right1 {
+        width: 100%;
+        padding: 0;
+        gap: 1rem;
+    }
+
+    .about2 .right1 .skill-cata {
+        padding-bottom: 1.2rem;
+    }
+
+    .about2 .right1 h3 {
+        font-size: clamp(1.1rem, 5vw, 1.7rem);
+    }
+
+    .about2 .right1 p {
+        font-size: clamp(0.9rem, 3.6vw, 1.1rem);
+        line-height: 1.6;
     }
     
 

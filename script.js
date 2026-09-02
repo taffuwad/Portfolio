@@ -1,4 +1,9 @@
+// smoooth scroll =---------------------------- 
 
+const lenis = new Lenis({
+      autoRaf: true,
+      lerp: 0.05,
+    });
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -124,3 +129,19 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
         console.log('👀 Mouse tracking eyes (no bg, no text)');
     })();
+
+
+// About section horizontal scroll---------------------------------------- 
+gsap.to(".about", {
+    xPercent: -100,
+    ease: "none",
+    
+
+    scrollTrigger: {
+        trigger: ".about",
+        start: "top top",
+        end: () => `+=${window.innerWidth}`,
+        pin: true,
+        scrub: 1.5,
+    }
+});
