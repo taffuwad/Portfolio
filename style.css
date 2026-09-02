@@ -119,6 +119,7 @@ nav a{
     width: 100%;
     background-color: #fff;
     display: flex;
+    overflow: hidden;
     
     /* transform: translateX(-100%); */
 }
@@ -128,7 +129,7 @@ nav a{
 .about1{
     height: 100vh;
     width: 100%;
-    
+    box-sizing: border-box;
     flex-shrink: 0;
     padding: 0 4vw 0 4vw;
     display: flex;
@@ -1083,6 +1084,13 @@ textarea::placeholder {
 
 /* Responsive Media Query for screens smaller than 1024px */
 @media (max-width: 1024px) {
+
+    .about {
+        height: auto;
+        min-height: 100vh;
+        display: block;
+        overflow: visible;
+    }
 
     nav{
         padding-top: 4vw;

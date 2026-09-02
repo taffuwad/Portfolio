@@ -131,21 +131,179 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
     })();
 
 
-// About section horizontal scroll---------------------------------------- 
-gsap.to(".about", {
-    xPercent: -100,
-    ease: "none",
+// About ------------------------------------------------------------------
+// The two About panels share one pinned, scroll-controlled sequence on larger
+// screens.  Each text block is split into words so its reveal stays tied to
+// the visitor's scroll position instead of firing as a one-off animation.
+const aboutMedia = gsap.matchMedia();
 
-    
+aboutMedia.add(
+    {
+        desktop: "(min-width: 1025px)",
+        reduceMotion: "(prefers-reduced-motion: reduce)",
+    },
+    (context) => {
+        const { desktop, reduceMotion } = context.conditions;
+        const about = document.querySelector(".about");
 
-    scrollTrigger: {
-        trigger: ".about",
-        start: "top top",
-        end: () => `+=${window.innerWidth}`,
-        pin: true,
-        scrub: 1.5,
+        if (!about || reduceMotion) return;
+
+        const splitText = (selector) =>
+            gsap.utils.toArray(selector).map(
+                (element) =>
+                    new SplitText(element, {
+                        type: "lines,words",
+                        mask: "lines",
+                        linesClass: "about-line",
+                        wordsClass: "about-word",
+                    })
+            );
+
+        const firstPanelSplits = splitText(
+            ".about1 .left h1, .about1 .left p, .about1 .right h1, .about1 .right h4, .about1 .right p"
+        );
+        const secondPanelSplits = splitText(
+            ".about2 .left1 h1, .about2 .right1 h3, .about2 .right1 p"
+        );
+        const firstPanelWords = firstPanelSplits.flatMap((split) => split.words);
+        const secondPanelWords = secondPanelSplits.flatMap((split) => split.words);
+
+        if (desktop) {
+            const aboutTimeline = gsap.timeline({
+                defaults: { ease: "power3.out" },
+                scrollTrigger: {
+                    trigger: about,
+                    start: "top top",
+                    end: () => `+=${window.innerWidth * 2.6}`,
+                    pin: true,
+                    scrub: 1,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
+                },
+            });
+
+            aboutTimeline
+                .from(".about1 .about-img", {
+                    scale: 0.82,
+                    autoAlpha: 0,
+                    duration: 0.55,
+                })
+                .from(
+                    ".about1 .about-img img",
+                    { scale: 1.28, duration: 0.7, ease: "power2.out" },
+                    "<"
+                )
+                .from(
+                    firstPanelWords,
+                    {
+                        yPercent: 115,
+                        autoAlpha: 0,
+                        stagger: 0.012,
+                        duration: 0.5,
+                    },
+                    "<0.1"
+                )
+                .from(
+                    ".about1 .eye-container",
+                    {
+                        scale: 0,
+                        rotate: -18,
+                        autoAlpha: 0,
+                        stagger: 0.1,
+                        duration: 0.32,
+                    },
+                    "<0.1"
+                )
+                .to(".about > *", {
+                    xPercent: -100,
+                    duration: 1.05,
+                    ease: "none",
+                })
+                .from(
+                    ".about2 .left1 .image",
+                    {
+                        clipPath: "inset(0 100% 0 0)",
+                        scale: 1.08,
+                        duration: 0.65,
+                    },
+                    "<0.2"
+                )
+                .from(
+                    ".about2 .skill-cata",
+                    {
+                        xPercent: 22,
+                        autoAlpha: 0,
+                        stagger: 0.12,
+                        duration: 0.42,
+                    },
+                    "<0.12"
+                )
+                .from(
+                    secondPanelWords,
+                    {
+                        yPercent: 115,
+                        autoAlpha: 0,
+                        stagger: 0.008,
+                        duration: 0.48,
+                    },
+                    "<"
+                );
+        } else {
+            // On touch-sized layouts, keep the natural vertical flow and give
+            // each panel an enter/leave reveal rather than pinning the page.
+            gsap.from(firstPanelWords, {
+                yPercent: 115,
+                autoAlpha: 0,
+                stagger: 0.012,
+                duration: 0.5,
+                scrollTrigger: {
+                    trigger: ".about1",
+                    start: "top 78%",
+                    toggleActions: "play none none reverse",
+                },
+            });
+            gsap.from(secondPanelWords, {
+                yPercent: 115,
+                autoAlpha: 0,
+                stagger: 0.009,
+                duration: 0.48,
+                scrollTrigger: {
+                    trigger: ".about2",
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+            });
+            gsap.from(".about1 .about-img, .about1 .eye-container", {
+                y: 40,
+                scale: 0.94,
+                autoAlpha: 0,
+                stagger: 0.1,
+                duration: 0.55,
+                scrollTrigger: {
+                    trigger: ".about1",
+                    start: "top 78%",
+                    toggleActions: "play none none reverse",
+                },
+            });
+            gsap.from(".about2 .left1 .image, .about2 .skill-cata", {
+                y: 36,
+                autoAlpha: 0,
+                stagger: 0.1,
+                duration: 0.5,
+                scrollTrigger: {
+                    trigger: ".about2",
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+            });
+        }
+
+        return () => {
+            firstPanelSplits.forEach((split) => split.revert());
+            secondPanelSplits.forEach((split) => split.revert());
+        };
     }
-});
+);
 
 
 // works--------------------------------------------------- 
