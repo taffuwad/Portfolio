@@ -1161,18 +1161,6 @@ nav a{
     gap: 4vw;
 }
 
-.contact .con-top h1 div{
-    color: #222;
-    font-size: 7vw;
-    line-height: 5.5vw;
-    text-transform: uppercase;
-    font-weight: bolder;
-    font-family: 'cap';
-    letter-spacing: -0.4rem;
-
-    
-    
-}
 .contact .con-top .box h1{
     font-family: 'cap';
     font-size: 7vw;
@@ -1183,9 +1171,24 @@ nav a{
     align-items: center;
 }
 
+/* The wheel replaces the O in “TO GATHER”. */
+.contact .con-top .box h1 .title-o {
+    flex: 0 0 auto;
+    width: 12em;
+    height: 12em;
+    font-size: 0.083333em;
+}
+
 .contact-title-line {
     display: block;
     overflow: hidden;
+}
+.contact-title-line div{
+    font-family: 'cap';
+    font-size: 7vw;
+    letter-spacing: -0.4rem;
+    color: #222;
+    line-height: 1;
 }
 .contact .con-top .box{
     display: flex;
@@ -1741,6 +1744,12 @@ textarea::placeholder {
         gap: 0.7rem;
     }
 
+    .contact .con-top .box h1 {
+        flex: 1 1 100%;
+        min-width: 0;
+        white-space: nowrap;
+    }
+
     .contact .con-top img {
         height: clamp(2rem, 5vw, 3.5rem);
         margin-top: 0;
@@ -1894,6 +1903,10 @@ textarea::placeholder {
 
     .contact .con-top .box {
         align-items: center;
+    }
+
+    .contact .con-top .box h1 {
+        font-size: clamp(2rem, 12vw, 3rem);
     }
 
     .con-bottom .sec {
