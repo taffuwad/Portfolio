@@ -128,12 +128,16 @@ nav .section{
 }
 
 nav a{
-    color: inherit;
-    font-size: 1.2rem;
+    
 }
 .section a{
   transition: 0.5s ease-in-out;
     display: inline-block;
+    color: inherit;
+    font-size: 1.2rem;
+    color: #222;
+    font-family: 'main';
+  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.35);
 
 }
 .section a:hover{
