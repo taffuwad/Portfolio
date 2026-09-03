@@ -45,6 +45,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 })();
 
 
+
 (function() {
         "use strict";
 
@@ -458,8 +459,52 @@ tl.from(split.chars,{
 tl.from('nav ',{
     y:-200,
     stagger:0.05,
-    ease:"elastic.out"
+    ease:"expo.out"
 })
+
+
+
+// Magnetic home title --------------------------------------------------
+// (() => {
+//     const homeTitle = document.querySelector(".home h1");
+//     const canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+//     if (!homeTitle || !split.chars.length || !canHover.matches) return;
+
+//     const letters = split.chars.map((letter) => ({
+//         element: letter,
+//         moveX: gsap.quickTo(letter, "x", { duration: 0.32, ease: "power3.out" }),
+//         moveY: gsap.quickTo(letter, "y", { duration: 0.32, ease: "power3.out" }),
+//     }));
+//     const pullStrength = 34;
+
+//     homeTitle.addEventListener("mousemove", (event) => {
+//         const titleBounds = homeTitle.getBoundingClientRect();
+
+//         letters.forEach(({ element, moveX, moveY }) => {
+//             const letterBounds = element.getBoundingClientRect();
+//             const letterCenterX = letterBounds.left + letterBounds.width / 2;
+//             const letterCenterY = letterBounds.top + letterBounds.height / 2;
+//             const horizontalPull = (event.clientX - letterCenterX) / titleBounds.width;
+//             const verticalPull = (event.clientY - letterCenterY) / titleBounds.height;
+
+//             moveX(gsap.utils.clamp(-pullStrength, pullStrength, horizontalPull * pullStrength * 2));
+//             moveY(gsap.utils.clamp(-pullStrength, pullStrength, verticalPull * pullStrength * 2));
+//         });
+//     });
+
+//     homeTitle.addEventListener("mouseleave", () => {
+//         gsap.to(split.chars, {
+//             x: 0,
+//             y: 0,
+//             duration: 0.8,
+//             ease: "elastic.out(1, 0.45)",
+//             overwrite: true,
+//         });
+//     });
+// })();
+
+
 
 // About--------------------------------------------------------------- 
 
