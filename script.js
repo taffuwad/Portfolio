@@ -127,7 +127,6 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
         container.addEventListener('touchend', onTouchEnd);
         container.addEventListener('touchcancel', onTouchEnd);
 
-        console.log('👀 Mouse tracking eyes (no bg, no text)');
     })();
 
 
@@ -371,7 +370,6 @@ if (contactSection) {
             .from(".contact .send", {
                 y: 24,
                 scale: 0.92,
-                autoAlpha: 0,
                 duration: 0.55,
             }, "-=0.15");
 
