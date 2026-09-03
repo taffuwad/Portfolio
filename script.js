@@ -322,6 +322,75 @@ gsap.to(".works-wrapper",{
 })
 
 
+// Contact -------------------------------------------------
+const contactSection = document.querySelector(".contact");
+
+if (contactSection) {
+    const contactMedia = gsap.matchMedia();
+
+    contactMedia.add("(prefers-reduced-motion: no-preference)", () => {
+        const contactTitle = contactSection.querySelector(".con-top > .text");
+        const contactSplit = new SplitText(contactTitle, {
+            type: "lines,words",
+            linesClass: "contact-title-line",
+        });
+
+        const contactTimeline = gsap.timeline({
+            defaults: { ease: "power4.out" },
+            scrollTrigger: {
+                trigger: contactSection,
+                start: "top 72%",
+                toggleActions: "play none none reverse",
+            },
+        });
+
+        contactTimeline
+            .from(contactSplit.words, {
+                yPercent: 125,
+                rotate: 2,
+                autoAlpha: 0,
+                duration: 0.9,
+                stagger: 0.06,
+            })
+            .from(".contact .con-top .box", {
+                y: 70,
+                autoAlpha: 0,
+                duration: 0.85,
+            }, "-=0.45")
+            .from(".contact .con-top img", {
+                scale: 0.82,
+                rotate: -7,
+                duration: 0.75,
+            }, "-=0.65")
+            .from(".contact .con-bottom .sec", {
+                x: -34,
+                autoAlpha: 0,
+                duration: 0.55,
+                stagger: 0.1,
+            }, "-=0.25")
+            .from(".contact .send", {
+                y: 24,
+                scale: 0.92,
+                autoAlpha: 0,
+                duration: 0.55,
+            }, "-=0.15");
+
+        gsap.to(".contact .con-top img", {
+            yPercent: -12,
+            ease: "none",
+            scrollTrigger: {
+                trigger: contactSection,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.8,
+            },
+        });
+
+        return () => contactSplit.revert();
+    });
+}
+
+
 
 // Home----------------------------------------------------------- 
 const split = new SplitText(".home h1", {

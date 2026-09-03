@@ -441,7 +441,7 @@ nav a{
     background-color: #555;
 }
 .pro6{
-    background: #666;
+    background: #222;
     padding: 0 0;
 }
 
@@ -1165,6 +1165,11 @@ nav a{
     letter-spacing: -0.4rem;
     
 }
+
+.contact-title-line {
+    display: block;
+    overflow: hidden;
+}
 .contact .con-top .box{
     display: flex;
     align-items: center;
@@ -1681,7 +1686,7 @@ textarea::placeholder {
 
     .contact{
     /* background-color:#c75a5a; */
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     padding: 9vw 3.7vw 0 3.7vw;
     display: flex;
@@ -2095,15 +2100,19 @@ textarea::placeholder {
     }
 
     .works .pro .card {
-        width: min(34rem, 100%);
+        width: 100%;
+        max-width: 34rem;
         height: auto;
         min-height: 0;
-        padding: 0.75rem;
+        min-width: 0;
+        padding: clamp(0.7rem, 2vw, 0.9rem);
         border-radius: 0.9rem;
     }
 
     .works .pro .card img {
+        width: 100%;
         height: auto;
+        max-height: 58svh;
         aspect-ratio: 16 / 10;
         display: block;
         object-fit: cover;
@@ -2120,10 +2129,11 @@ textarea::placeholder {
 
     .works .pro .card .techno span {
         padding: 0.35rem 0.6rem;
-        font-size: 0.64rem;
+        font-size: clamp(0.6rem, 2.2vw, 0.7rem);
     }
 
     .works .pro .card button {
+        width: 100%;
         min-height: 2.4rem;
         margin-top: 0.2rem;
         padding: 0.55rem 0.75rem;
@@ -2171,17 +2181,21 @@ textarea::placeholder {
     }
 
     .works .pro .card {
+        width: 100%;
+        max-width: none;
         padding: 0.6rem;
         border-radius: 0.7rem;
     }
 
     .works .pro .card img {
+        max-height: none;
         aspect-ratio: 4 / 3;
         border-radius: 0.5rem;
     }
 
     .works .pro .card h4 {
-        font-size: 1.1rem;
+        font-size: clamp(1.05rem, 5vw, 1.25rem);
+        line-height: 1;
     }
 
     .works .pro .card .techno {
@@ -2190,7 +2204,12 @@ textarea::placeholder {
 
     .works .pro .card .techno span {
         padding: 0.3rem 0.5rem;
-        font-size: 0.58rem;
+        font-size: clamp(0.56rem, 2.8vw, 0.64rem);
+    }
+
+    .works .pro .card button {
+        min-height: 2.6rem;
+        font-size: 0.7rem;
     }
 
     .works .pro6,
