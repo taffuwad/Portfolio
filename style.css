@@ -1112,6 +1112,37 @@ nav a{
   }
 }
 
+.pro6 .view{
+    padding: 1.5rem 5rem;
+    background: rgb(252, 116, 25);
+    border-radius: 4rem;
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: 800;
+    transition: 0.3s ease;
+    text-transform: uppercase;
+    user-select: none;
+}
+.pro6 .view:hover{
+    transform: translateY(-3px) scale(1.05);
+}
+.pro6 .view:active{
+    transform: translateY(3px) scale(0.95);
+}
+.pro6 .con-work{
+    display: flex;
+    flex-direction: column;
+}
+.pro6 .container h1{
+    display: block;
+    font-size: 6vw;
+    color: #fff;
+}
+.pro6 .container p{
+    display: block;
+    font-size: 1.2vw;
+    color: #fff;
+}
 
 
 .contact{
@@ -1967,4 +1998,327 @@ textarea::placeholder {
 
 /* Very small mobile */
 @media (max-width: 375px) {
+}
+
+/* Works responsive layout ------------------------------------------------ */
+.works .work-h {
+    max-width: calc(100% - 2rem);
+    font-size: clamp(2.6rem, 5vw, 5.2rem);
+    line-height: 0.9;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.works .pro .card {
+    width: min(700px, calc(100vw - 4rem));
+    height: clamp(430px, 54vw, 550px);
+    padding: clamp(0.7rem, 1.2vw, 1rem);
+}
+
+.works .pro .card h4 {
+    font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+}
+
+.works .pro .card .title {
+    gap: clamp(0.45rem, 0.7vw, 0.7rem);
+    margin-top: clamp(0.45rem, 0.7vw, 0.7rem);
+}
+
+.works .pro .card .techno {
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.works .pro .card .techno span {
+    padding: 0.3rem 0.7rem;
+    font-size: clamp(0.62rem, 0.85vw, 0.75rem);
+    line-height: 1;
+}
+
+.works .pro .card button {
+    min-height: 2rem;
+    margin-top: 0.1rem;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.72rem;
+}
+
+@media (max-width: 1024px) {
+    .works .work-h {
+        top: 1.75rem;
+        font-size: clamp(2.5rem, 7vw, 4.5rem);
+    }
+
+    .works .pro {
+        padding: 0 1.5rem;
+    }
+
+    .works .pro .card {
+        width: min(620px, calc(100vw - 3rem));
+        height: min(68svh, 500px);
+    }
+
+    .pro6 .view {
+        padding: 1.1rem 3.2rem;
+        font-size: clamp(1.2rem, 3vw, 1.75rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .works {
+        padding: 0 0 2.5rem;
+    }
+
+    .works .work-h {
+        position: relative;
+        top: auto;
+        left: auto;
+        max-width: none;
+        margin: 0;
+        padding: 1.75rem 1rem 1.1rem;
+        transform: none;
+        font-size: clamp(2.8rem, 14vw, 5rem);
+        letter-spacing: -0.04em;
+    }
+
+    .works-wrapper {
+        height: auto;
+        display: grid;
+        gap: 1rem;
+    }
+
+    .works .pro {
+        position: relative;
+        top: auto;
+        min-height: 0;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .works .pro .card {
+        width: min(34rem, 100%);
+        height: auto;
+        min-height: 0;
+        padding: 0.75rem;
+        border-radius: 0.9rem;
+    }
+
+    .works .pro .card img {
+        height: auto;
+        aspect-ratio: 16 / 10;
+        display: block;
+        object-fit: cover;
+    }
+
+    .works .pro .card .title {
+        gap: 0.6rem;
+        margin-top: 0.75rem;
+    }
+
+    .works .pro .card h4 {
+        font-size: clamp(1.2rem, 4.5vw, 1.6rem);
+    }
+
+    .works .pro .card .techno span {
+        padding: 0.35rem 0.6rem;
+        font-size: 0.64rem;
+    }
+
+    .works .pro .card button {
+        min-height: 2.4rem;
+        margin-top: 0.2rem;
+        padding: 0.55rem 0.75rem;
+    }
+
+    .works .pro6 {
+        min-height: 20rem;
+        padding: 0;
+    }
+
+    .pro6 .container {
+        min-height: 20rem;
+    }
+
+    .pro6 .container h1{
+    line-height: 5vw;
+}
+/* .pro6 .container p{
+    
+} */
+
+
+    .pro6 .view {
+        padding: 1rem 2.2rem;
+        font-size: clamp(1.1rem, 5vw, 1.55rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .works {
+        padding-bottom: 1rem;
+    }
+
+    .works .work-h {
+        padding: 1.35rem 0.75rem 0.8rem;
+        font-size: clamp(2.5rem, 15vw, 4rem);
+    }
+
+    .works-wrapper {
+        gap: 0.65rem;
+    }
+
+    .works .pro {
+        padding: 0.65rem;
+    }
+
+    .works .pro .card {
+        padding: 0.6rem;
+        border-radius: 0.7rem;
+    }
+
+    .works .pro .card img {
+        aspect-ratio: 4 / 3;
+        border-radius: 0.5rem;
+    }
+
+    .works .pro .card h4 {
+        font-size: 1.1rem;
+    }
+
+    .works .pro .card .techno {
+        gap: 0.35rem;
+    }
+
+    .works .pro .card .techno span {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.58rem;
+    }
+
+    .works .pro6,
+    .pro6 .container {
+        min-height: 16rem;
+    }
+
+    .pro6 .view {
+        padding: 0.9rem 1.6rem;
+        font-size: 1rem;
+    }
+}
+
+/* Selected works panel: keep content above the animated background. */
+.pro6 .con-work {
+    position: relative;
+    isolation: isolate;
+}
+
+.pro6 .con-work::before {
+    z-index: 0;
+    pointer-events: none;
+}
+
+.pro6 .con-work::after {
+    z-index: 2;
+    pointer-events: none;
+}
+
+.pro6 .con-work h1,
+.pro6 .con-work p,
+.pro6 .con-work .view {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .works .pro6 {
+        min-height: 0;
+        padding: 0.75rem;
+    }
+
+    .pro6 .con-work {
+        height: auto;
+        min-height: clamp(28rem, 92vw, 34rem);
+        padding: clamp(1.5rem, 6vw, 2.5rem);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        gap: 1.15rem;
+        overflow: hidden;
+        background-size: 220px 110px;
+    }
+
+    .pro6 .con-work::before {
+        background-size: 220px 110px;
+    }
+
+    .pro6 .con-work h1 {
+        max-width: 9ch;
+        margin: 0;
+        font-size: clamp(3.1rem, 12vw, 5.4rem);
+        line-height: 0.78;
+        letter-spacing: -0.06em;
+    }
+
+    .pro6 .con-work p {
+        max-width: 38ch;
+        margin: 0;
+        font-size: clamp(0.9rem, 2.8vw, 1.1rem);
+        line-height: 1.45;
+        color: rgba(255, 255, 255, 0.82);
+    }
+
+    .pro6 .con-work .view {
+        margin-top: 0.4rem;
+        padding: 0.9rem 1.6rem;
+        font-size: clamp(0.95rem, 3.5vw, 1.25rem);
+        line-height: 1;
+    }
+
+    .pro6 .con-work::after {
+        bottom: 2rem;
+        left: auto;
+        right: 2.6rem;
+        transform: scale(0.8);
+        transform-origin: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .works .pro6 {
+        padding: 0.65rem;
+    }
+
+    .pro6 .con-work {
+        min-height: clamp(29rem, 128vw, 34rem);
+        padding: 1.35rem;
+        gap: 1rem;
+        background-size: 180px 90px;
+    }
+
+    .pro6 .con-work::before {
+        background-size: 180px 90px;
+    }
+
+    .pro6 .con-work h1 {
+        max-width: 8ch;
+        font-size: clamp(2.8rem, 14vw, 4.2rem);
+    }
+
+    .pro6 .con-work p {
+        max-width: 31ch;
+        font-size: 0.88rem;
+        line-height: 1.42;
+    }
+
+    .pro6 .con-work .view {
+        width: 100%;
+        padding: 0.95rem 1rem;
+        text-align: center;
+        font-size: 0.95rem;
+    }
+
+    .pro6 .con-work::after {
+        right: 1.6rem;
+        bottom: 1.6rem;
+        transform: scale(0.64);
+    }
 }
