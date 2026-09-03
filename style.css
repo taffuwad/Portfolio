@@ -93,8 +93,33 @@ body{
   font-display: swap; /* Improves performance */
 }
 
+
+
 main{
     position: relative;
+}
+
+.mouse{
+    position: fixed;
+    bottom:1%;
+    left: 50%;
+    z-index: 999999;
+    color: white;
+    animation: blink 0.3s linear  infinite ;
+}
+.mouse i{
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0.3;
+}
+@keyframes blink{
+    0%{
+        /* opacity: 1; */
+        color: #000;
+    }
+    100%{
+        /* opacity: 0; */
+        color: #fff;
+    }
 }
 /* home------------------------------------  */
 
@@ -122,22 +147,198 @@ nav{
     z-index: 9999;
 }
 
+nav .logo{
+    font-size: 1.3vw;
+    font-weight: 300;
+    font-family: 'cap';
+    color: #222;
+    text-shadow: 0 8px 30px rgba(250, 249, 249, 0.03);
+}
+
 nav .section{
     display: flex;
     gap: 2vw;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.03);
+    padding: 0.3rem 2rem;
+    border-radius: 4rem;
 }
 
-nav a{
-    
+/* nav buttton-----------------------------------------------------  */
+
+.ui-btn {
+  --btn-default-bg: rgb(41, 41, 41);
+  --btn-padding: 0.9rem 2.5rem;
+  --btn-hover-bg: rgb(51, 51, 51);
+  --btn-transition: .3s;
+  --btn-letter-spacing: .1rem;
+  --btn-animation-duration: 1.2s;
+  --btn-shadow-color: rgba(0, 0, 0, 0.137);
+  --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
+  --hover-btn-color: #ffdaa2;
+  --default-btn-color: #fff;
+  --font-size: 16px;
+  /* 👆 this field should not be empty */
+  --font-weight: 600;
+  --font-family: 'cap',sans-serif;
+  /* 👆 this field should not be empty */
 }
+
+/* button settings 👆 */
+
+.ui-btn {
+  box-sizing: border-box;
+  padding: var(--btn-padding);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--default-btn-color);
+  font: var(--font-weight) var(--font-size) var(--font-family);
+  background: var(--btn-default-bg);
+  border: none;
+  cursor: pointer;
+  transition: var(--btn-transition);
+  overflow: hidden;
+  box-shadow: var(--btn-shadow);
+}
+
+.ui-btn span {
+  letter-spacing: var(--btn-letter-spacing);
+  transition: var(--btn-transition);
+  box-sizing: border-box;
+  position: relative;
+  background: inherit;
+}
+
+.ui-btn span::before {
+  box-sizing: border-box;
+  position: absolute;
+  content: "";
+  background: inherit;
+}
+
+.ui-btn:hover, .ui-btn:focus {
+  background: var(--btn-hover-bg);
+}
+
+.ui-btn:hover span, .ui-btn:focus span {
+  color: var(--hover-btn-color);
+}
+
+.ui-btn:hover span::before, .ui-btn:focus span::before {
+  animation: chitchat linear both var(--btn-animation-duration);
+}
+
+@keyframes chitchat {
+  0% {
+    content: "#";
+  }
+
+  5% {
+    content: ".";
+  }
+
+  10% {
+    content: "^{";
+  }
+
+  15% {
+    content: "-!";
+  }
+
+  20% {
+    content: "#$_";
+  }
+
+  25% {
+    content: "№:0";
+  }
+
+  30% {
+    content: "#{+.";
+  }
+
+  35% {
+    content: "@}-?";
+  }
+
+  40% {
+    content: "?{4@%";
+  }
+
+  45% {
+    content: "=.,^!";
+  }
+
+  50% {
+    content: "?2@%";
+  }
+
+  55% {
+    content: "\;1}]";
+  }
+
+  60% {
+    content: "?{%:%";
+    right: 0;
+  }
+
+  65% {
+    content: "|{f[4";
+    right: 0;
+  }
+
+  70% {
+    content: "{4%0%";
+    right: 0;
+  }
+
+  75% {
+    content: "'1_0<";
+    right: 0;
+  }
+
+  80% {
+    content: "{0%";
+    right: 0;
+  }
+
+  85% {
+    content: "]>'";
+    right: 0;
+  }
+
+  90% {
+    content: "4";
+    right: 0;
+  }
+
+  95% {
+    content: "2";
+    right: 0;
+  }
+
+  100% {
+    content: "";
+    right: 0;
+  }
+}
+
+
+
+
+
 .section a{
   transition: 0.5s ease-in-out;
     display: inline-block;
     color: inherit;
     font-size: 1.2rem;
-    color: #222;
+    color: #000;
     font-family: 'main';
-  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.35);
 
 }
 .section a:hover{
@@ -1178,23 +1379,74 @@ nav a{
   }
 }
 
-.pro6 .view{
-    padding: 1.5rem 5rem;
-    background: rgb(252, 116, 25);
-    border-radius: 4rem;
-    cursor: pointer;
-    font-size: 2rem;
-    font-weight: 800;
-    transition: 0.3s ease;
-    text-transform: uppercase;
-    user-select: none;
+
+/* pro6 cutom btn----------------------------------------------  */
+/* From Uiverse.io by barisdogansutcu */ 
+.pro6 button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 20px;
+  color: white;
+  text-shadow: 2px 2px rgb(116, 116, 116);
+  text-transform: uppercase;
+  cursor: pointer;
+  border: solid 2px black;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-size: 17px;
+  background-color: hsl(49deg 98% 60%);
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
 }
-.pro6 .view:hover{
-    transform: translateY(-3px) scale(1.05);
+
+.pro6 button:active {
+  transform: scale(0.9);
+  transition: all 100ms ease;
 }
-.pro6 .view:active{
-    transform: translateY(3px) scale(0.95);
+
+.pro6 button svg {
+  transition: all 0.5s ease;
+  z-index: 2;
 }
+
+.pro6 .play {
+  transition: all 0.5s ease;
+  transition-delay: 300ms;
+}
+
+.pro6 button:hover svg {
+  transform: scale(3) translate(50%);
+}
+
+.pro6 .now {
+  position: absolute;
+  left: 0;
+  transform: translateX(-100%);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+
+.pro6 button:hover .now {
+  transform: translateX(10px);
+  transition-delay: 300ms;
+}
+
+.pro6 button:hover .play {
+  transform: translateX(200%);
+  transition-delay: 300ms;
+}
+
+
+
+
+
+
+
+
 .pro6 .con-work{
     display: flex;
     flex-direction: column;

@@ -1,3 +1,8 @@
+import Lenis from "./node_modules/lenis/dist/lenis.mjs";
+import { gsap } from "./node_modules/gsap/index.js";
+import { ScrollTrigger } from "./node_modules/gsap/ScrollTrigger.js";
+import { SplitText } from "./node_modules/gsap/SplitText.js";
+
 // smoooth scroll =---------------------------- 
 
 const lenis = new Lenis({
@@ -438,17 +443,16 @@ const tl = gsap.timeline();
 tl.fromTo(
   ".home",
   {
-    clipPath: "polygon(17% 38%, 60% 36%, 62% 79%, 16% 80%)",
+    clipPath: "circle(1.6% at 50% 51%)",
   },
   {
-    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+    clipPath: "circle(70.7% at 50% 50%)",
     duration: 1.2,
     ease: "power4.inOut",
   }
-);
-
+)
 tl.from(split.chars,{
-    y: 100,
+    y: 200,
   opacity: 0,
   duration: 1,
   stagger: {
