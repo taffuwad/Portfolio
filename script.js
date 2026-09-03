@@ -7,56 +7,6 @@ const lenis = new Lenis({
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
-// Page loader ----------------------------------------------------------
-(() => {
-    const loader = document.getElementById("pageLoader");
-    const counter = document.getElementById("loaderCounter");
-
-    if (!loader || !counter) return;
-
-    let progress = 0;
-    let progressTimer;
-
-    const setProgress = (value) => {
-        progress = Math.round(value);
-        counter.textContent = `${progress}%`;
-    };
-
-    const simulateProgress = () => {
-        setProgress(Math.min(progress + Math.ceil(Math.random() * 4), 90));
-        if (progress < 90) progressTimer = window.setTimeout(simulateProgress, 90);
-    };
-
-    const finishLoading = () => {
-        window.clearTimeout(progressTimer);
-        const startProgress = progress;
-        const startTime = performance.now();
-        const duration = 380;
-
-        const completeCounter = (now) => {
-            const elapsed = Math.min((now - startTime) / duration, 1);
-            setProgress(startProgress + (100 - startProgress) * elapsed);
-
-            if (elapsed < 1) {
-                requestAnimationFrame(completeCounter);
-                return;
-            }
-
-            loader.classList.add("is-complete");
-            document.body.classList.remove("is-loading");
-        };
-
-        requestAnimationFrame(completeCounter);
-    };
-
-    simulateProgress();
-
-    if (document.readyState === "complete") {
-        finishLoading();
-    } else {
-        window.addEventListener("load", finishLoading, { once: true });
-    }
-})();
 
 // Custom cursor for all headings and paragraphs ------------------------
 (() => {
