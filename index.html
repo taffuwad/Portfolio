@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet"/>
 </head>
-<body>
+<body class="is-loading">
+    <div class="page-loader" id="pageLoader" role="status" aria-live="polite" aria-label="Loading portfolio">
+        <div class="loader" aria-hidden="true"></div>
+        <span class="loader-counter" id="loaderCounter">0%</span>
+    </div>
     
     <main>
         
