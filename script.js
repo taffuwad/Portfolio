@@ -7,6 +7,43 @@ const lenis = new Lenis({
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
+// Custom cursor for all headings and paragraphs ------------------------
+(() => {
+    const cursor = document.getElementById("cursorLine");
+    const textTargets = document.querySelectorAll("h1, h2, h3, h4, h5, h6, p");
+    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+    if (!cursor || !textTargets.length || !canHover.matches) return;
+
+    let mouseX = -100;
+    let mouseY = -100;
+    let cursorX = mouseX;
+    let cursorY = mouseY;
+
+    document.addEventListener("mousemove", (event) => {
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+    }, { passive: true });
+
+    textTargets.forEach((target) => {
+        target.addEventListener("mouseenter", () => cursor.classList.add("is-visible"));
+        target.addEventListener("mouseleave", () => cursor.classList.remove("is-visible"));
+    });
+
+    document.addEventListener("mouseleave", () => cursor.classList.remove("is-visible"));
+    window.addEventListener("blur", () => cursor.classList.remove("is-visible"));
+
+    function animateCursor() {
+        cursorX += (mouseX - cursorX) * 0.2;
+        cursorY += (mouseY - cursorY) * 0.2;
+        cursor.style.left = `${cursorX}px`;
+        cursor.style.top = `${cursorY}px`;
+        requestAnimationFrame(animateCursor);
+    }
+
+    animateCursor();
+})();
+
 
 (function() {
         "use strict";
