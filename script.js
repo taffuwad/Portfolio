@@ -1,16 +1,81 @@
-import Lenis from "./node_modules/lenis/dist/lenis.mjs";
-import { gsap } from "./node_modules/gsap/index.js";
-import { ScrollTrigger } from "./node_modules/gsap/ScrollTrigger.js";
-import { SplitText } from "./node_modules/gsap/SplitText.js";
+// Keep the loading animation on screen until all page assets are ready.
+const pageLoader = document.querySelector(".page-loader");
 
-// smoooth scroll =---------------------------- 
+window.addEventListener("load", () => {
+    if (!pageLoader) return;
 
-const lenis = new Lenis({
-      autoRaf: true,
-      lerp: 0.05,
+    window.setTimeout(() => {
+        pageLoader.classList.add("is-hidden");
+        pageLoader.addEventListener("transitionend", () => pageLoader.remove(), { once: true });
+    }, 250);
+}, { once: true });
+
+// Animation libraries are loaded from the CDN in index.html.
+const gsap = window.gsap;
+const ScrollTrigger = window.ScrollTrigger;
+const SplitText = window.SplitText;
+const lenis = window.Lenis
+    ? new window.Lenis({ autoRaf: true, lerp: 0.05 })
+    : null;
+
+if (gsap && ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+}
+
+if (gsap && SplitText) {
+    gsap.registerPlugin(SplitText);
+}
+
+// Navbar links use Lenis when available and keep the current section visible.
+(() => {
+    const navLinks = [...document.querySelectorAll(".nav-link")];
+    const scrollTriggers = [...document.querySelectorAll("[data-scroll-target]")];
+    const sections = navLinks
+        .map((link) => document.querySelector(link.getAttribute("href")))
+        .filter(Boolean);
+
+    const scrollToTarget = (targetSelector) => {
+        const target = document.querySelector(targetSelector);
+        if (!target) return;
+
+        if (lenis) {
+            lenis.scrollTo(target, { offset: -24 });
+        } else {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    };
+
+    navLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+            event.preventDefault();
+            scrollToTarget(link.getAttribute("href"));
+        });
     });
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+    scrollTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", () => {
+            scrollToTarget(trigger.dataset.scrollTarget);
+        });
+    });
+
+    if ("IntersectionObserver" in window) {
+        const sectionObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+
+                    navLinks.forEach((link) => {
+                        const isCurrent = link.getAttribute("href") === `#${entry.target.id}`;
+                        link.toggleAttribute("aria-current", isCurrent);
+                    });
+                });
+            },
+            { rootMargin: "-35% 0px -55%", threshold: 0 }
+        );
+
+        sections.forEach((section) => sectionObserver.observe(section));
+    }
+})();
 
 
 // Custom cursor for all headings and paragraphs ------------------------
@@ -178,175 +243,76 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 // The two About panels share one pinned, scroll-controlled sequence on larger
 // screens.  Each text block is split into words so its reveal stays tied to
 // the visitor's scroll position instead of firing as a one-off animation.
-const aboutMedia = gsap.matchMedia();
+const about = document.querySelector(".about");
 
-aboutMedia.add(
-    {
-        desktop: "(min-width: 1025px)",
-        reduceMotion: "(prefers-reduced-motion: reduce)",
-    },
-    (context) => {
-        const { desktop, reduceMotion } = context.conditions;
-        const about = document.querySelector(".about");
+if (gsap && ScrollTrigger && about) {
+    const aboutMedia = gsap.matchMedia();
 
-        if (!about || reduceMotion) return;
+    aboutMedia.add(
+        {
+            desktop: "(min-width: 1025px)",
+            reduceMotion: "(prefers-reduced-motion: reduce)",
+        },
+        (context) => {
+            const { desktop, reduceMotion } = context.conditions;
+            if (reduceMotion) return;
 
-        const splitText = (selector) =>
-            gsap.utils.toArray(selector).map(
-                (element) =>
-                    new SplitText(element, {
-                        type: "lines,words",
-                        mask: "lines",
-                        linesClass: "about-line",
-                        wordsClass: "about-word",
-                    })
+            const panelOne = about.querySelector(".about1");
+            const panelTwo = about.querySelector(".about2");
+            const firstPanelContent = about.querySelectorAll(
+                ".about1 .left h1, .about1 .left p, .about1 .right h1, .about1 .right h4, .about1 .right p"
+            );
+            const secondPanelContent = about.querySelectorAll(
+                ".about2 .left1 h1, .about2 .right1 h3, .about2 .right1 p"
             );
 
-        const firstPanelSplits = splitText(
-            ".about1 .left h1, .about1 .left p, .about1 .right h1, .about1 .right h4, .about1 .right p"
-        );
-        const secondPanelSplits = splitText(
-            ".about2 .left1 h1, .about2 .right1 h3, .about2 .right1 p"
-        );
-        const firstPanelWords = firstPanelSplits.flatMap((split) => split.words);
-        const secondPanelWords = secondPanelSplits.flatMap((split) => split.words);
+            const animationContext = gsap.context(() => {
+                if (desktop) {
+                    gsap.timeline({
+                        defaults: { ease: "power3.out" },
+                        scrollTrigger: {
+                            trigger: about,
+                            start: "top top",
+                            end: () => `+=${window.innerWidth * 2.4}`,
+                            pin: true,
+                            scrub: 1,
+                            anticipatePin: 1,
+                            invalidateOnRefresh: true,
+                        },
+                    })
+                        .from(".about1 .about-img", { scale: 0.82, autoAlpha: 0, duration: 0.45 })
+                        .from(".about1 .about-img img", { scale: 1.18, duration: 0.55 }, "<")
+                        .from(firstPanelContent, { y: 42, autoAlpha: 0, stagger: 0.08, duration: 0.38 }, "<0.1")
+                        .from(".about1 .eye-container", { scale: 0, rotate: -15, autoAlpha: 0, stagger: 0.1, duration: 0.35 }, "<0.05")
+                        .to([panelOne, panelTwo], { xPercent: -100, duration: 0.95, ease: "none" })
+                        .from(".about2 .left1 .image", { clipPath: "inset(0 100% 0 0)", scale: 1.06, duration: 0.5 }, "<0.15")
+                        .from(".about2 .skill-cata", { x: 42, autoAlpha: 0, stagger: 0.12, duration: 0.35 }, "<0.1")
+                        .from(secondPanelContent, { y: 32, autoAlpha: 0, stagger: 0.06, duration: 0.32 }, "<");
+                } else {
+                    const reveal = (targets, trigger) =>
+                        gsap.from(targets, {
+                            y: 32,
+                            autoAlpha: 0,
+                            stagger: 0.08,
+                            duration: 0.5,
+                            ease: "power3.out",
+                            scrollTrigger: {
+                                trigger,
+                                start: "top 78%",
+                                toggleActions: "play none none reverse",
+                            },
+                        });
 
-        if (desktop) {
-            const aboutTimeline = gsap.timeline({
-                defaults: { ease: "power3.out" },
-                scrollTrigger: {
-                    trigger: about,
-                    start: "top top",
-                    end: () => `+=${window.innerWidth * 2.6}`,
-                    pin: true,
-                    scrub: 1,
-                    anticipatePin: 1,
-                    invalidateOnRefresh: true,
-                },
-            });
+                    reveal([".about1 .about-img", ".about1 .eye-container", ...firstPanelContent], panelOne);
+                    reveal([".about2 .left1 .image", ".about2 .skill-cata", ...secondPanelContent], panelTwo);
+                }
+            }, about);
 
-            aboutTimeline
-                .from(".about1 .about-img", {
-                    scale: 0.82,
-                    autoAlpha: 0,
-                    duration: 0.55,
-                })
-                .from(
-                    ".about1 .about-img img",
-                    { scale: 1.28, duration: 0.7, ease: "power2.out" },
-                    "<"
-                )
-                .from(
-                    firstPanelWords,
-                    {
-                        yPercent: 115,
-                        autoAlpha: 0,
-                        stagger: 0.012,
-                        duration: 0.5,
-                    },
-                    "<0.1"
-                )
-                .from(
-                    ".about1 .eye-container",
-                    {
-                        scale: 0,
-                        rotate: -18,
-                        autoAlpha: 0,
-                        stagger: 0.1,
-                        duration: 0.32,
-                    },
-                    "<0.1"
-                )
-                .to(".about > *", {
-                    xPercent: -100,
-                    duration: 1.05,
-                    ease: "none",
-                })
-                .from(
-                    ".about2 .left1 .image",
-                    {
-                        clipPath: "inset(0 100% 0 0)",
-                        scale: 1.08,
-                        duration: 0.65,
-                    },
-                    "<0.2"
-                )
-                .from(
-                    ".about2 .skill-cata",
-                    {
-                        xPercent: 22,
-                        autoAlpha: 0,
-                        stagger: 0.12,
-                        duration: 0.42,
-                    },
-                    "<0.12"
-                )
-                .from(
-                    secondPanelWords,
-                    {
-                        yPercent: 115,
-                        autoAlpha: 0,
-                        stagger: 0.008,
-                        duration: 0.48,
-                    },
-                    "<"
-                );
-        } else {
-            // On touch-sized layouts, keep the natural vertical flow and give
-            // each panel an enter/leave reveal rather than pinning the page.
-            gsap.from(firstPanelWords, {
-                yPercent: 115,
-                autoAlpha: 0,
-                stagger: 0.012,
-                duration: 0.5,
-                scrollTrigger: {
-                    trigger: ".about1",
-                    start: "top 78%",
-                    toggleActions: "play none none reverse",
-                },
-            });
-            gsap.from(secondPanelWords, {
-                yPercent: 115,
-                autoAlpha: 0,
-                stagger: 0.009,
-                duration: 0.48,
-                scrollTrigger: {
-                    trigger: ".about2",
-                    start: "top 80%",
-                    toggleActions: "play none none reverse",
-                },
-            });
-            gsap.from(".about1 .about-img, .about1 .eye-container", {
-                y: 40,
-                scale: 0.94,
-                autoAlpha: 0,
-                stagger: 0.1,
-                duration: 0.55,
-                scrollTrigger: {
-                    trigger: ".about1",
-                    start: "top 78%",
-                    toggleActions: "play none none reverse",
-                },
-            });
-            gsap.from(".about2 .left1 .image, .about2 .skill-cata", {
-                y: 36,
-                autoAlpha: 0,
-                stagger: 0.1,
-                duration: 0.5,
-                scrollTrigger: {
-                    trigger: ".about2",
-                    start: "top 80%",
-                    toggleActions: "play none none reverse",
-                },
-            });
+            requestAnimationFrame(() => ScrollTrigger.refresh());
+            return () => animationContext.revert();
         }
-
-        return () => {
-            firstPanelSplits.forEach((split) => split.revert());
-            secondPanelSplits.forEach((split) => split.revert());
-        };
-    }
-);
+    );
+}
 
 
 // works--------------------------------------------------- 
@@ -465,49 +431,11 @@ tl.from('nav ',{
     y:-200,
     stagger:0.05,
     ease:"expo.out"
-})
+}, '-=0.5')
 
 
 
 // Magnetic home title --------------------------------------------------
-// (() => {
-//     const homeTitle = document.querySelector(".home h1");
-//     const canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
-
-//     if (!homeTitle || !split.chars.length || !canHover.matches) return;
-
-//     const letters = split.chars.map((letter) => ({
-//         element: letter,
-//         moveX: gsap.quickTo(letter, "x", { duration: 0.32, ease: "power3.out" }),
-//         moveY: gsap.quickTo(letter, "y", { duration: 0.32, ease: "power3.out" }),
-//     }));
-//     const pullStrength = 34;
-
-//     homeTitle.addEventListener("mousemove", (event) => {
-//         const titleBounds = homeTitle.getBoundingClientRect();
-
-//         letters.forEach(({ element, moveX, moveY }) => {
-//             const letterBounds = element.getBoundingClientRect();
-//             const letterCenterX = letterBounds.left + letterBounds.width / 2;
-//             const letterCenterY = letterBounds.top + letterBounds.height / 2;
-//             const horizontalPull = (event.clientX - letterCenterX) / titleBounds.width;
-//             const verticalPull = (event.clientY - letterCenterY) / titleBounds.height;
-
-//             moveX(gsap.utils.clamp(-pullStrength, pullStrength, horizontalPull * pullStrength * 2));
-//             moveY(gsap.utils.clamp(-pullStrength, pullStrength, verticalPull * pullStrength * 2));
-//         });
-//     });
-
-//     homeTitle.addEventListener("mouseleave", () => {
-//         gsap.to(split.chars, {
-//             x: 0,
-//             y: 0,
-//             duration: 0.8,
-//             ease: "elastic.out(1, 0.45)",
-//             overwrite: true,
-//         });
-//     });
-// })();
 
 
 

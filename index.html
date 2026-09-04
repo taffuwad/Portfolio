@@ -6,8 +6,26 @@
     <title>Portfolio website</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
 </head>
 <body>
+
+    <div class="page-loader" role="status" aria-label="Loading portfolio">
+        <div class="loader" aria-hidden="true">
+            <span><span></span><span></span><span></span><span></span></span>
+            <div class="base">
+                <span></span>
+                <div class="face"></div>
+            </div>
+        </div>
+        <div class="longfazers" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+        </div>
+    </div>
+
 
     <main>
         <div class="mouse"><i class="ri-scroll-to-bottom-line"></i></div>
@@ -16,13 +34,13 @@
                     TAF FUWAD
                 </div>
                 <div class="section">
-                    <a href="#home" id="op">Home</a>
-                    <a href="" id="op">About</a>
-                    <a href="" id="op">Works</a>
-                    <a href="" id="op">Contact</a>
+                    <a href="#home" class="nav-link" id="home" aria-current="page">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#works" class="nav-link">Works</a>
+                    <a href="#contact" class="nav-link">Contact</a>
                 </div>
 
-                <button class="ui-btn">
+                <button class="ui-btn" type="button" data-scroll-target="#contact">
                     <span>
                         LET'S TALK 
                     </span>
@@ -35,7 +53,7 @@
                 Every great trick <br></br> has three <br></br> parts.Your website <br></br> is the Prestige.
             </h1>
         </div>
-        <div class="about">
+        <div class="about" id="about">
             
             <div class="about1">
                 <div class="left">
@@ -112,7 +130,7 @@
             </div>
             
         </div>
-        <div class="works">
+        <div class="works" id="works">
             <h1 class="work-h">WORKS</h1>
             <div class="works-wrapper">
                 <div class="pro pro1">
@@ -202,8 +220,6 @@
                             <h1>VISIT MY WORKS</h1>
                             <p>A collection of digital experiences shaped by design, code, and motion. Each project is an exploration of ideas, interactions, and visual details crafted to make the web feel more alive.</p>
                             
-                        
-                        <!-- From Uiverse.io by barisdogansutcu --> 
                         <button>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -255,7 +271,7 @@
             </div>
         </div>
 
-        <div class="contact">
+        <div class="contact" id="contact">
             <div class="con-top">
                 <h1 class="text">LET'S WORK</h1>
                 <div class="box">
@@ -285,21 +301,21 @@
                 <form action="">
                     <div class="sec">
                         <span>NAME</span>
-                        <input type="text" placeholder="FUWAD TALUKDER">
+                        <input type="text" id="name" placeholder="FUWAD TALUKDER">
                     </div>
                     <div class="sec">
                         <span>email</span>
-                        <input type="text" placeholder="taffuwad7x@gmail.com">
+                        <input type="text" id="mail" placeholder="taffuwad7x@gmail.com">
                     </div>
                     <div class="sec">
                         <span>Number</span>
-                        <input type="text" placeholder="XXX XXXXX XXXXX">
+                        <input type="text" id="number" placeholder="XXX XXXXX XXXXX">
                     </div>
                     
                     <div class="sec">
                         <span>Massage</span>
                         
-                        <textarea name="massage" class="massage" id="" placeholder="GIVE US A SHORT PROJECT BRIEF, DEADLINE, BUDGET, ETC."></textarea>
+                        <textarea name="massage" class="massage" id="massage" placeholder="GIVE US A SHORT PROJECT BRIEF, DEADLINE, BUDGET, ETC."></textarea>
                     </div>
                     <button type="submit" class="send">SEND</button>
                 </form>
@@ -313,6 +329,6 @@
 
     <div class="cursor-line" id="cursorLine" aria-hidden="true"></div>
 
-    <script type="module" src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
