@@ -126,6 +126,9 @@ if (gsap && SplitText) {
         const leftEye = document.getElementById('leftEye');
         const rightEye = document.getElementById('rightEye');
 
+        // The eye animation is optional; do not let absent markup stop site scripts.
+        if (!leftPupil || !rightPupil || !leftEye || !rightEye) return;
+
         // ----- eye geometry cache -----
         let leftEyeRect = leftEye.getBoundingClientRect();
         let rightEyeRect = rightEye.getBoundingClientRect();
@@ -431,7 +434,7 @@ tl.from('nav ',{
     y:-200,
     stagger:0.05,
     ease:"expo.out"
-}, '-=0.5')
+}, '-=0.5');
 
 
 
@@ -440,4 +443,55 @@ tl.from('nav ',{
 
 
 // About--------------------------------------------------------------- 
+
+// Contact form --------------------------------------------------------
+(() => {
+    const contactForm = document.querySelector("#contact-form");
+    if (!contactForm) return;
+
+    const submitButton = contactForm.querySelector(".send");
+    const statusMessage = contactForm.querySelector(".contact-form-status");
+    const defaultButtonText = submitButton.textContent;
+
+    const showStatus = (message, isError = false) => {
+        statusMessage.textContent = message;
+        statusMessage.hidden = false;
+        statusMessage.style.color = isError ? "#a12424" : "#222";
+    };
+
+    contactForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        if (!contactForm.checkValidity()) {
+            contactForm.reportValidity();
+            return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = "SENDING...";
+        statusMessage.hidden = true;
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: new FormData(contactForm),
+                headers: { Accept: "application/json" },
+            });
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+                throw new Error(result.message || "Web3Forms submission failed.");
+            }
+
+            contactForm.reset();
+            showStatus("MESSAGE SENT — THANK YOU.");
+        } catch (error) {
+            console.error("Contact form submission failed:", error);
+            showStatus("Something went wrong. Please try again.", true);
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = defaultButtonText;
+        }
+    });
+})();
 

@@ -298,26 +298,30 @@
             </div>
 
             <div class="con-bottom">
-                <form action="">
+                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                    <!-- Replace the value below with the access key from Web3Forms. -->
+                    <input type="hidden" name="access_key" value="436a60b3-c4fa-4ce0-b984-15bedd77e7c3">
+                    <input type="hidden" name="subject" value="New portfolio contact form submission">
                     <div class="sec">
                         <span>NAME</span>
-                        <input type="text" id="name" placeholder="FUWAD TALUKDER">
+                        <input type="text" id="name" name="name" placeholder="FUWAD TALUKDER" autocomplete="name" required>
                     </div>
                     <div class="sec">
                         <span>email</span>
-                        <input type="text" id="mail" placeholder="taffuwad7x@gmail.com">
+                        <input type="email" id="mail" name="email" placeholder="taffuwad7x@gmail.com" autocomplete="email" required>
                     </div>
                     <div class="sec">
                         <span>Number</span>
-                        <input type="text" id="number" placeholder="XXX XXXXX XXXXX">
+                        <input type="tel" id="number" name="number" placeholder="XXX XXXXX XXXXX" autocomplete="tel">
                     </div>
                     
                     <div class="sec">
-                        <span>Massage</span>
+                        <span>Message</span>
                         
-                        <textarea name="massage" class="massage" id="massage" placeholder="GIVE US A SHORT PROJECT BRIEF, DEADLINE, BUDGET, ETC."></textarea>
+                        <textarea name="message" class="massage" id="massage" placeholder="GIVE US A SHORT PROJECT BRIEF, DEADLINE, BUDGET, ETC." required></textarea>
                     </div>
                     <button type="submit" class="send">SEND</button>
+                    <p class="contact-form-status" role="status" aria-live="polite" hidden></p>
                 </form>
             </div>
         </div>

@@ -2119,6 +2119,7 @@ nav .section{
     font-size: 4vw;
     outline: none;
     color: #222;
+    text-transform: uppercase;
 
 }
 input::placeholder,
@@ -2157,6 +2158,20 @@ textarea::placeholder {
 .con-bottom .send:hover{
     transform: translateY(3px) scale(0.95);
     background-color: #353535;
+}
+
+.con-bottom .send:disabled{
+    cursor: wait;
+    opacity: 0.7;
+    transform: none;
+}
+
+.contact-form-status{
+    margin: 1rem 2vw 0 auto;
+    color: #222;
+    font-family: 'cap';
+    font-size: 1rem;
+    text-align: right;
 }
 
 
