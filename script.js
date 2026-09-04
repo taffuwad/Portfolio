@@ -412,10 +412,10 @@ const tl = gsap.timeline();
 tl.fromTo(
   ".home",
   {
-    clipPath: "circle(1.6% at 50% 51%)",
+    clipPath: "polygon(0% 0%, 52.83% 47.62%, 100% 99.5%, 43.54% 56.24%)",
   },
   {
-    clipPath: "circle(70.7% at 50% 50%)",
+    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
     duration: 1.2,
     ease: "power4.inOut",
   }

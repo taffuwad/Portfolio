@@ -6,6 +6,11 @@
     text-decoration: none;
 }
 
+*::selection{
+  background: #222;
+  color: #fff;
+}
+
 /* Page loader --------------------------------------------------------- */
 /* From Uiverse.io by anand_4957 */
 .page-loader {
@@ -612,6 +617,87 @@ nav .section{
   }
 }
 
+/* mobile nav--------------------------------------------------------------------------------  */
+.mobile-nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  z-index: 9999;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.mobile-nav .m-logo{
+  /* padding: 3vw 4vw; */
+  font-size: 1.5rem;
+  margin-left: 2vw;
+  margin-top: 2vw;
+}
+.mobile-nav .m-menu{
+  position: relative;
+  background-color: #111;
+  height: 2.3rem;
+  width: 10rem;
+  cursor: pointer;
+
+  margin-left: -2vw;
+  margin-top: -2vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0 1.2rem;
+  transform: rotate(180deg);
+}
+.mobile-nav .m-menu::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color:#000;
+  
+  transform: scaleY(0);
+  transition: 0.3s ease-out;
+  transform-origin: bottom;
+}
+.m-menu:hover::before{
+  transform: scaleY(1);
+
+}
+
+
+.mobile-nav .m-menu .line1{
+  position: absolute;
+  height: 2px;
+  width: 50%;
+  background-color: #fff;
+  border-radius: 4rem;
+  margin-top: 0.7rem;
+  z-index: 2;
+}
+.mobile-nav .m-menu .line2{
+    position: absolute;
+    height: 2px;
+    width: 70%;
+    background-color: #fff;
+    border-radius: 4rem;
+  margin-top: -0.5rem;
+  z-index: 2;
+
+}
+
+
+
+
+
+
+
 
 
 
@@ -638,7 +724,7 @@ nav .section{
   -webkit-text-fill-color: transparent;
 }
 
-#home{
+#active-h{
   color: #222;
 }
 .home h1{
@@ -2175,11 +2261,17 @@ textarea::placeholder {
 }
 
 
-
+@media (min-width: 1024px) {
+  .mobile-nav{
+      display: none;
+    }
+}
 
 
 /* Responsive Media Query for screens smaller than 1024px */
 @media (max-width: 1024px) {
+
+    
 
     .about {
         height: auto;
@@ -2947,6 +3039,16 @@ textarea::placeholder {
 }
 
 @media (max-width: 480px) {
+
+  .mobile-nav .m-menu{
+
+  height: 2rem;
+  width: 8rem;
+
+}
+
+
+
     .works .pro6 {
         padding: 0.65rem;
     }
