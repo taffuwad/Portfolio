@@ -692,30 +692,90 @@ nav .section{
 
 }
 
+/* full screen nav-----------------------------------------------------------------------  */
 
 
+.fullnav{
+  position: fixed;
+  left: 0;
+  top: -100%;
+  z-index: 9999;
+  color: #fff;
+
+  background: #000;
+  height: 100vh;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 9vw;
 
 
+}
+.fullnav .full-top{
+  display: flex;
+  justify-content: space-between;
+  padding: 2vw 5vw;
 
+}
 
+.fullnav .full-top .full-logo{
+  font-size: 4vw;
+  padding-top: 5vw;
+}
+.fullnav .full-top .close{
+  font-size: 9vw;
+  cursor: pointer;
+}
 
+.fullnav .full-bottom{
+  display: flex;
+  flex-direction: column;
+  
+  text-align: center;
+}
+.fullnav .full-bottom a{
+  font-size: 9vw;
+  border-top: 0.4px solid #fff;
+  transition: 0.9s ease;
+  position: relative;
+  cursor: pointer;
+  display: block;
+  color: #fff;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+.fullnav .full-bottom a:nth-last-child(1){
+  border-bottom: 0.4px solid #fff;
+}
+.fullnav .full-bottom a:hover{
+  background-image: url("components/web-images/blue.jpg");
+
+  background-size: cover;
+  background-position: center;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
 
 
 
 .section a{
-  transition: 0.5s ease-in-out;
-    display: inline-block;
-    color: inherit;
+  transition: 0.9s ease;
     font-size: 1.2rem;
     color: #000;
     font-family: 'main';
 
 }
 .section a:hover{
-    background-image: url("components/web-images/blue.jpg");
+  background-image: url("components/web-images/blue.jpg");
 
   background-size: cover;
-  background-position: top;
+  background-position: center;
 
   background-clip: text;
   -webkit-background-clip: text;
@@ -2265,6 +2325,10 @@ textarea::placeholder {
   .mobile-nav{
       display: none;
     }
+
+  .fullnav{
+    display: none;
+  }
 }
 
 
@@ -2416,6 +2480,14 @@ textarea::placeholder {
     gap: 7vw;
 }
 
+    .contact .con-top h1 div{
+      letter-spacing: -0.05rem;
+      
+    }
+    .contact .con-top .box h1{
+      letter-spacing: -0.05rem;
+
+    }
     .con-bottom .send{
     background-color: #222;
     color: #fff;

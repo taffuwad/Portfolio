@@ -417,6 +417,7 @@ tl.fromTo(
   {
     clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
     duration: 1.2,
+    delay:0.3,
     ease: "power4.inOut",
   }
 )
@@ -435,14 +436,6 @@ tl.from('nav ',{
     stagger:0.05,
     ease:"expo.out"
 }, '-=0.5');
-
-
-
-// Magnetic home title --------------------------------------------------
-
-
-
-// About--------------------------------------------------------------- 
 
 // Contact form --------------------------------------------------------
 (() => {
@@ -495,3 +488,34 @@ tl.from('nav ',{
     });
 })();
 
+// full screen navbar----------------------------------------------------
+
+let fullnav = document.querySelector('fullnav');
+let door = document.querySelector('.close');
+
+door.addEventListener('click', ()=>{
+    gsap.to('.fullnav',{
+        top : '-100%'
+    })
+})
+
+
+// mobile nav-----------------------------------------------------------------
+
+let mNav = document.querySelector('.m-menu');
+
+mNav.addEventListener('click', ()=>{
+    gsap.to('.fullnav',{
+        top : '0%'
+    })
+})
+let fullLinks = document.querySelectorAll('#full-link');
+
+
+fullLinks.forEach((fullLink) => {
+    fullLink.addEventListener('click', ()=>{
+    gsap.to('.fullnav',{
+        top : '-100%'
+    })
+    })
+})
