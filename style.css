@@ -2317,7 +2317,10 @@ textarea::placeholder {
     height: 10rem;
     color: #222;
 }
-
+.con-bottom .sec .email{
+  width: 60%;
+  text-transform: lowercase;
+}
 .con-bottom .send{
     background-color: #222;
     color: #fff;
