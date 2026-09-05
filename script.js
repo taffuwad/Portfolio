@@ -263,7 +263,7 @@ if (gsap && ScrollTrigger && about) {
             const panelOne = about.querySelector(".about1");
             const panelTwo = about.querySelector(".about2");
             const firstPanelContent = about.querySelectorAll(
-                ".about1 .left h1, .about1 .left p, .about1 .right h1, .about1 .right h4, .about1 .right p"
+                ".about1 .left h1, .about1 .left p, .about1 .left .resume-btn, .about1 .right h1, .about1 .right h4, .about1 .right p"
             );
             const secondPanelContent = about.querySelectorAll(
                 ".about2 .left1 h1, .about2 .right1 h3, .about2 .right1 p"

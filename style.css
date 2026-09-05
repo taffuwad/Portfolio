@@ -419,11 +419,16 @@ nav .section{
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(1px);
+    text-transform: uppercase;
 
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.03);
     padding: 0.3rem 2rem;
     border-radius: 4rem;
+}
+
+nav .section a{
+  font-size: 1rem;
 }
 
   nav .nav-link {
@@ -855,6 +860,36 @@ nav .section{
 .about1 .left p{
     z-index: 99;
     font-size: 1vw;
+}
+.about1 .left .resume-btn{
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 0vw;
+    padding: 0.85rem 1.2rem;
+    border: 1px solid #111;
+    border-radius: 999px;
+    color: #111;
+    font-size: clamp(0.7rem, 0.85vw, 0.9rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+.about1 .left .resume-btn i{
+    font-size: 1.1em;
+    transition: transform 0.25s ease;
+}
+.about1 .left .resume-btn:hover,
+.about1 .left .resume-btn:focus-visible{
+    background-color: #111;
+    color: #fff;
+    transform: translateY(-2px);
+}
+.about1 .left .resume-btn:hover i,
+.about1 .left .resume-btn:focus-visible i{
+    transform: translateY(2px);
 }
 .about1 .right{
     height: 100%;
