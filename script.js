@@ -593,3 +593,16 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: 'power2.out'
       }, '-=0.6');
     });
+
+
+// --------------------------------------------------------ALL Links---------------------------------------------------------------
+
+const talk = document.querySelector('#talk');
+
+
+talk.addEventListener('click', ()=>{
+    window.open(
+  "https://wa.me/8801920409685?text=Hello%20Fuwad%2C%20I%20want%20to%20work%20with%20you.",
+  "_blank"
+);
+})
