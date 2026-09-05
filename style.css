@@ -2288,14 +2288,14 @@ textarea::placeholder {
     color: #fff;
     border: none;
     font-size: 2vw;
-    padding: 1vw 3vw;
+    padding: 1vw 3vw ;
     border-radius: 1rem;
     display: block;
     position: relative;
-    margin: 1rem 2vw 0 auto;
+    margin: 1rem 2vw 4VW auto;
     cursor: pointer;
     transition: 0.3s ease-out;
-    z-index: 9999;
+    z-index: 999;
 }
 .con-bottom .send:hover{
     transform: translateY(-3px) scale(1.05);
@@ -2319,6 +2319,704 @@ textarea::placeholder {
     font-size: 1rem;
     text-align: right;
 }
+
+
+
+/* Works responsive layout ------------------------------------------------ */
+.works .work-h {
+    max-width: calc(100% - 2rem);
+    font-size: clamp(2.6rem, 5vw, 5.2rem);
+    line-height: 0.9;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.works .pro .card {
+    width: min(700px, calc(100vw - 4rem));
+    height: clamp(430px, 54vw, 550px);
+    padding: clamp(0.7rem, 1.2vw, 1rem);
+}
+
+.works .pro .card h4 {
+    font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+}
+
+.works .pro .card .title {
+    gap: clamp(0.45rem, 0.7vw, 0.7rem);
+    margin-top: clamp(0.45rem, 0.7vw, 0.7rem);
+}
+
+.works .pro .card .techno {
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.works .pro .card .techno span {
+    padding: 0.3rem 0.7rem;
+    font-size: clamp(0.62rem, 0.85vw, 0.75rem);
+    line-height: 1;
+}
+
+.works .pro .card button {
+    min-height: 2rem;
+    margin-top: 0.1rem;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.72rem;
+}
+
+
+/* Selected works panel: keep content above the animated background. */
+.pro6 .con-work {
+    position: relative;
+    isolation: isolate;
+}
+
+.pro6 .con-work::before {
+    z-index: 0;
+    pointer-events: none;
+}
+
+.pro6 .con-work::after {
+    z-index: 2;
+    pointer-events: none;
+}
+
+.pro6 .con-work h1,
+.pro6 .con-work p,
+.pro6 .con-work .view {
+    position: relative;
+    z-index: 1;
+}
+
+/* ------------------------------------------Footer------------------------------------------------------------------------------------- */
+
+
+/* ===================================================
+       FOOTER ARCHITECTURE
+       Brutalist · Editorial · Creative Developer · Flat Coral
+       =================================================== */
+    .site-footer {
+      --bg-coral: #f5f2ea;
+      --text-black: #111;
+      --border-line: rgba(17, 17, 17, 0.28);
+      --border-subtle: rgba(17, 17, 17, 0.2);
+      --font-display: 'cap', 'main', sans-serif;
+      --font-body: 'main', sans-serif;
+      position: relative;
+      width: 100%;
+      background-color: var(--bg-coral);
+      color: var(--text-black);
+      overflow: hidden;
+      border-top: 2px solid var(--text-black);
+      z-index: 10;
+    }
+
+    /* Container */
+    .footer-inner {
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---------------------------------------------------
+       SECTION 1: TOP 3-COLUMN INFORMATION GRID
+       --------------------------------------------------- */
+    .footer-grid-section {
+      display: grid;
+      grid-template-columns: 1fr;
+      border-bottom: 1px solid var(--border-line);
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid-section {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .footer-col {
+      padding: 2.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    @media (min-width: 768px) {
+      .footer-col {
+        padding: 3rem 2rem;
+        border-right: 1px solid var(--border-line);
+      }
+      .footer-col:last-child {
+        border-right: none;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .footer-col:not(:last-child) {
+        border-bottom: 1px solid var(--border-line);
+      }
+    }
+
+    /* Column Meta Labels */
+    .col-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--text-black);
+      margin-bottom: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.85;
+    }
+
+    .col-label::after {
+      content: "";
+      height: 1px;
+      width: 14px;
+      background-color: var(--text-black);
+      display: inline-block;
+      opacity: 0.4;
+    }
+
+    /* Navigation Column Links */
+    .foot-nav-list, .foot-social-list, .foot-skills-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+    }
+
+    .foot-nav-link {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      font-weight: 800;
+      color: var(--text-black);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      position: relative;
+      width: fit-content;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+      cursor: pointer;
+    }
+
+    .foot-nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0%;
+      height: 2px;
+      background-color: var(--text-black);
+      transition: width 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .foot-nav-link:hover {
+      transform: translateX(6px);
+      opacity: 0.85;
+    }
+
+    .foot-nav-link:hover::after {
+      width: 100%;
+    }
+
+    .foot-nav-link:focus-visible {
+      outline: 2px dashed var(--text-black);
+      outline-offset: 4px;
+    }
+
+    /* Skills / Expertise Column */
+    .skill-item {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      font-weight: 800;
+      color: var(--text-black);
+      text-transform: uppercase;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      position: relative;
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 767px) {
+      .skill-item {
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+    }
+
+    .skill-badge {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 0.15rem 0.4rem;
+      border: 1px solid rgba(17, 17, 17, 0.4);
+      border-radius: 2px;
+      vertical-align: middle;
+    }
+
+    /* Social Column Links */
+    .foot-social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 280px;
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+      font-weight: 700;
+      color: var(--text-black);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border-subtle);
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, opacity 0.2s ease;
+      cursor: pointer;
+    }
+
+    .foot-social-link span.arrow-icon {
+      font-size: 1rem;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .foot-social-link:hover {
+      transform: translateX(6px);
+      border-color: var(--text-black);
+      opacity: 0.85;
+    }
+
+    .foot-social-link:hover span.arrow-icon {
+      transform: translate(2px, -2px);
+    }
+
+    .foot-social-link:focus-visible {
+      outline: 2px dashed var(--text-black);
+      outline-offset: 4px;
+    }
+
+    /* ---------------------------------------------------
+       SECTION 2: LARGE BRAND SIGNATURE (FUWAD)
+       Oversized display typography touching edges
+       --------------------------------------------------- */
+    .footer-brand-stage {
+      width: 100%;
+      padding: 1.5rem 1.25rem 0.5rem 1.25rem;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      line-height: 0.82;
+      position: relative;
+    }
+
+    @media (min-width: 768px) {
+      .footer-brand-stage {
+        padding: 3rem 2rem 1rem 2rem;
+      }
+    }
+
+    .brand-wordmark-container {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .brand-wordmark {
+      font-family: var(--font-display);
+      font-size: clamp(4.75rem, 21.5vw, 22rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      text-align: center;
+      color: var(--text-black);
+      letter-spacing: -0.055em;
+      line-height: 0.82;
+      display: block;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      white-space: nowrap;
+      transform-origin: bottom left;
+      will-change: transform, opacity;
+    }
+
+    /* ---------------------------------------------------
+       SECTION 3: BOTTOM METADATA BAR
+       --------------------------------------------------- */
+    .footer-bottom-bar {
+      border-top: 1px solid var(--border-line);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem 1.5rem;
+      font-size: clamp(0.6875rem, 1.2vw, 0.8125rem);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-black);
+    }
+
+    @media (min-width: 768px) {
+      .footer-bottom-bar {
+        padding: 1.25rem 2rem;
+      }
+    }
+
+    .bottom-group-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .bottom-group-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .bottom-legal-link {
+      color: var(--text-black);
+      text-decoration: none;
+      position: relative;
+      transition: opacity 0.2s ease;
+    }
+
+    .bottom-legal-link:hover {
+      opacity: 0.65;
+      text-decoration: underline;
+    }
+
+    .bottom-legal-link:focus-visible {
+      outline: 2px dashed var(--text-black);
+      outline-offset: 2px;
+    }
+
+    .bottom-credit {
+      opacity: 0.9;
+    }
+
+    /* Responsive adjustments for mobile */
+    @media (max-width: 640px) {
+      .footer-bottom-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+      .bottom-group-links {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 1rem;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+
+
+
+
+
+
+@media (max-width: 1024px) {
+    .works .work-h {
+        top: 1.75rem;
+        font-size: clamp(2.5rem, 7vw, 4.5rem);
+    }
+
+    .works .pro {
+        padding: 0 1.5rem;
+    }
+
+    .works .pro .card {
+        width: min(620px, calc(100vw - 3rem));
+        height: min(68svh, 500px);
+    }
+
+    .pro6 .view {
+        padding: 1.1rem 3.2rem;
+        font-size: clamp(1.2rem, 3vw, 1.75rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .works {
+        padding: 0 0 2.5rem;
+    }
+
+    .works .work-h {
+        position: relative;
+        top: auto;
+        left: auto;
+        max-width: none;
+        margin: 0;
+        padding: 1.75rem 1rem 1.1rem;
+        transform: none;
+        font-size: clamp(2.8rem, 14vw, 5rem);
+        letter-spacing: -0.04em;
+    }
+
+    .works-wrapper {
+        height: auto;
+        display: grid;
+        gap: 1rem;
+    }
+
+    .works .pro {
+        position: relative;
+        top: auto;
+        min-height: 0;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .works .pro .card {
+        width: 100%;
+        max-width: 34rem;
+        height: auto;
+        min-height: 0;
+        min-width: 0;
+        padding: clamp(0.7rem, 2vw, 0.9rem);
+        border-radius: 0.9rem;
+    }
+
+    .works .pro .card img {
+        width: 100%;
+        height: auto;
+        max-height: 58svh;
+        aspect-ratio: 16 / 10;
+        display: block;
+        object-fit: cover;
+    }
+
+    .works .pro .card .title {
+        gap: 0.6rem;
+        margin-top: 0.75rem;
+    }
+
+    .works .pro .card h4 {
+        font-size: clamp(1.2rem, 4.5vw, 1.6rem);
+    }
+
+    .works .pro .card .techno span {
+        padding: 0.35rem 0.6rem;
+        font-size: clamp(0.6rem, 2.2vw, 0.7rem);
+    }
+
+    .works .pro .card button {
+        width: 100%;
+        min-height: 2.4rem;
+        margin-top: 0.2rem;
+        padding: 0.55rem 0.75rem;
+    }
+
+    .works .pro6 {
+        min-height: 20rem;
+        padding: 0;
+    }
+
+    .pro6 .container {
+        min-height: 20rem;
+    }
+
+    .pro6 .container h1{
+    line-height: 5vw;
+}
+/* .pro6 .container p{
+    
+} */
+
+
+    .pro6 .view {
+        padding: 1rem 2.2rem;
+        font-size: clamp(1.1rem, 5vw, 1.55rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .works {
+        padding-bottom: 1rem;
+    }
+
+    .works .work-h {
+        padding: 1.35rem 0.75rem 0.8rem;
+        font-size: clamp(2.5rem, 15vw, 4rem);
+    }
+
+    .works-wrapper {
+        gap: 0.65rem;
+    }
+
+    .works .pro {
+        padding: 0.65rem;
+    }
+
+    .works .pro .card {
+        width: 100%;
+        max-width: none;
+        padding: 0.6rem;
+        border-radius: 0.7rem;
+    }
+
+    .works .pro .card img {
+        max-height: none;
+        aspect-ratio: 4 / 3;
+        border-radius: 0.5rem;
+    }
+
+    .works .pro .card h4 {
+        font-size: clamp(1.05rem, 5vw, 1.25rem);
+        line-height: 1;
+    }
+
+    .works .pro .card .techno {
+        gap: 0.35rem;
+    }
+
+    .works .pro .card .techno span {
+        padding: 0.3rem 0.5rem;
+        font-size: clamp(0.56rem, 2.8vw, 0.64rem);
+    }
+
+    .works .pro .card button {
+        min-height: 2.6rem;
+        font-size: 0.7rem;
+    }
+
+    .works .pro6,
+    .pro6 .container {
+        min-height: 16rem;
+    }
+
+    .pro6 .view {
+        padding: 0.9rem 1.6rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .works .pro6 {
+        min-height: 0;
+        padding: 0.75rem;
+    }
+
+    .pro6 .con-work {
+        height: auto;
+        min-height: clamp(28rem, 92vw, 34rem);
+        padding: clamp(1.5rem, 6vw, 2.5rem);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        gap: 1.15rem;
+        overflow: hidden;
+        background-size: 220px 110px;
+    }
+
+    .pro6 .con-work::before {
+        background-size: 220px 110px;
+    }
+
+    .pro6 .con-work h1 {
+        max-width: 9ch;
+        margin: 0;
+        font-size: clamp(3.1rem, 12vw, 5.4rem);
+        line-height: 0.78;
+        letter-spacing: -0.06em;
+    }
+
+    .pro6 .con-work p {
+        max-width: 38ch;
+        margin: 0;
+        font-size: clamp(0.9rem, 2.8vw, 1.1rem);
+        line-height: 1.45;
+        color: rgba(255, 255, 255, 0.82);
+    }
+
+    .pro6 .con-work .view {
+        margin-top: 0.4rem;
+        padding: 0.9rem 1.6rem;
+        font-size: clamp(0.95rem, 3.5vw, 1.25rem);
+        line-height: 1;
+    }
+
+    .pro6 .con-work::after {
+        bottom: 2rem;
+        left: auto;
+        right: 2.6rem;
+        transform: scale(0.8);
+        transform-origin: center;
+    }
+}
+
+@media (max-width: 480px) {
+
+  .mobile-nav .m-menu{
+
+  height: 2rem;
+  width: 8rem;
+
+}
+
+
+
+    .works .pro6 {
+        padding: 0.65rem;
+    }
+
+    .pro6 .con-work {
+        min-height: clamp(29rem, 128vw, 34rem);
+        padding: 1.35rem;
+        gap: 1rem;
+        background-size: 180px 90px;
+    }
+
+    .pro6 .con-work::before {
+        background-size: 180px 90px;
+    }
+
+    .pro6 .con-work h1 {
+        max-width: 8ch;
+        font-size: clamp(2.8rem, 14vw, 4.2rem);
+    }
+
+    .pro6 .con-work p {
+        max-width: 31ch;
+        font-size: 0.88rem;
+        line-height: 1.42;
+    }
+
+    .pro6 .con-work .view {
+        width: 100%;
+        padding: 0.95rem 1rem;
+        text-align: center;
+        font-size: 0.95rem;
+    }
+
+    .pro6 .con-work::after {
+        right: 1.6rem;
+        bottom: 1.6rem;
+        transform: scale(0.64);
+    }
+}
+
 
 
 @media (min-width: 1024px) {
@@ -2809,360 +3507,6 @@ textarea::placeholder {
 /* Very small mobile */
 @media (max-width: 375px) {
 }
-
-/* Works responsive layout ------------------------------------------------ */
-.works .work-h {
-    max-width: calc(100% - 2rem);
-    font-size: clamp(2.6rem, 5vw, 5.2rem);
-    line-height: 0.9;
-    text-align: center;
-    white-space: nowrap;
-}
-
-.works .pro .card {
-    width: min(700px, calc(100vw - 4rem));
-    height: clamp(430px, 54vw, 550px);
-    padding: clamp(0.7rem, 1.2vw, 1rem);
-}
-
-.works .pro .card h4 {
-    font-size: clamp(1.1rem, 1.7vw, 1.5rem);
-}
-
-.works .pro .card .title {
-    gap: clamp(0.45rem, 0.7vw, 0.7rem);
-    margin-top: clamp(0.45rem, 0.7vw, 0.7rem);
-}
-
-.works .pro .card .techno {
-    flex-wrap: wrap;
-    gap: 0.45rem;
-}
-
-.works .pro .card .techno span {
-    padding: 0.3rem 0.7rem;
-    font-size: clamp(0.62rem, 0.85vw, 0.75rem);
-    line-height: 1;
-}
-
-.works .pro .card button {
-    min-height: 2rem;
-    margin-top: 0.1rem;
-    padding: 0.4rem 0.75rem;
-    font-size: 0.72rem;
-}
-
-
-/* Selected works panel: keep content above the animated background. */
-.pro6 .con-work {
-    position: relative;
-    isolation: isolate;
-}
-
-.pro6 .con-work::before {
-    z-index: 0;
-    pointer-events: none;
-}
-
-.pro6 .con-work::after {
-    z-index: 2;
-    pointer-events: none;
-}
-
-.pro6 .con-work h1,
-.pro6 .con-work p,
-.pro6 .con-work .view {
-    position: relative;
-    z-index: 1;
-}
-
-
-
-
-@media (max-width: 1024px) {
-    .works .work-h {
-        top: 1.75rem;
-        font-size: clamp(2.5rem, 7vw, 4.5rem);
-    }
-
-    .works .pro {
-        padding: 0 1.5rem;
-    }
-
-    .works .pro .card {
-        width: min(620px, calc(100vw - 3rem));
-        height: min(68svh, 500px);
-    }
-
-    .pro6 .view {
-        padding: 1.1rem 3.2rem;
-        font-size: clamp(1.2rem, 3vw, 1.75rem);
-    }
-}
-
-@media (max-width: 768px) {
-    .works {
-        padding: 0 0 2.5rem;
-    }
-
-    .works .work-h {
-        position: relative;
-        top: auto;
-        left: auto;
-        max-width: none;
-        margin: 0;
-        padding: 1.75rem 1rem 1.1rem;
-        transform: none;
-        font-size: clamp(2.8rem, 14vw, 5rem);
-        letter-spacing: -0.04em;
-    }
-
-    .works-wrapper {
-        height: auto;
-        display: grid;
-        gap: 1rem;
-    }
-
-    .works .pro {
-        position: relative;
-        top: auto;
-        min-height: 0;
-        height: auto;
-        padding: 1rem;
-    }
-
-    .works .pro .card {
-        width: 100%;
-        max-width: 34rem;
-        height: auto;
-        min-height: 0;
-        min-width: 0;
-        padding: clamp(0.7rem, 2vw, 0.9rem);
-        border-radius: 0.9rem;
-    }
-
-    .works .pro .card img {
-        width: 100%;
-        height: auto;
-        max-height: 58svh;
-        aspect-ratio: 16 / 10;
-        display: block;
-        object-fit: cover;
-    }
-
-    .works .pro .card .title {
-        gap: 0.6rem;
-        margin-top: 0.75rem;
-    }
-
-    .works .pro .card h4 {
-        font-size: clamp(1.2rem, 4.5vw, 1.6rem);
-    }
-
-    .works .pro .card .techno span {
-        padding: 0.35rem 0.6rem;
-        font-size: clamp(0.6rem, 2.2vw, 0.7rem);
-    }
-
-    .works .pro .card button {
-        width: 100%;
-        min-height: 2.4rem;
-        margin-top: 0.2rem;
-        padding: 0.55rem 0.75rem;
-    }
-
-    .works .pro6 {
-        min-height: 20rem;
-        padding: 0;
-    }
-
-    .pro6 .container {
-        min-height: 20rem;
-    }
-
-    .pro6 .container h1{
-    line-height: 5vw;
-}
-/* .pro6 .container p{
-    
-} */
-
-
-    .pro6 .view {
-        padding: 1rem 2.2rem;
-        font-size: clamp(1.1rem, 5vw, 1.55rem);
-    }
-}
-
-@media (max-width: 480px) {
-    .works {
-        padding-bottom: 1rem;
-    }
-
-    .works .work-h {
-        padding: 1.35rem 0.75rem 0.8rem;
-        font-size: clamp(2.5rem, 15vw, 4rem);
-    }
-
-    .works-wrapper {
-        gap: 0.65rem;
-    }
-
-    .works .pro {
-        padding: 0.65rem;
-    }
-
-    .works .pro .card {
-        width: 100%;
-        max-width: none;
-        padding: 0.6rem;
-        border-radius: 0.7rem;
-    }
-
-    .works .pro .card img {
-        max-height: none;
-        aspect-ratio: 4 / 3;
-        border-radius: 0.5rem;
-    }
-
-    .works .pro .card h4 {
-        font-size: clamp(1.05rem, 5vw, 1.25rem);
-        line-height: 1;
-    }
-
-    .works .pro .card .techno {
-        gap: 0.35rem;
-    }
-
-    .works .pro .card .techno span {
-        padding: 0.3rem 0.5rem;
-        font-size: clamp(0.56rem, 2.8vw, 0.64rem);
-    }
-
-    .works .pro .card button {
-        min-height: 2.6rem;
-        font-size: 0.7rem;
-    }
-
-    .works .pro6,
-    .pro6 .container {
-        min-height: 16rem;
-    }
-
-    .pro6 .view {
-        padding: 0.9rem 1.6rem;
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .works .pro6 {
-        min-height: 0;
-        padding: 0.75rem;
-    }
-
-    .pro6 .con-work {
-        height: auto;
-        min-height: clamp(28rem, 92vw, 34rem);
-        padding: clamp(1.5rem, 6vw, 2.5rem);
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-end;
-        gap: 1.15rem;
-        overflow: hidden;
-        background-size: 220px 110px;
-    }
-
-    .pro6 .con-work::before {
-        background-size: 220px 110px;
-    }
-
-    .pro6 .con-work h1 {
-        max-width: 9ch;
-        margin: 0;
-        font-size: clamp(3.1rem, 12vw, 5.4rem);
-        line-height: 0.78;
-        letter-spacing: -0.06em;
-    }
-
-    .pro6 .con-work p {
-        max-width: 38ch;
-        margin: 0;
-        font-size: clamp(0.9rem, 2.8vw, 1.1rem);
-        line-height: 1.45;
-        color: rgba(255, 255, 255, 0.82);
-    }
-
-    .pro6 .con-work .view {
-        margin-top: 0.4rem;
-        padding: 0.9rem 1.6rem;
-        font-size: clamp(0.95rem, 3.5vw, 1.25rem);
-        line-height: 1;
-    }
-
-    .pro6 .con-work::after {
-        bottom: 2rem;
-        left: auto;
-        right: 2.6rem;
-        transform: scale(0.8);
-        transform-origin: center;
-    }
-}
-
-@media (max-width: 480px) {
-
-  .mobile-nav .m-menu{
-
-  height: 2rem;
-  width: 8rem;
-
-}
-
-
-
-    .works .pro6 {
-        padding: 0.65rem;
-    }
-
-    .pro6 .con-work {
-        min-height: clamp(29rem, 128vw, 34rem);
-        padding: 1.35rem;
-        gap: 1rem;
-        background-size: 180px 90px;
-    }
-
-    .pro6 .con-work::before {
-        background-size: 180px 90px;
-    }
-
-    .pro6 .con-work h1 {
-        max-width: 8ch;
-        font-size: clamp(2.8rem, 14vw, 4.2rem);
-    }
-
-    .pro6 .con-work p {
-        max-width: 31ch;
-        font-size: 0.88rem;
-        line-height: 1.42;
-    }
-
-    .pro6 .con-work .view {
-        width: 100%;
-        padding: 0.95rem 1rem;
-        text-align: center;
-        font-size: 0.95rem;
-    }
-
-    .pro6 .con-work::after {
-        right: 1.6rem;
-        bottom: 1.6rem;
-        transform: scale(0.64);
-    }
-}
-
-
-
 
 
 
