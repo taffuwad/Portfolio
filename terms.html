@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terms and Conditions — FUWAD TALUKDER</title>
+    <meta
+        name="description"
+        content="Terms and Conditions for FUWAD TALUKDER's personal portfolio website. Learn about website usage, intellectual property, contact form submissions, and other terms."
+    />
+    <style>
+        /* ============================================================
+           TERMS.CSS — FUWAD TALUKDER PORTFOLIO
+           No header / navbar version
+           Minimal · Editorial · Experimental · Typography-focused
+           ============================================================ */
+
+        /* ---------- Base Reset & Global Styles ---------- */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg: #faf9f7;
+            --color-text: #1a1a1a;
+            --color-text-muted: #6b6b6b;
+            --color-border: #e2dfda;
+            --color-accent: #000000;
+            --color-hover-bg: #1a1a1a;
+            --color-hover-text: #ffffff;
+            --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --max-width: 1200px;
+            --thin-border: 1px solid var(--color-border);
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --transition-fast: 0.2s var(--ease-out);
+            --transition-medium: 0.4s var(--ease-out);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.7;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color var(--transition-fast), opacity var(--transition-fast);
+        }
+
+        a:hover {
+            opacity: 0.7;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 4px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin-inline: auto;
+            padding-inline: 2rem;
+        }
+
+        /* ============================================================
+           HERO SECTION (no navbar, page starts directly)
+           ============================================================ */
+        .hero {
+            padding: 6rem 2rem;
+            border-bottom: var(--thin-border);
+        }
+
+        .hero-inner {
+            max-width: var(--max-width);
+            margin-inline: auto;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            font-size: clamp(3rem, 10vw, 8rem);
+            margin-bottom: 2rem;
+        }
+
+        .hero-line {
+            display: block;
+        }
+
+        .hero-line-2 {
+            margin-left: 1.2em;
+        }
+
+        .hero-line-3 {
+            margin-left: 2.4em;
+        }
+
+        .hero-meta {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* ============================================================
+           INTRO SECTION
+           ============================================================ */
+        .intro {
+            padding: 4rem 2rem 2rem;
+            border-bottom: var(--thin-border);
+        }
+
+        .intro .container {
+            max-width: 800px;
+        }
+
+        .intro-text {
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+            line-height: 1.5;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-subtle {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+        }
+
+        /* ============================================================
+           LEGAL SECTIONS GRID
+           ============================================================ */
+        .legal-sections {
+            max-width: var(--max-width);
+            margin-inline: auto;
+            padding: 0 2rem;
+        }
+
+        .legal-section {
+            display: grid;
+            grid-template-columns: 6rem 1fr;
+            gap: 2rem;
+            padding: 3rem 0;
+            border-bottom: var(--thin-border);
+        }
+
+        .legal-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-number {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--color-text-muted);
+            letter-spacing: 0.08em;
+            padding-top: 0.3rem;
+            user-select: none;
+        }
+
+        .section-content {
+            max-width: 700px;
+        }
+
+        .section-heading {
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .section-text {
+            margin-bottom: 1.2rem;
+            color: #2a2a2a;
+        }
+
+        .section-text:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-fields-list,
+        .acceptable-use-list {
+            list-style: none;
+            margin: 1rem 0 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .form-fields-list li,
+        .acceptable-use-list li {
+            position: relative;
+            margin-bottom: 0.5rem;
+            color: #2a2a2a;
+        }
+
+        .form-fields-list li::before,
+        .acceptable-use-list li::before {
+            content: "—";
+            position: absolute;
+            left: -1.5rem;
+            color: var(--color-text-muted);
+        }
+
+        .placeholder-text {
+            display: inline-block;
+            background-color: #f0ede8;
+            padding: 0.2rem 0.6rem;
+            font-style: italic;
+            letter-spacing: 0.03em;
+            border: 1px dashed #bdb8b0;
+            color: #555;
+        }
+
+        .contact-email {
+            margin: 1rem 0 1.5rem;
+        }
+
+        .email-link {
+            font-weight: 600;
+            border-bottom: 1px solid currentColor;
+            padding-bottom: 0.2rem;
+        }
+
+        .email-link:hover {
+            opacity: 0.7;
+        }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .site-footer {
+            border-top: var(--thin-border);
+            padding: 2rem;
+            background-color: var(--color-bg);
+        }
+
+        .footer-inner {
+            max-width: var(--max-width);
+            margin-inline: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copy,
+        .footer-credit {
+            font-size: 0.8rem;
+            letter-spacing: 0.03em;
+            color: var(--color-text-muted);
+        }
+
+        .footer-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.85rem;
+        }
+
+        .footer-link {
+            letter-spacing: 0.03em;
+        }
+
+        .footer-link-active {
+            font-weight: 600;
+            border-bottom: 1px solid currentColor;
+            opacity: 1;
+        }
+
+        .footer-separator {
+            color: var(--color-text-muted);
+            opacity: 0.5;
+        }
+
+        .footer-author {
+            font-weight: 600;
+        }
+
+        /* ============================================================
+           ANIMATIONS (subtle, triggered by JS)
+           ============================================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-line {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+        }
+
+        .hero-line.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-line-1.is-visible {
+            transition-delay: 0.05s;
+        }
+
+        .hero-line-2.is-visible {
+            transition-delay: 0.15s;
+        }
+
+        .hero-line-3.is-visible {
+            transition-delay: 0.25s;
+        }
+
+        /* ============================================================
+           RESPONSIVE BREAKPOINTS
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .legal-section {
+                grid-template-columns: 4rem 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 1.5rem 3rem;
+            }
+            .hero-title {
+                font-size: clamp(2.5rem, 12vw, 4rem);
+            }
+            .hero-line-2 {
+                margin-left: 0.5em;
+            }
+            .hero-line-3 {
+                margin-left: 1em;
+            }
+            .intro {
+                padding: 2.5rem 1.5rem 1.5rem;
+            }
+            .legal-sections {
+                padding: 0 1.5rem;
+            }
+            .legal-section {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+                padding: 2.5rem 0;
+            }
+            .section-number {
+                font-size: 0.8rem;
+                padding-top: 0;
+            }
+            .section-heading {
+                font-size: 1.3rem;
+            }
+            .footer-row {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main id="main" role="main">
+        <!-- HERO — Page Title -->
+        <section class="hero" aria-labelledby="pageTitle">
+            <div class="hero-inner">
+                <h1 class="hero-title" id="pageTitle">
+                    <span class="hero-line hero-line-1">Terms</span>
+                    <span class="hero-line hero-line-2">And</span>
+                    <span class="hero-line hero-line-3">Conditions</span>
+                </h1>
+                <p class="hero-meta">
+                    Last updated:&nbsp;<span class="hero-date">[INSERT&nbsp;DATE]</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- INTRODUCTORY STATEMENT -->
+        <section class="intro" aria-label="Introductory statement">
+            <div class="container">
+                <p class="intro-text">
+                    These Terms and Conditions govern your use of the personal
+                    portfolio website of
+                    <strong>Fuwad Talukder</strong> — a frontend developer, UI/UX
+                    designer, and animated web specialist. By accessing and browsing
+                    this website, you agree to use it responsibly and in accordance
+                    with the terms outlined below.
+                </p>
+                <p class="intro-subtle">
+                    This is a portfolio website intended to showcase frontend
+                    engineering work, creative development, and digital experiences.
+                    It is not an e-commerce platform and does not process payments,
+                    collect sensitive personal data, or engage in commercial
+                    transactions.
+                </p>
+            </div>
+        </section>
+
+        <!-- LEGAL SECTIONS — 01 to 13 -->
+        <div class="legal-sections">
+            <!-- Section 01 -->
+            <section class="legal-section" id="section-01" aria-labelledby="h-01">
+                <div class="section-number" aria-hidden="true">01</div>
+                <div class="section-content">
+                    <h2 class="section-heading" id="h-01">Acceptance of Terms</h2>
+                    <p class="section-text">
+                        By accessing and using this portfolio website, you acknowledge
+                        that you have read and understood these Terms and Conditions and
+                        agree to be bound by them. If you do not agree with any part of
+                        these terms, please discontinue use of the website.
+                    </p>
+                    <p class="section-text">
+                        Your continued use of the website constitutes acceptance of the
+                        terms as they apply at the time of use.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 02 -->
+            <section class="legal-section" id="section-02" aria-labelledby="h-02">
+                <div class="section-number" aria-hidden="true">02</div>
+                <div class="section-content">
+                    <h2 class="section-heading" id="h-02">Use of the Website</h2>
+                    <p class="section-text">
+                        Visitors are welcome to browse portfolio content, review
+                        project descriptions, explore design work, and contact Fuwad
+                        Talukder through the available channels. The website is
+                        intended for lawful, personal, and professional use.
+                    </p>
+                    <p class="section-text">
+                        You may not use this website in any way that violates applicable
+                        laws or regulations, or in a manner that could damage, disable,
+                        or impair the site's functionality.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 03 -->
+            <section class="legal-section" id="section-03" aria-labelledby="h-03">
+                <div class="section-number" aria-hidden="true">03</div>
+                <div class="section-content">
+                    <h2 class="section-heading" id="h-03">Intellectual Property</h2>
+                    <p class="section-text">
+                        The original content on this website — including written text,
+                        visual design, layout, graphics, code snippets, portfolio
+                        presentation, and the overall creative direction — may be
+                        protected by applicable intellectual-property rights.
+                    </p>
+                    <p class="section-text">
+                        All original branding, design elements, written content, and
+                        code authored by Fuwad Talukder remain the intellectual property
+                        of Fuwad Talukder unless otherwise stated. You may not
+                        reproduce, distribute, or use original website content for
+                        commercial purposes without prior written consent.
+                    </p>
+                    <p class="section-text">
+                        <em>
+                            Note: Project work presented in the portfolio may belong to the
+                            relevant client, brand, or owner where applicable. Fuwad
+                            Talukder does not claim ownership of third-party assets, client
+                            deliverables, or materials used in featured projects.
+                        </em>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 04 -->
+            <section class="legal-section" id="section-04" aria-labelledby="h-04">
+                <div class="section-number" aria-hidden="true">04</div>
+                <div class="section-content">
+                    <h2 class="section-heading" id="h-04">Portfolio Projects</h2>
+                    <p class="section-text">
+                        Project examples, case studies, and visual demonstrations are
+                        presented on this website for portfolio and demonstration
+                        purposes only. They showcase frontend engineering, creative
+                        development, UI/UX design, and animation work.
+                    </p>
+                    <p class="section-text">
+                        Where projects involve third-party brands, content, imagery,
+                        or technologies, all respective rights remain with their
+                        original owners. Inclusion in the portfolio does not imply
+                        endorsement by, or affiliation with, any third-party brand
+                        unless explicitly stated.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 05 -->
+            <section class="legal-section" id="section-05" aria-labelledby="h-05">
+                <div class="section-number" aria-hidden="true">05</div>
+                <div class="section-content">
+                    <h2 class="section-heading" id="h-05">Contact Form</h2>
+                    <p class="section-text">
+                        Visitors may submit information through the contact form for
+                        communication purposes. The form currently collects the
+                        following fields:
+                    </p>
+                    <ul class="form-fields-list">
+                        <li>Name</li>
+                        <li>Email</li>
+                        <li>Phone number</li>
+                        <li>Message</li>
+                    </ul>
+                    <p class="section-text">
+                        Submitting the contact form does not guarantee a response
+                        within any specific timeframe. Fuwad Talukder will make
+                        reasonable efforts to respond to genuine inquiries, but no
+                        response time is promised or implied.
+                    </p>
+                    <p class="section-text">
+                        By submitting the form, you confirm that the information
+                        provided is accurate and that you are authorised to share it.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 06 -->
+            <section class="legal-section" id="section-06" aria-labelledby="h-06">
+                <div class="section-number" aria-hidden="true">06</div>
+                <div class="section-content">
+                    <h2 class="section-heading" id="h-06">Acceptable Use</h2>
+                    <p class="section-text">
+                        You agree not to use this website for any purpose that is:
+                    </p>
+                    <ul class="acceptable-use-list">
+                        <li>Unlawful or in violation of any applicable regulations</li>
+                        <li>Malicious, harmful, or intended to cause distress</li>
+                        <li>Designed to interfere with the site's normal operation</li>
+                        <li>An attempt to gain unauthorised access to any part of the website</li>
+                        <li>Intended to scrape, harvest, or replicate website content without permission</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 07 -->
+            <section class="legal-section" id="section-07" aria-labelledby="h-07">
+                <div class="section-number" aria-hidden="true">07</div>
+                <div class="section-content">
+                    <h2 class="section-heading" id="h-07">Third-Party Links</h2>
+                    <p class="section-text">
+                        This website may contain links to external platforms, including
+                        social media profiles such as Facebook, LinkedIn, GitHub, and
+                        X. These links are provided for convenience and to showcase
+                        professional presence.
+                    </p>
+                    <p class="section-text">
+                        External websites are governed by their own terms, conditions,
+                        and privacy policies. Fuwad Talukder is not responsible for the
+                        content, practices, or availability of any third-party sites
+                        linked from this portfolio.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 08 -->
+            <section class="legal-section" id="section-08" aria-labelledby="h-08">
+                <div class="section-number" aria-hidden="true">08</div>
+                <div class="section-content">
+                    <h2 class="section-heading" id="h-08">Website Availability</h2>
+                    <p class="section-text">
+                        This website may occasionally be unavailable due to
+                        maintenance, updates, hosting-related issues, or other
+                        technical factors beyond our control.
+                    </p>
+                    <p class="section-text">
+                        While reasonable efforts are made to keep the website
+                        accessible and functioning properly, no guarantee of
+                        uninterrupted availability is provided. The website may also
+                        be modified, updated, or restructured at any time.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 09 -->
+            <section class="legal-section" id="section-09" aria-labelledby="h-09">
+                <div class="section-number" aria-hidden="true">09</div>
+                <div class="section-content">
+                    <h2 class="section-heading" id="h-09">Accuracy of Information</h2>
+                    <p class="section-text">
+                        Reasonable care is taken to present portfolio information
+                        accurately and keep it up to date. However, project details,
+                        descriptions, skill sets, and other content may change over
+                        time.
+                    </p>
+                    <p class="section-text">
+                        Fuwad Talukder does not warrant or guarantee that all
+                        information on this website is current, complete, or
+                        error-free at all times. Content is provided for informational
+                        and showcase purposes.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 10 -->
+            <section class="legal-section" id="section-10" aria-labelledby="h-10">
+                <div class="section-number" aria-hidden="true">10</div>
+                <div class="section-content">
+                    <h2 class="section-heading" id="h-10">Limitation of Liability</h2>
+                    <p class="section-text">
+                        To the fullest extent permitted by applicable law, Fuwad
+                        Talukder shall not be held liable for any direct, indirect,
+                        incidental, consequential, or exemplary damages arising from
+                        the use of, or inability to use, this website.
+                    </p>
+                    <p class="section-text">
+                        This includes, but is not limited to, damages for loss of
+                        data, loss of profits, business interruption, or any other
+                        commercial or personal loss related to website access or
+                        reliance on website content.
+                    </p>
+                    <p class="section-text">
+                        <em>
+                            This limitation applies to all content, services, and
+                            information available through this portfolio website.
+                        </em>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 11 -->
+            <section class="legal-section" id="section-11" aria-labelledby="h-11">
+                <div class="section-number" aria-hidden="true">11</div>
+                <div class="section-content">
+                    <h2 class="section-heading" id="h-11">Changes to Terms</h2>
+                    <p class="section-text">
+                        These Terms and Conditions may be updated, amended, or
+                        modified as the portfolio evolves over time. Any changes will
+                        be reflected on this page with an updated date.
+                    </p>
+                    <p class="section-text">
+                        Continued use of the website after changes have been posted
+                        constitutes acceptance of the revised terms. Visitors are
+                        encouraged to review this page periodically.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 12 -->
+            <section class="legal-section" id="section-12" aria-labelledby="h-12">
+                <div class="section-number" aria-hidden="true">12</div>
+                <div class="section-content">
+                    <h2 class="section-heading" id="h-12">Governing Law</h2>
+                    <p class="section-text">
+                        These Terms and Conditions shall be governed by and construed
+                        in accordance with the laws of:
+                    </p>
+                    <p class="placeholder-text">
+                        [INSERT GOVERNING LAW / JURISDICTION]
+                    </p>
+                    <p class="section-text">
+                        <em>
+                            This placeholder should be replaced with the applicable
+                            governing law or jurisdiction relevant to the website owner.
+                        </em>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 13 -->
+            <section class="legal-section" id="section-13" aria-labelledby="h-13">
+                <div class="section-number" aria-hidden="true">13</div>
+                <div class="section-content">
+                    <h2 class="section-heading" id="h-13">Contact</h2>
+                    <p class="section-text">
+                        If you have any questions, concerns, or comments about these
+                        Terms and Conditions, please contact:
+                    </p>
+                    <p class="contact-email">
+                        <a
+                            href="mailto:fuwadtalukderdev@gmail.com"
+                            class="email-link"
+                            aria-label="Send an email to Fuwad Talukder"
+                        >
+                            fuwadtalukderdev@gmail.com
+                        </a>
+                    </p>
+                    <p class="section-text">
+                        You may also reach out via the contact form on the main
+                        portfolio page.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="footer-row footer-row-top">
+                <p class="footer-copy">© 2026 FUWAD TALUKDER</p>
+                <nav class="footer-nav" aria-label="Footer navigation">
+                    <a
+                        href="terms.html"
+                        class="footer-link footer-link-active"
+                        aria-current="page"
+                    >
+                        Terms and Conditions
+                    </a>
+                    <span class="footer-separator" aria-hidden="true">/</span>
+                    <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                </nav>
+            </div>
+            <div class="footer-row footer-row-bottom">
+                <p class="footer-credit">
+                    Website by <span class="footer-author">Fuwad Talukder</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for subtle animations -->
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+    <script>
+
+        const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    
+        // Wait for DOM content to load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate hero lines on page load
+            const heroLines = document.querySelectorAll('.hero-line');
+            heroLines.forEach((line) => {
+                line.classList.add('is-visible');
+            });
+
+            // Reveal sections on scroll using Intersection Observer
+            const revealElements = document.querySelectorAll('.legal-section, .intro, .hero-meta');
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('reveal', 'is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                {
+                    root: null,
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px',
+                }
+            );
+
+            // Observe all legal sections and intro
+            document.querySelectorAll('.legal-section, .intro').forEach((el) => {
+                el.classList.add('reveal');
+                observer.observe(el);
+            });
+
+            // Optionally reveal hero meta with slight delay
+            const heroMeta = document.querySelector('.hero-meta');
+            if (heroMeta) {
+                heroMeta.classList.add('reveal');
+                observer.observe(heroMeta);
+            }
+        });
+    </script>
+</body>
+</html>
