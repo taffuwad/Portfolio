@@ -306,6 +306,7 @@
   height: 100vh;
   width: 100%;
   background: #111;
+  overflow: hidden;
 }
 .page2 .text-anim{
   height: 100vh;
@@ -320,9 +321,12 @@
   font-size: 20vw;
   text-wrap: nowrap;
   text-transform: uppercase;
+  will-change: transform;
+  color: #fff;
 }
 .page3{
   height: 100vh;
   width: 100%;
   background: #111;
+  
 }
