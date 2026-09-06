@@ -64,3 +64,63 @@ if (page2 && page2Heading) {
             ease: 'none'
         });
 }
+
+
+
+
+// -------------------------------------------------------------------------------------------------------
+
+const sliderImage = document.querySelectorAll('.work-card');
+const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+if (supportsHover) {
+  sliderImage.forEach((card) => {
+    const webLink = card.querySelector('.web-link');
+
+    if (!webLink) return;
+
+    gsap.set(webLink, {
+      autoAlpha: 0,
+      scale: 0.75,
+      xPercent: -50,
+      yPercent: -50
+    });
+
+    const moveX = gsap.quickTo(webLink, 'left', {
+      duration: 0.28,
+      ease: 'power3.out'
+    });
+    const moveY = gsap.quickTo(webLink, 'top', {
+      duration: 0.28,
+      ease: 'power3.out'
+    });
+
+    const moveWebLink = (event) => {
+      const rect = card.getBoundingClientRect();
+      moveX(event.clientX - rect.left);
+      moveY(event.clientY - rect.top);
+    };
+
+    card.addEventListener('pointerenter', (event) => {
+      moveWebLink(event);
+      gsap.to(webLink, {
+        autoAlpha: 1,
+        scale: 1,
+        duration: 0.25,
+        ease: 'back.out(1.5)',
+        overwrite: 'auto'
+      });
+    });
+
+    card.addEventListener('pointermove', moveWebLink);
+    card.addEventListener('pointerleave', () => {
+      gsap.to(webLink, {
+        autoAlpha: 0,
+        scale: 0.75,
+        duration: 0.18,
+        ease: 'power2.in',
+        overwrite: 'auto'
+      });
+    });
+  });
+}
