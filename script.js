@@ -320,19 +320,58 @@ if (gsap && ScrollTrigger && about) {
 
 // works--------------------------------------------------- 
 
-gsap.to(".works-wrapper",{
+// Page 4: show each project preview at the pointer on devices with a fine cursor.
+const minicircle = document.querySelector('#minicircle');
+const supportsFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-    scrollTrigger:{
-        // trigger: ".works",
-        start: "top top",
-        end: () => `+=${window.innerWidth}`,
-        pin: true,
-        
-        scrub: 1.5,
+if (minicircle && supportsFinePointer) {
+  let previousX = 0;
+  let previousY = 0;
+  let resetTimer;
 
-    }
-})
+  window.addEventListener('pointermove', (event) => {
+    const xScale = gsap.utils.clamp(0.8, 1.2, event.clientX - previousX);
+    const yScale = gsap.utils.clamp(0.8, 1.2, event.clientY - previousY);
+    previousX = event.clientX;
+    previousY = event.clientY;
 
+    minicircle.style.transform = `translate(${event.clientX}px, ${event.clientY}px) translate(-50%, -50%) scale(${xScale}, ${yScale})`;
+    clearTimeout(resetTimer);
+    resetTimer = setTimeout(() => {
+      minicircle.style.transform = `translate(${event.clientX}px, ${event.clientY}px) translate(-50%, -50%)`;
+    }, 100);
+  });
+}
+
+if (supportsFinePointer) {
+  document.querySelectorAll('.elem').forEach((elem) => {
+    let previousX = 0;
+
+    elem.addEventListener('mouseleave', () => {
+    gsap.to(elem.querySelector("img"), {
+      opacity: 0,
+      ease: Power3,
+      duration: 0.5,
+    });
+    });
+
+    elem.addEventListener('pointermove', (event) => {
+      const image = elem.querySelector('img');
+      const relativeY = event.clientY - elem.getBoundingClientRect().top;
+      const rotation = gsap.utils.clamp(-20, 20, (event.clientX - previousX) * 0.5);
+      previousX = event.clientX;
+
+      gsap.to(image, {
+        opacity: 1,
+        ease: Power3,
+        top: relativeY,
+        left: event.clientX,
+        rotate: rotation,
+        overwrite: 'auto'
+      });
+    });
+  });
+}
 
 // Contact -------------------------------------------------
 const contactSection = document.querySelector(".contact");
