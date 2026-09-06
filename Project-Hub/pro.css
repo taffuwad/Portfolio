@@ -470,3 +470,141 @@
     flex-basis: min(67vw, 20rem);
   }
 }
+
+
+.page4{
+  min-height: 100vh;
+  width: 100%;
+  background: #000;
+  color: var(--ink);
+  overflow: hidden;
+}
+
+#minicircle {
+  width: 10px;
+  height: 10px;
+  position: fixed;
+  z-index: 99999;
+  border-radius: 50%;
+  background-color: #fff;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 120ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#main {
+  width: 100%;
+  background-color: #000;
+}
+
+#second {
+  width: 100%;
+  padding: clamp(5rem, 12vw, 10rem) 8vw 0 0;
+  color: #fff;
+}
+
+.elem {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: clamp(1.25rem, 3.5vw, 3.5rem) 3vw;
+  border-top: 1px solid #888;
+}
+
+.elem h1 {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: clamp(2.5rem, 7.6vw, 8rem);
+  line-height: 0.9;
+  opacity: .7;
+}
+
+.elem h5 {
+  flex: 0 0 auto;
+  margin: 0;
+  font-size: clamp(0.7rem, 1vw, 1rem);
+  font-weight: normal;
+  letter-spacing: 0.12em;
+  opacity: .7;
+}
+
+.elem img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: clamp(10rem, 22vw, 22rem);
+  height: clamp(12rem, 28vw, 28rem);
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  will-change: left, top, transform, opacity;
+}
+
+.elemlast {
+  border-bottom: 1px solid #888;
+}
+
+@media (hover: none), (pointer: coarse) {
+  #minicircle {
+    display: none;
+  }
+
+  .elem img {
+    position: relative;
+    top: auto;
+    left: auto;
+    display: block;
+    width: min(100%, 20rem);
+    height: auto;
+    margin-top: 1rem;
+    opacity: 0.72;
+    transform: none;
+  }
+
+  .elem:focus-within img,
+  .elem:hover img {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 700px) {
+  #second {
+    padding-right: 1rem;
+  }
+
+  .elem {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    padding: 1.5rem 1rem 1.5rem 1.35rem;
+  }
+
+  .elem h1 {
+    font-size: clamp(2.25rem, 12vw, 5rem);
+    overflow-wrap: anywhere;
+  }
+
+  .elem h5 {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .elem {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .elem h1 {
+    width: 100%;
+  }
+
+  .elem img {
+    width: min(100%, 16rem);
+  }
+}
