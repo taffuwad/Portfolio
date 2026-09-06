@@ -307,3 +307,22 @@
   width: 100%;
   background: #111;
 }
+.page2 .text-anim{
+  height: 100vh;
+  width: 200vw;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: 0 15vw;
+}
+.page2 .text-anim h1{
+  font-size: 20vw;
+  text-wrap: nowrap;
+  text-transform: uppercase;
+}
+.page3{
+  height: 100vh;
+  width: 100%;
+  background: #111;
+}
