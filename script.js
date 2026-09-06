@@ -7,7 +7,7 @@ window.addEventListener("load", () => {
     window.setTimeout(() => {
         pageLoader.classList.add("is-hidden");
         pageLoader.addEventListener("transitionend", () => pageLoader.remove(), { once: true });
-    }, 250);
+    }, 500);
 }, { once: true });
 
 // Animation libraries are loaded from the CDN in index.html.

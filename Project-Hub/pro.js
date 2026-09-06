@@ -1,3 +1,20 @@
+const projectLoader = document.querySelector('.loader-screen');
+
+const hideProjectLoader = () => {
+    if (!projectLoader) return;
+
+    projectLoader.classList.add('is-hidden');
+    window.setTimeout(() => projectLoader.remove(), 1500);
+};
+
+// Keep the loader up until the Project Hub's media and other page assets load.
+window.addEventListener('load', hideProjectLoader, { once: true });
+
+// This also handles pages inserted after the document has already loaded.
+if (document.readyState === 'complete') {
+    hideProjectLoader();
+}
+
 const lenis = new Lenis({
     duration: 1.2,          // Scroll duration (seconds)
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Ease-out
