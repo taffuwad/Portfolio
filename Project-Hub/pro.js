@@ -65,8 +65,25 @@ if (page2 && page2Heading) {
         });
 }
 
+// page1-------------------------------------------------------------------------------------------------------- 
 
+let home = document.querySelector('.home');
+let contact = document.querySelector('.Contact');
 
+home.addEventListener('click',()=>{
+  window.location.href = '../index.html';
+})
+
+contact.addEventListener('click', () => {
+  const message = encodeURIComponent(
+    "Hello TAF Fuwad, I would like to discuss a project with you."
+  );
+
+  window.open(
+    `https://wa.me/8801920409685?text=${message}`,
+    '_blank'
+  );
+});
 
 // -------------------------------------------------------------------------------------------------------
 

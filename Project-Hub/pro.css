@@ -498,6 +498,7 @@
   background: #111;
   color: var(--ink);
   overflow: hidden;
+  z-index: 9999;
 }
 
 #minicircle {

@@ -560,7 +560,13 @@ fullLinks.forEach((fullLink) => {
 })
 
 
+// pro6------------------------------------------------------------------------------------------
 
+let proHub = document.querySelector('#pro-hub');
+
+proHub.addEventListener('click',()=>{
+    window.location.href = './Project-Hub/project.html';
+})
 
 
 
