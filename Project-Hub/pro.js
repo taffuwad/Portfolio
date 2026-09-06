@@ -70,6 +70,74 @@ if (page2 && page2Heading) {
 
 // -------------------------------------------------------------------------------------------------------
 
+// Page 3 sliders: use the duplicated cards as a measured, seamless loop.
+// Buttons nudge the loop without restarting its continuous movement.
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+document.querySelectorAll('.slider-shell').forEach((shell) => {
+  const marquee = shell.querySelector('.marquee');
+  const track = shell.querySelector('.marquee-track');
+  const cards = track ? Array.from(track.children) : [];
+
+  if (!marquee || !track || cards.length < 2) return;
+
+  // The second half is present only to complete the visual loop.
+  cards.slice(Math.floor(cards.length / 2)).forEach((card) => {
+    card.setAttribute('aria-hidden', 'true');
+    card.querySelectorAll('a').forEach((link) => { link.tabIndex = -1; });
+  });
+
+  let loopWidth = 0;
+  let offset = 0;
+  let pendingShift = 0;
+  let lastTime = performance.now();
+  let paused = false;
+  const direction = marquee.dataset.direction === 'reverse' ? 1 : -1;
+
+  const normaliseOffset = () => {
+    if (!loopWidth) return;
+    while (offset <= -loopWidth) offset += loopWidth;
+    while (offset > 0) offset -= loopWidth;
+  };
+
+  const measure = () => {
+    // The first repeated card marks the exact point at which the sequence repeats.
+    loopWidth = cards[Math.floor(cards.length / 2)].offsetLeft - cards[0].offsetLeft;
+    if (!loopWidth) return;
+    offset = direction === 1 ? -loopWidth : 0;
+    track.style.transform = `translate3d(${offset}px, 0, 0)`;
+  };
+
+  shell.querySelectorAll('.slider-control').forEach((button) => {
+    button.addEventListener('click', () => {
+      const step = Math.min(cards[0].getBoundingClientRect().width * 0.9, marquee.clientWidth * 0.85);
+      pendingShift += button.dataset.slide === 'next' ? -step : step;
+    });
+  });
+
+  shell.addEventListener('pointerenter', () => { paused = true; });
+  shell.addEventListener('pointerleave', () => { paused = false; });
+  shell.addEventListener('focusin', () => { paused = true; });
+  shell.addEventListener('focusout', () => { paused = false; });
+  window.addEventListener('resize', measure, { passive: true });
+  window.addEventListener('load', measure, { once: true });
+
+  const animate = (time) => {
+    const elapsed = Math.min(time - lastTime, 64);
+    lastTime = time;
+    const nudge = pendingShift * Math.min(1, elapsed / 180);
+    pendingShift -= nudge;
+    const speed = paused || reduceMotion.matches ? 0 : direction * 0.035 * elapsed;
+    offset += speed + nudge;
+    normaliseOffset();
+    track.style.transform = `translate3d(${offset}px, 0, 0)`;
+    requestAnimationFrame(animate);
+  };
+
+  measure();
+  requestAnimationFrame(animate);
+});
+
 const sliderImage = document.querySelectorAll('.work-card');
 const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 

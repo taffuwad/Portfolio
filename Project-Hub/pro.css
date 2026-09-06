@@ -372,24 +372,45 @@
   justify-self: end;
   text-align: right;
 }
+.slider-shell{
+  position: relative;
+  padding-inline: clamp(3.25rem, 5vw, 5.5rem);
+}
 .marquee{
-  width: max-content;
-  animation: showcase-slide 34s linear infinite;
-  will-change: transform;
-}
-.marquee-reverse{
-  animation-name: showcase-slide-reverse;
-  animation-duration: 30s;
-}
-.marquee:hover,
-.marquee:focus-within{
-  animation-play-state: paused;
+  width: 100%;
+  overflow: hidden;
 }
 .marquee-track{
   display: flex;
   gap: clamp(0.75rem, 1.3vw, 1.5rem);
-  padding-left: 3.5vw;
+  width: max-content;
+  will-change: transform;
 }
+.slider-control{
+  position: absolute;
+  top: calc(50% - 1.25rem);
+  z-index: 2;
+  display: grid;
+  width: clamp(2.5rem, 3.4vw, 3.25rem);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid rgba(244, 241, 234, 0.5);
+  border-radius: 50%;
+  background: rgba(23, 25, 23, 0.88);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background-color 200ms ease, color 200ms ease, transform 200ms ease;
+}
+.slider-control:hover,
+.slider-control:focus-visible{
+  background: #ffdaa2;
+  color: #222;
+  outline: none;
+  transform: scale(1.08);
+}
+.slider-control-prev{ left: clamp(0.5rem, 1.25vw, 1.5rem); }
+.slider-control-next{ right: clamp(0.5rem, 1.25vw, 1.5rem); }
 .work-card{
   flex: 0 0 clamp(14rem, 23vw, 27rem);
   position: relative;
@@ -432,17 +453,9 @@
   cursor: none;
 }
 
-@keyframes showcase-slide{
-  from{ transform: translateX(0); }
-  to{ transform: translateX(calc(-50% - 0.65vw)); }
-}
-@keyframes showcase-slide-reverse{
-  from{ transform: translateX(calc(-50% - 0.65vw)); }
-  to{ transform: translateX(0); }
-}
 @media (prefers-reduced-motion: reduce){
-  .marquee{ animation-play-state: paused; }
   .work-card img{ transition: none; }
+  .slider-control{ transition: none; }
 }
 @media (max-width: 700px){
   .top3,
@@ -462,13 +475,20 @@
   .showcase-note{
     display: none;
   }
+  .slider-shell{
+    padding-inline: 3.6rem;
+  }
   .marquee-track{
     gap: 0.75rem;
-    padding-left: 1.35rem;
   }
   .work-card{
     flex-basis: min(67vw, 20rem);
   }
+  .slider-control{
+    top: calc(50% - 1.1rem);
+  }
+  .slider-control-prev{ left: 0.55rem; }
+  .slider-control-next{ right: 0.55rem; }
 }
 
 
