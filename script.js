@@ -27,55 +27,26 @@ if (gsap && SplitText) {
 }
 
 // Navbar links use Lenis when available and keep the current section visible.
-(() => {
-    const navLinks = [...document.querySelectorAll(".nav-link, .foot-nav-link")];
-    const scrollTriggers = [...document.querySelectorAll("[data-scroll-target]")];
-    const sections = navLinks
-        .map((link) => document.querySelector(link.getAttribute("href")))
-        .filter(Boolean);
+const navlinks = document.querySelectorAll('.nav-link');
 
-    const scrollToTarget = (targetSelector) => {
-        const target = document.querySelector(targetSelector);
-        if (!target) return;
+    navlinks.forEach((navlink)=>{
+        let innerText = navlink.innerText;
+        navlink.innerHTML = '';
 
-        if (lenis) {
-            lenis.scrollTo(target, { offset: -24 });
-        } else {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
+        let textContainer = document.createElement('div');
+        textContainer.classList.add('block');
+
+        for(let letter of innerText){
+            let span = document.createElement('span');
+            span.innerText = letter.trim() === '' ? '\xa0' : letter;
+            span.classList.add('letter');
+            textContainer.appendChild(span);
         }
-    };
 
-    navLinks.forEach((link) => {
-        link.addEventListener("click", (event) => {
-            event.preventDefault();
-            scrollToTarget(link.getAttribute("href"));
-        });
-    });
+        navlink.appendChild(textContainer);
+    navlink.appendChild(textContainer.cloneNode(true));
+});
 
-    scrollTriggers.forEach((trigger) => {
-        trigger.addEventListener("click", () => {
-            scrollToTarget(trigger.dataset.scrollTarget);
-        });
-    });
-
-    if ("IntersectionObserver" in window) {
-        const sectionObserver = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (!entry.isIntersecting) return;
-
-                    navLinks.forEach((link) => {
-                        const isCurrent = link.getAttribute("href") === `#${entry.target.id}`;
-                        link.toggleAttribute("aria-current", isCurrent);
-                    });
-                });
-            },
-            { rootMargin: "-35% 0px -55%", threshold: 0 }
-        );
-
-        sections.forEach((section) => sectionObserver.observe(section));
-    }
-})();
 
 
 // Custom cursor for all headings and paragraphs ------------------------
@@ -372,6 +343,24 @@ if (supportsFinePointer) {
     });
   });
 }
+
+const webs = document.querySelectorAll('.elem');
+const webLinks = [
+    'https://taffuwad.github.io/Brand-Designer-Portfolio/',
+    'https://melt-chocolate-website.vercel.app/',
+    'https://taffuwad.github.io/Animated-Cookie-Landing-page/'
+];
+
+webs.forEach((web, index)=>{
+    web.addEventListener('click',()=>{
+        window.open(webLinks[index], '_blank');
+    })
+})
+
+
+
+
+
 
 // Contact -------------------------------------------------
 const contactSection = document.querySelector(".contact");

@@ -1,3 +1,11 @@
+:root{
+  --active-color : #FFD43B;
+  --main-color : #111;
+}
+
+
+
+
 *{
     margin: 0;
     padding: 0;
@@ -157,7 +165,7 @@
 .page1{
   height: 100svh;
   width: 100%;
-  background: #171917;
+  background: var(--main-color);
   position: relative;
   overflow: hidden;
   text-transform: uppercase;
@@ -303,8 +311,8 @@
 }
 .page1 .hero-bottom button:hover,
 .page1 .hero-bottom button:focus-visible{
-  color: #ffdaa2;
-  border-color: #ffdaa2;
+  color: var(--active-color);
+  border-color: var(--active-color);
   outline: none;
 }
 
@@ -418,7 +426,7 @@
 .page2{
   height: 100vh;
   width: 100%;
-  background: #111;
+  background: var(--main-color);
   overflow: hidden;
 }
 .page2 .text-anim{
@@ -442,7 +450,7 @@
 .page3{
   min-height: 100vh;
   width: 100%;
-  background: #171917;
+  background: var(--main-color);
   color: var(--ink);
   overflow: hidden;
 }
@@ -484,6 +492,8 @@
 .showcase-note{
   justify-self: end;
   text-align: right;
+  font-size: clamp(0.3rem, 0.6vw, 0.7rem);
+
 }
 .slider-shell{
   position: relative;
@@ -536,6 +546,7 @@
   border: 1px solid rgba(244, 241, 234, 0.28);
   object-fit: cover;
   filter: saturate(0.75);
+  cursor: none;
   transition: filter 350ms ease, transform 350ms ease;
 }
 .work-card:hover img{
@@ -551,14 +562,17 @@
   position: absolute;
   left: 0;
   top: 0;
-  background: #ffdaa2;
-  color: #222;
-  padding: 1.5rem 0.5rem;
+  
+  background: none;
+  color: #fff;
+  padding: 1.2rem 1rem;
   font-size: 0.8rem;
+  border: 1px solid #fff;
   border-radius: 4rem;
   z-index: 999999;
   margin: 0;
-  pointer-events: none;
+  cursor: none;
+  pointer-events: auto;
   transform: translate(-50%, -50%);
   will-change: left, top, transform;
 }
@@ -608,7 +622,7 @@
 .page4{
   min-height: 100vh;
   width: 100%;
-  background: #111;
+  background: var(--main-color);
   color: var(--ink);
   overflow: hidden;
   z-index: 9999;
@@ -633,7 +647,7 @@
 
 #second {
   width: 100%;
-  padding: clamp(5rem, 12vw, 10rem) 8vw 0 0;
+  padding: clamp(5rem, 12vw, 10rem) 6vw 6vw 2vw ;
   color: #fff;
 }
 
@@ -748,7 +762,7 @@
 .page5{
   min-height: 100vh;
   width: 100%;
-  background: #111;
+  background: var(--main-color);
   color: var(--ink);
   padding: clamp(5rem, 10vw, 9rem) clamp(1.35rem, 5vw, 5rem);
   padding-top: -10rem;
@@ -806,7 +820,7 @@
 
 .web-card:hover,
 .web-card:focus-within{
-  border-color: #ffdaa2;
+  border-color: var(--active-color);
   transform: translateY(-0.35rem);
 }
 
@@ -868,8 +882,8 @@
 
 .web-visit:hover,
 .web-visit:focus-visible{
-  background: #ffdaa2;
-  color: #171917;
+  background: var(--active-color);
+  color: var(--main-color);
   outline: none;
 }
 
