@@ -1806,10 +1806,12 @@ nav .nav-link:hover .letter {
 .pro6 .con-work{
     display: flex;
     flex-direction: column;
+    
 }
 .pro6 .container h1{
     display: block;
     font-size: 6vw;
+    
     color: #fff;
 }
 .pro6 .container p{
@@ -2863,8 +2865,8 @@ textarea::placeholder {
         max-width: 9ch;
         margin: 0;
         font-size: clamp(3.1rem, 12vw, 5.4rem);
-        line-height: 0.78;
-        letter-spacing: -0.06em;
+        line-height: 0.9;
+        /* letter-spacing: -0.06em; */
     }
 
     .pro6 .con-work p {
@@ -2954,6 +2956,18 @@ textarea::placeholder {
   }
 }
 
+@media (max-width: 1280px) {
+  .contact{
+    /* background-color:#c75a5a; */
+    min-height:90vh;
+    width: 100%;
+    padding: 4vw 3.7vw 0 3.7vw;
+    display: flex;
+    flex-direction: column;
+    gap: 7vw;
+}
+
+}
 
 /* Responsive Media Query for screens smaller than 1024px */
 @media (max-width: 1024px) {
@@ -3095,9 +3109,9 @@ textarea::placeholder {
 
     .contact{
     /* background-color:#c75a5a; */
-    min-height: 100vh;
+    min-height:86vh;
     width: 100%;
-    padding: 9vw 3.7vw 0 3.7vw;
+    padding: 8vw 3.7vw 0 3.7vw;
     display: flex;
     flex-direction: column;
     gap: 7vw;
@@ -3115,8 +3129,8 @@ textarea::placeholder {
     background-color: #222;
     color: #fff;
     border: none;
-    font-size: 2vw;
-    padding: 1vw 3vw;
+    font-size: 3vw;
+    padding: 2vw 7vw;
     border-radius: 1rem;
     display: block;
     position: relative;
@@ -3130,8 +3144,8 @@ textarea::placeholder {
 @media (max-width: 768px) {
     .contact {
         height: auto;
-        min-height: 100vh;
-        padding: 12vw 5vw 6vw;
+        min-height: 80vh;
+        padding: 1vw 5vw 6vw;
         gap: 2.5rem;
     }
 
@@ -3281,7 +3295,7 @@ textarea::placeholder {
     color: #fff;
     border: none;
     font-size: 3vw;
-    padding: 1vw 3vw;
+    padding: 2vw 7vw;
     border-radius: 1rem;
     display: block;
     position: relative;
@@ -3292,10 +3306,11 @@ textarea::placeholder {
 
 /* Small mobile */
 @media (max-width: 480px) {
-    .contact {
-        padding: 16vw 4vw 5vw;
+    /* .contact {
+        min-height: 30vh;
+        padding: 1vw 4vw 1vw;
         gap: 2rem;
-    }
+    } */
 
     .contact .con-top h1 {
         font-size: clamp(2rem, 12vw, 3rem);
@@ -3406,9 +3421,9 @@ textarea::placeholder {
 
     .contact{
     /* background-color:#c75a5a; */
-    height: 100vh;
+    height: 80vh;
     width: 100%;
-    padding: 25vw 3.7vw 0 3.7vw;
+    padding: 5vw 7vw 0 7vw;
     display: flex;
     flex-direction: column;
     gap: 10vw;
@@ -3418,8 +3433,8 @@ textarea::placeholder {
     background-color: #222;
     color: #fff;
     border: none;
-    font-size: 5vw;
-    padding: 1vw 3vw;
+    font-size: 7vw;
+    padding: 3vw 10vw;
     border-radius: 1rem;
     display: block;
     position: relative;
@@ -3431,6 +3446,15 @@ textarea::placeholder {
 
 /* Very small mobile */
 @media (max-width: 375px) {
+  .contact{
+    /* background-color:#c75a5a; */
+    height: 96vh;
+    width: 100%;
+    padding: 5vw 7vw 0 7vw;
+    display: flex;
+    flex-direction: column;
+    gap: 10vw;
+    }
 }
 
 
