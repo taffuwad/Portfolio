@@ -321,7 +321,7 @@ if (supportsFinePointer) {
     elem.addEventListener('mouseleave', () => {
     gsap.to(elem.querySelector("img"), {
       opacity: 0,
-      ease: Power3,
+      ease: "power3.out",
       duration: 0.5,
     });
     });
@@ -334,7 +334,7 @@ if (supportsFinePointer) {
 
       gsap.to(image, {
         opacity: 1,
-        ease: Power3,
+        ease: "power3.out",
         top: relativeY,
         left: event.clientX,
         rotate: rotation,
@@ -432,38 +432,72 @@ if (contactSection) {
 
 
 // Home----------------------------------------------------------- 
-const split = new SplitText(".home h1", {
-  type: "chars"
+const mm = gsap.matchMedia();
+
+mm.add("(min-width: 1025px)", () => {
+    const split = new SplitText(".home h1", {
+        type: "chars"
+    });
+
+    const tl = gsap.timeline();
+
+    tl.fromTo(
+        ".home",
+        {
+            clipPath: "polygon(59% 46%, 60% 70%, 35% 70%, 34% 47%)",
+        },
+        {
+            clipPath: "polygon(100% 0%, 100% 100%, 0% 100%, 0% 0%)",
+            duration: 1.2,
+            delay: 0.3,
+            ease: "power4.inOut",
+        }
+    )
+    .from(split.chars, {
+        y: 200,
+        opacity: 0,
+        duration: 1,
+        stagger: {
+            from: "random",
+            amount: 1
+        },
+        ease: "power4.out"
+    })
+    .from("nav", {
+        y: -200,
+        ease: "expo.out"
+    }, "-=0.5");
+
+    return () => {
+        split.revert();
+        tl.kill();
+    };
 });
 
-const tl = gsap.timeline();
-tl.fromTo(
-  ".home",
-  {
-    clipPath: "polygon(59% 46%, 60% 70%, 35% 70%, 34% 47%)",
-  },
-  {
-    clipPath: "polygon(100% 0%, 100% 100%, 0% 100%, 0% 0%)",
-    duration: 1.2,
-    delay:0.3,
-    ease: "power4.inOut",
-  }
-)
-tl.from(split.chars,{
-    y: 200,
-  opacity: 0,
-  duration: 1,
-  stagger: {
-    from: "random",
-    amount: 1
-  },
-  ease: "power4.out"
-})
-tl.from('nav ',{
-    y:-200,
-    stagger:0.05,
-    ease:"expo.out"
-}, '-=0.5');
+mm.add("(max-width: 1024px)", () => {
+    const split = new SplitText(".home h1", {
+        type: "chars"
+    });
+
+    const tl = gsap.timeline();
+
+    tl.from(split.chars, {
+        y: 120,
+        opacity: 0,
+        duration: 1.3,
+        stagger: {
+            from: "random",
+            amount: 1.5
+        },
+        ease: "power3.out"
+    });
+
+    return () => {
+        split.revert();
+        tl.kill();
+    };
+});
+
 
 // Contact form --------------------------------------------------------
 (() => {
@@ -518,7 +552,7 @@ tl.from('nav ',{
 
 // full screen navbar----------------------------------------------------
 
-let fullnav = document.querySelector('fullnav');
+let fullnav = document.querySelector('.fullnav');
 let door = document.querySelector('.close');
 
 door.addEventListener('click', ()=>{

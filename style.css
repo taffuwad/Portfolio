@@ -395,6 +395,7 @@ main{
     background-position: center;
     padding: 1.7vw 4vw 0 4vw;
     position: relative;
+    z-index: 0;
 }
 
 nav{
@@ -649,40 +650,53 @@ nav .nav-link:hover .letter {
 }
 
 /* mobile nav--------------------------------------------------------------------------------  */
-.mobile-nav{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
 
   width: 100%;
-  z-index: 9999;
+  height: auto;
 
-  position: fixed;
-  left: 0;
-  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  padding: 1rem 1rem 0;
+
+  isolation: isolate;
+  z-index: 99999;
+  box-sizing: border-box;
+
+  pointer-events: none;
 }
-.mobile-nav .m-logo{
-  /* padding: 3vw 4vw; */
+
+.mobile-nav .m-logo {
   font-size: 1.5rem;
-  margin-left: 2vw;
-  margin-top: 2vw;
+  margin: 0;
+  pointer-events: auto;
 }
-.mobile-nav .m-menu{
-  position: relative;
-  background-color: var(--main-color);
-  height: 2.3rem;
-  width: 10rem;
-  cursor: pointer;
 
-  margin-left: -2vw;
-  margin-top: -2vw;
+.mobile-nav .m-menu {
+  position: relative;
+
+  width: 8rem;
+  height: 2rem;
+
+  margin: 0;
+
+  background-color: var(--main-color);
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1rem;
+
   padding: 0 1.2rem;
+  cursor: pointer;
+
   transform: rotate(180deg);
+
+  pointer-events: auto;
 }
 .mobile-nav .m-menu::before{
   content: '';
@@ -734,7 +748,7 @@ nav .nav-link:hover .letter {
   color: #fff;
 
   background: var(--main-color);
-  height: 100vh;
+  height: 100svh;
   width: 100%;
 
   display: flex;
@@ -3016,6 +3030,146 @@ textarea::placeholder {
 /* Responsive Media Query for screens smaller than 1024px */
 @media (max-width: 1024px) {
 
+    html,
+    body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    nav {
+        display: none !important;
+    }
+
+    .mobile-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: auto;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        padding-top: max(0.75rem, env(safe-area-inset-top));
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+
+        z-index: 99999;
+        box-sizing: border-box;
+
+        pointer-events: none;
+        background: transparent;
+
+        isolation: isolate;
+    }
+
+    .mobile-nav .m-logo {
+        margin: 0;
+        padding: 0;
+
+        font-size: 1.5rem;
+
+        pointer-events: auto;
+    }
+
+    .mobile-nav .m-menu {
+        position: relative;
+
+        width: 8rem;
+        height: 2rem;
+
+        margin: 0;
+        padding: 0 1.2rem;
+
+        background: #111;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        cursor: pointer;
+
+        transform: rotate(180deg);
+
+        pointer-events: auto;
+
+        overflow: hidden;
+    }
+
+    .mobile-nav .m-menu::before {
+        content: "";
+
+        position: absolute;
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background: #000;
+
+        transform: scaleY(0);
+        transform-origin: bottom;
+
+        transition: transform 0.3s ease;
+
+        z-index: 0;
+    }
+
+    .mobile-nav .m-menu:hover::before,
+    .mobile-nav .m-menu:active::before {
+        transform: scaleY(1);
+    }
+
+    .mobile-nav .m-menu .line1,
+    .mobile-nav .m-menu .line2 {
+        position: absolute;
+
+        height: 2px;
+
+        background: #fff;
+
+        border-radius: 999px;
+
+        z-index: 2;
+
+        margin: 0;
+    }
+
+    .mobile-nav .m-menu .line1 {
+        width: 50%;
+    }
+
+    .mobile-nav .m-menu .line2 {
+        width: 70%;
+        margin-top: -0.8rem;
+    }
+
+    .home {
+        width: 100%;
+        height: 100svh;
+        min-height: 100svh;
+
+        margin: 0;
+        padding: 0;
+
+        position: relative;
+
+        z-index: 0;
+
+        background-size: cover;
+        background-position: center;
+    }
+
+    .fullnav {
+        height: 100svh;
+        z-index: 100000;
+    }
+
     
 
     .about {
@@ -3035,7 +3189,13 @@ textarea::placeholder {
     color: inherit;
     font-size: 1rem;
 }
+
+    .home{
+      height: 100svh;
+      min-height: 100svh;
+    }
     .home h1{
+
     bottom: 4vw;
     line-height: 3.6vw;
     white-space: nowrap;
