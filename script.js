@@ -379,7 +379,7 @@ if (contactSection) {
             defaults: { ease: "power4.out" },
             scrollTrigger: {
                 trigger: contactSection,
-                start: "top 72%",
+                start: "top 40%",
                 toggleActions: "play none none reverse",
             },
         });
