@@ -2710,6 +2710,9 @@ textarea::placeholder {
         transform: none;
         font-size: clamp(2.8rem, 14vw, 5rem);
         letter-spacing: -0.04em;
+        z-index: 9999;
+        /* color: black; */
+        background-color: #111;
     }
 
     .works-wrapper {
@@ -3163,6 +3166,7 @@ textarea::placeholder {
 
     .contact{
     /* background-color:#c75a5a; */
+    /* height: auto; */
     min-height:86vh;
     width: 100%;
     padding: 8vw 3.7vw 0 3.7vw;
