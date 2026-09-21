@@ -3030,7 +3030,7 @@ textarea::placeholder {
 /* Responsive Media Query for screens smaller than 1024px */
 @media (max-width: 1024px) {
 
-    html,
+    /* html,
     body {
         width: 100%;
         min-height: 100%;
@@ -3147,7 +3147,7 @@ textarea::placeholder {
     .mobile-nav .m-menu .line2 {
         width: 70%;
         margin-top: -0.8rem;
-    }
+    } */
 
     .home {
         width: 100%;
@@ -3167,7 +3167,7 @@ textarea::placeholder {
 
     .fullnav {
         height: 100svh;
-        z-index: 100000;
+        z-index: 99999999;
     }
 
     
