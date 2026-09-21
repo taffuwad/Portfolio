@@ -2954,7 +2954,31 @@ textarea::placeholder {
   .fullnav{
     display: none;
   }
+
+  /* .about1{
+    height: 90vh;
+    width: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    padding: 0 4vw 0 4vw;
+    display: flex;
+    color: black;
+    background-color: #004d4d;
 }
+.about2{
+    width: 100%;
+    height: 10vh;
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 2vw;
+    padding: 2vw 4vw 4vw;
+    box-sizing: border-box;
+    background-color: #091313;
+
+} */
+}
+
 
 @media (max-width: 1280px) {
   .contact{
@@ -2966,6 +2990,7 @@ textarea::placeholder {
     flex-direction: column;
     gap: 7vw;
 }
+
 
 }
 
@@ -3003,7 +3028,8 @@ textarea::placeholder {
 
     .about1 {
         flex-direction: column;
-        padding: 8vw 4vw;
+        padding: 6vw 4vw;
+        min-height: 140vh;
         
     }
     
@@ -3015,7 +3041,7 @@ textarea::placeholder {
     }
     
     .about1 .left .about-img {
-        height: 250px;
+        height: 400px;
         width: 100%;
         max-width: 70%;
         position: relative;
@@ -3024,11 +3050,11 @@ textarea::placeholder {
     }
     
     .about1 .left h1 {
-        font-size: 2.3vw;
+        font-size: 4vw;
     }
     
     .about1 .left p {
-        font-size: 1.6vw;
+        font-size: 2.5vw;
     }
     
     .about1 .right {
@@ -3038,12 +3064,12 @@ textarea::placeholder {
     }
     
     .about1 .right h1 {
-        font-size: 1.9vw;
+        font-size: 4vw;
     }
     
     .about1 .right h4 {
-        font-size: 1.8vw;
-        line-height: 1.9vw;
+        font-size: 2.5vw;
+        /* line-height: 1.9vw; */
     }
     
     .about1 .right p {
@@ -3067,17 +3093,19 @@ textarea::placeholder {
     }
 
     .about2 .left1 {
-        padding: 0;
+        padding: 0 ;
+        margin-left: -1.5vw;
     }
 
     .about2 .left1 .image {
-        height: 150px;
-        width: auto;
+        height: 500px;
+        width: 500px;
         /* max-width: 500px; */
     }
 
     .about2 .right1 {
         gap: 1rem;
+        padding: 0 0;
     }
 
     .about2 .right1 h3 {
@@ -3212,6 +3240,7 @@ textarea::placeholder {
 
     .about1{
         margin-top: 4vw;
+        height: 100vh;
     }
 
     .about1 .left .about-img {

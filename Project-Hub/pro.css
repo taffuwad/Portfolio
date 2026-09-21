@@ -362,7 +362,7 @@
   .page1 .hero-bottom button{
     min-width: 0;
     flex: 1 1 0;
-    font-size: clamp(1.25rem, 5vw, 2.5rem);
+    font-size: clamp(1.25rem, 8vw, 2.5rem);
     padding: 0rem 0.75rem;
     overflow: hidden;
     white-space: nowrap;
