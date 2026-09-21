@@ -370,6 +370,19 @@
   }
 }
 
+@media (max-width: 550px) {
+  .page1 .hero-bottom button{
+
+    font-size: 9.5vw;
+   
+  }
+
+  .page1 .hero-bottom .Contact{
+    font-size: 7vw;
+    font-weight: bolder;
+  }
+}
+
 @media (max-width: 380px){
   .page1{
     padding-inline: 1rem;
@@ -384,7 +397,16 @@
   }
 
   .page1 .hero-bottom button{
-    font-size: clamp(1rem, 6vw, 1.5rem);
+
+    font-size: 9.5vw;
+    font-weight: 500;
+
+   
+  }
+
+  .page1 .hero-bottom .Contact{
+    font-size: 7vw;
+    font-weight: bold;
   }
 }
 
