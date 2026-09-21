@@ -1151,7 +1151,7 @@ nav .nav-link:hover .letter {
     top: 2vw;
     left: 50%;
     transform: translate(-50%,0);
-    z-index: 999;
+    z-index: 1;
     color: #fff;
 
 
@@ -1842,6 +1842,9 @@ nav .nav-link:hover .letter {
     flex-direction: column;
     gap: 4vw;
 }
+.contact .con-top .text{
+  display: inline-block;
+}
 
 .contact .con-top .box h1{
     font-family: 'cap';
@@ -2217,6 +2220,7 @@ textarea::placeholder {
     width: 250%;
     height: 10rem;
     color: #222;
+    padding: 1vw;
 }
 .con-bottom .sec .email{
   width: 60%;
@@ -2710,7 +2714,7 @@ textarea::placeholder {
         transform: none;
         font-size: clamp(2.8rem, 14vw, 5rem);
         letter-spacing: -0.04em;
-        z-index: 9999;
+        z-index: 1;
         /* color: black; */
         background-color: #111;
     }
@@ -3167,7 +3171,7 @@ textarea::placeholder {
     .contact{
     /* background-color:#c75a5a; */
     /* height: auto; */
-    min-height:86vh;
+    min-height:88vh;
     width: 100%;
     padding: 8vw 3.7vw 0 3.7vw;
     display: flex;
@@ -3368,14 +3372,10 @@ textarea::placeholder {
 
 /* Small mobile */
 @media (max-width: 480px) {
-    /* .contact {
-        min-height: 30vh;
-        padding: 1vw 4vw 1vw;
-        gap: 2rem;
-    } */
+   
 
     .contact .con-top h1 {
-        font-size: clamp(2rem, 12vw, 3rem);
+        font-size: clamp(3rem, 15vw, 4rem);
         letter-spacing: -0.08rem;
         line-height: 0.9;
     }
@@ -3488,13 +3488,17 @@ textarea::placeholder {
 
 
     .contact{
-    /* background-color:#c75a5a; */
-    height: 80vh;
+    /* background-color:#ff0000; */
+    height: 70vh;
+    min-height: 0;
     width: 100%;
     padding: 5vw 7vw 0 7vw;
     display: flex;
     flex-direction: column;
-    gap: 10vw;
+    gap: 8vw;
+    }
+    .contact #con-img{
+      display: none;
     }
 
     .con-bottom .send{
@@ -3508,6 +3512,7 @@ textarea::placeholder {
     position: relative;
     margin: 1rem 0 0 auto;
 }
+
 }
 
 
@@ -3516,7 +3521,7 @@ textarea::placeholder {
 @media (max-width: 375px) {
   .contact{
     /* background-color:#c75a5a; */
-    height: 96vh;
+    height: 88vh;
     width: 100%;
     padding: 5vw 7vw 0 7vw;
     display: flex;

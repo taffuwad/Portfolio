@@ -523,7 +523,7 @@ let door = document.querySelector('.close');
 
 door.addEventListener('click', ()=>{
     gsap.to('.fullnav',{
-        top : '-100%'
+        top : '-150%'
     })
 })
 
