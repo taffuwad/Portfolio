@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "projectName": "podfolio3",
+  "userName": "developer",
+  "skillLevel": "intermediate",
+  "outputFolder": ".vibecheck/flow",
+  "planningArtifacts": ".vibecheck\\flow\\planning-artifacts",
+  "implementationArtifacts": ".vibecheck\\flow\\implementation-artifacts",
+  "installedAt": "2026-09-21T03:46:08.656Z",
+  "ide": [
+    "cursor"
+  ]
+}
