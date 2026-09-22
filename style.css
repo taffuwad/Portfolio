@@ -1129,7 +1129,7 @@ nav .nav-link:hover .letter {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    clip-path: inset(0% 0% 0% 3%);
+    /* clip-path: inset(0% 0% 0% 3%); */
 }
 
 .about2 .right1{
@@ -3694,7 +3694,181 @@ textarea::placeholder {
 
 
 
+/* -------------------------screen respnsive for bigger screen-sizes------------------------------- */
+
+/* =========================================================
+   LARGE SCREEN SYSTEM
+   1440px+
+   ========================================================= */
+
+/* 1440px — Large desktop */
+/* @media (min-width: 1440px) {
+
+  .home {
+      padding: 2rem 5vw 0;
+  }
+
+  nav {
+      padding: 2rem 5vw;
+  }
+
+  nav .logo {
+      font-size: 1.15rem;
+  }
+
+  nav .section {
+      gap: 2rem;
+      padding: 0.45rem 2.2rem;
+  }
+
+  nav .nav-link {
+      font-size: 1rem;
+  }
+
+  .ui-btn {
+      --font-size: 15px;
+      --btn-padding: 0.9rem 2.2rem;
+  }
+
+  .home h1 {
+      font-size: clamp(4.5rem, 5.2vw, 6.5rem);
+      line-height: 0.95;
+      bottom: 3rem;
+  }
+
+  .about1 {
+      padding-inline: 5vw;
+      padding-top: 5vw;
+  }
+
+  .about1 .left {
+      padding-top: 6rem;
+  }
+
+  .about1 .right {
+      padding-top: 4rem;
+  }
+}
+.about2 {
+  padding-inline: 5vw;
+  padding-top: 5vw;
+} */
 
 
 
+/* 1600px+ */
+/* @media (min-width: 1600px) {
+
+  .home h1 {
+      font-size: clamp(5rem, 4.8vw, 7rem);
+  }
+
+  nav {
+      padding-inline: 5vw;
+  }
+
+  .about1 {
+      padding-inline: 5vw;
+  }
+
+  .about1 .left {
+      width: 38%;
+  }
+
+  .about1 .right {
+      width: 62%;
+  }
+
+  .about1 .right h4 {
+      max-width: 1000px;
+  }
+
+  .about1 .right p {
+      max-width: 1000px;
+  }
+} */
+
+
+/* 1920px+ */
+/* @media (min-width: 1920px) {
+
+  nav {
+      padding-inline: 6vw;
+  }
+
+  .home {
+      padding-inline: 6vw;
+  }
+
+  .home h1 {
+      font-size: clamp(5.5rem, 4.2vw, 7.5rem);
+      max-width: 1500px;
+  }
+
+  .about1 {
+      padding-inline: 6vw;
+  }
+
+  .about1 .left {
+      width: 36%;
+  }
+
+  .about1 .right {
+      width: 64%;
+  }
+
+  .about1 .right h1 {
+      font-size: 2rem;
+  }
+
+  .about1 .right h4 {
+      font-size: 2.2rem;
+      max-width: 1100px;
+  }
+
+  .about1 .right p {
+      font-size: 2rem;
+      max-width: 1100px;
+  }
+} */
+
+
+/* 2560px+ */
+/* @media (min-width: 2560px) {
+
+  nav {
+      padding-inline: 7vw;
+  }
+
+  .home {
+      padding-inline: 7vw;
+  }
+
+  .home h1 {
+      font-size: 7rem;
+      max-width: 1600px;
+  }
+
+  .about1 {
+      padding-inline: 7vw;
+  }
+
+  .about1 .left {
+      width: 35%;
+  }
+
+  .about1 .right {
+      width: 65%;
+  }
+
+  .about1 .right h4 {
+      font-size: 2.4rem;
+      max-width: 1200px;
+  }
+
+  .about1 .right p {
+      font-size: 2.1rem;
+      max-width: 1200px;
+  }
+} */
 
