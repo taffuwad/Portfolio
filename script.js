@@ -261,7 +261,7 @@ if (gsap && ScrollTrigger && about) {
                         .to([panelOne, panelTwo], { xPercent: -100, duration: 0.95, ease: "none" })
                         .from(".about2 .left1 .image", { clipPath: "inset(0 100% 0 0)", scale: 1.06, duration: 0.5 }, "<0.15")
                         .from(".about2 .skill-cata", { x: 42, autoAlpha: 0, stagger: 0.12, duration: 0.35 }, "<0.1")
-                        .from(secondPanelContent, { y: 32, autoAlpha: 0, stagger: 0.06, duration: 0.32 }, "<");
+                        .from(secondPanelContent, { y: 52, autoAlpha: 0, stagger: 0.06, duration: 0.42 }, "<");
                 } else {
                     const reveal = (targets, trigger) =>
                         gsap.from(targets, {
@@ -445,11 +445,13 @@ mm.add("(min-width: 1025px)", () => {
         ".home",
         {
             clipPath: "polygon(59% 46%, 60% 70%, 35% 70%, 34% 47%)",
+            width: "0%",
         },
         {
             clipPath: "polygon(100% 0%, 100% 100%, 0% 100%, 0% 0%)",
-            duration: 1.2,
+            duration: 1.5,
             delay: 0.3,
+            width: "100%",
             ease: "power4.inOut",
         }
     )
@@ -682,5 +684,131 @@ talk.addEventListener('click', ()=>{
 // responsive animation-------------------------------------------------------------------------------
 
 
+// const responsiveAnimations = gsap.matchMedia();
 
+// responsiveAnimations.add(
+
+//     {
+
+//         mobile: "(max-width: 768px)",
+
+//         small: "(max-width: 480px)",
+
+//         xs: "(max-width: 375px)",
+
+//         reducedMotion: "(prefers-reduced-motion: reduce)"
+
+//     },
+
+//     (context) => {
+
+//         const {
+
+//             mobile,
+
+//             small,
+
+//             xs,
+
+//             reducedMotion
+
+//         } = context.conditions;
+
+//         if (reducedMotion) return;
+
+//         if (mobile) {
+
+//             // Mobile
+
+//             let mtl = gsap.timeline();
+
+//             mtl.fromTo('.about #scale-up', 
+//                 {
+//                     clipPath: "polygon(0 100%, 0 100%, 0 0, 0 0)",
+//                 },
+//                 {
+//                 clipPath: "polygon(0 100%, 100% 100%, 100% 0, 0 0)",
+//                 stagger:0.4,
+//                 scrollTrigger: {
+//                 trigger: ".about",
+//                 start: "top 30%",
+//                 end : "top 31%",
+//                 scrub: true,
+                
+//             }
+//             })
+//             mtl.fromTo('.about #text-up-h', 
+//                 {
+//                     clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
+//                 },
+//                 {
+//                 clipPath: "polygon(0 100%, 100% 100%, 100% 0, 0 0)",
+//                 stagger:0.4,
+//                 scrollTrigger: {
+//                 trigger: ".about",
+//                 start: "top 30%",
+//                 end : "top 30%",
+//                 scrub: true,
+                
+//             }
+//             })
+//             mtl.fromTo('.about #text-up-p', 
+//                 {
+//                     clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
+//                 },
+//                 {
+//                 clipPath: "polygon(0 100%, 100% 100%, 100% 0, 0 0)",
+//                 stagger:0.4,
+//                 scrollTrigger: {
+//                 trigger: ".about",
+//                 start: "top 30%",
+//                 end : "top 30%",
+//                 scrub: true,
+                
+//             }
+//             })
+//             mtl.from('.about .resume-btn', {
+//                 opacity: 0,
+//                 x: -190,
+//                 duration: 0.6,
+//                 scrollTrigger: {
+//                     trigger: ".about",
+//                     start: "top 30%",
+//                     end: "top 30%",
+//                     scrub: true,
+                    
+//                 }
+//             })
+
+//             mtl.from('.about .eyes', {
+//                 opacity: 0,
+//                 y: 50,
+//                 duration: 0.8,
+//                 scrollTrigger: {
+//                     trigger: ".about",
+//                     start: "top 20%",
+//                     end: "top 20%",
+//                     scrub: true,
+//                     markers: true
+                    
+//                 }
+//             })
+
+//         }
+
+//         if (small) {
+
+//             // 480px
+
+//         }
+
+//         if (xs) {
+
+//             // 375px
+
+//         }
+
+//     }
+
+// );
 

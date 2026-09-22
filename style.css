@@ -10,6 +10,7 @@
     box-sizing: border-box;
     font-family: 'main',sans-serif;
     text-decoration: none;
+    /* transition: 0.4s ease; */
 }
 
 *::selection{
@@ -845,6 +846,7 @@ nav .nav-link:hover .letter {
     width: 100%;
     margin: 0;
     padding: 0;
+    z-index: 9;
     background-color: #fff;
     display: flex;
     overflow: hidden;
@@ -861,7 +863,7 @@ nav .nav-link:hover .letter {
     box-sizing: border-box;
     flex-shrink: 0;
     margin: 0;
-    padding: 0 clamp(1.25rem, 4vw, 4rem);
+    padding: 0 clamp(1.25rem, 4vw, 4rem) 3vw clamp(1.25rem, 4vw, 4rem);
     display: flex;
     color: black;
 }
@@ -880,6 +882,7 @@ nav .nav-link:hover .letter {
     width: 100%;
     border-radius: 2rem;
     overflow: hidden;
+    /* transition: 0.4s ease; */
 
 }
 .about1 .left .about-img img{
@@ -890,6 +893,7 @@ nav .nav-link:hover .letter {
 .about1 .left h1{
     font-size: clamp(0.92rem, 1.35vw, 1.35rem);
     line-height: 1.25;
+    overflow: hidden;
 }
 .about1 .left p{
     z-index: 99;
@@ -1108,6 +1112,9 @@ nav .nav-link:hover .letter {
     margin: 0;
     padding: clamp(1.25rem, 2vw, 2.25rem) clamp(1.25rem, 4vw, 4rem) clamp(2rem, 4vw, 4.25rem);
     box-sizing: border-box;
+    padding-top: 3vw;
+
+
 }
 .about2 .left1{
     width: 30%;
@@ -1156,13 +1163,15 @@ nav .nav-link:hover .letter {
 
 
 .works{
+    height: auto;
+    min-height: 100vh;
     width: 100%;
     background-color: #fff;
     position: relative;
 }
 .works .work-h{
     position: absolute;
-    top: 2vw;
+    top: 1vw;
     left: 50%;
     transform: translate(-50%,0);
     z-index: 1;
@@ -1216,12 +1225,13 @@ nav .nav-link:hover .letter {
 
 #main {
   width: 100%;
+  z-index: -99999;
   background-color: var(--main-color);
 }
 
 #second {
   width: 100%;
-  padding: clamp(5rem, 15vw, 13rem) 8vw 2vw 0vw;
+  padding: clamp(5rem, 13vw, 12rem) 8vw 8vw 0;
   color: #fff;
 }
 
@@ -2286,6 +2296,7 @@ textarea::placeholder {
     line-height: 0.9;
     text-align: center;
     white-space: nowrap;
+    margin-bottom: 3vw;
 }
 
 .works .pro .card {
@@ -2977,7 +2988,11 @@ textarea::placeholder {
     }
 }
 
-
+@media (min-width: 1150px) {
+  .works .work-h{
+    display: none;
+  }
+}
 
 @media (min-width: 1024px) {
   .mobile-nav{
@@ -3681,7 +3696,7 @@ textarea::placeholder {
 @media (max-width: 375px) {
   .contact{
     /* background-color:#c75a5a; */
-    height: 55vh;
+    height: 92vh;
     width: 100%;
     padding: 5vw 7vw 0 7vw;
     display: flex;
@@ -3696,179 +3711,17 @@ textarea::placeholder {
 
 /* -------------------------screen respnsive for bigger screen-sizes------------------------------- */
 
-/* =========================================================
-   LARGE SCREEN SYSTEM
-   1440px+
-   ========================================================= */
 
-/* 1440px — Large desktop */
-/* @media (min-width: 1440px) {
-
-  .home {
-      padding: 2rem 5vw 0;
-  }
-
-  nav {
-      padding: 2rem 5vw;
-  }
-
-  nav .logo {
-      font-size: 1.15rem;
-  }
-
-  nav .section {
-      gap: 2rem;
-      padding: 0.45rem 2.2rem;
-  }
-
-  nav .nav-link {
-      font-size: 1rem;
-  }
-
-  .ui-btn {
-      --font-size: 15px;
-      --btn-padding: 0.9rem 2.2rem;
-  }
-
-  .home h1 {
-      font-size: clamp(4.5rem, 5.2vw, 6.5rem);
-      line-height: 0.95;
-      bottom: 3rem;
-  }
-
-  .about1 {
-      padding-inline: 5vw;
-      padding-top: 5vw;
-  }
-
-  .about1 .left {
-      padding-top: 6rem;
-  }
-
-  .about1 .right {
-      padding-top: 4rem;
-  }
-}
-.about2 {
-  padding-inline: 5vw;
-  padding-top: 5vw;
-} */
+/* ============================================================
+   LARGE SCREEN RESPONSIVE — portfolio
+   Paste this at the very bottom of style.css
+   Covers: 1440px · 1600px · 1920px · 2160px · 2560px
+   ============================================================ */
 
 
-
-/* 1600px+ */
-/* @media (min-width: 1600px) {
-
-  .home h1 {
-      font-size: clamp(5rem, 4.8vw, 7rem);
-  }
-
-  nav {
-      padding-inline: 5vw;
-  }
-
-  .about1 {
-      padding-inline: 5vw;
-  }
-
-  .about1 .left {
-      width: 38%;
-  }
-
-  .about1 .right {
-      width: 62%;
-  }
-
-  .about1 .right h4 {
-      max-width: 1000px;
-  }
-
-  .about1 .right p {
-      max-width: 1000px;
-  }
-} */
-
-
-/* 1920px+ */
-/* @media (min-width: 1920px) {
-
-  nav {
-      padding-inline: 6vw;
-  }
-
-  .home {
-      padding-inline: 6vw;
-  }
-
-  .home h1 {
-      font-size: clamp(5.5rem, 4.2vw, 7.5rem);
-      max-width: 1500px;
-  }
-
-  .about1 {
-      padding-inline: 6vw;
-  }
-
-  .about1 .left {
-      width: 36%;
-  }
-
-  .about1 .right {
-      width: 64%;
-  }
-
-  .about1 .right h1 {
-      font-size: 2rem;
-  }
-
-  .about1 .right h4 {
-      font-size: 2.2rem;
-      max-width: 1100px;
-  }
-
-  .about1 .right p {
-      font-size: 2rem;
-      max-width: 1100px;
-  }
-} */
-
-
-/* 2560px+ */
-/* @media (min-width: 2560px) {
-
-  nav {
-      padding-inline: 7vw;
-  }
-
-  .home {
-      padding-inline: 7vw;
-  }
-
-  .home h1 {
-      font-size: 7rem;
-      max-width: 1600px;
-  }
-
-  .about1 {
-      padding-inline: 7vw;
-  }
-
-  .about1 .left {
-      width: 35%;
-  }
-
-  .about1 .right {
-      width: 65%;
-  }
-
-  .about1 .right h4 {
-      font-size: 2.4rem;
-      max-width: 1200px;
-  }
-
-  .about1 .right p {
-      font-size: 2.1rem;
-      max-width: 1200px;
-  }
-} */
-
+/* ----------------------------------------------------------
+   1440px — Large Desktop
+   Most clamp() maxima are already hit around 1100–1200px so
+   from here we scale the things that were capped or use vw
+   ---------------------------------------------------------- */
+   /*  */
