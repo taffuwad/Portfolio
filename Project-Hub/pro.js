@@ -105,127 +105,151 @@ contact.addEventListener('click', () => {
 // -------------------------------------------------------------------------------------------------------
 
 // Page 3 sliders: use the duplicated cards as a measured, seamless loop.
-// Buttons nudge the loop without restarting its continuous movement.
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-document.querySelectorAll('.slider-shell').forEach((shell) => {
-  const marquee = shell.querySelector('.marquee');
-  const track = shell.querySelector('.marquee-track');
-  const cards = track ? Array.from(track.children) : [];
+(function(){
+  'use strict';
 
-  if (!marquee || !track || cards.length < 2) return;
+  /* ==========================================================
+     REGISTER
+     ========================================================== */
+  if (!window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
 
-  // The second half is present only to complete the visual loop.
-  cards.slice(Math.floor(cards.length / 2)).forEach((card) => {
-    card.setAttribute('aria-hidden', 'true');
-    card.querySelectorAll('a').forEach((link) => { link.tabIndex = -1; });
+  /* ==========================================================
+     REFS
+     ========================================================== */
+  var section       = document.getElementById('showcase');
+  var textSections  = gsap.utils.toArray('.text-section');
+  var clusters      = gsap.utils.toArray('.image-cluster');
+  var railFill      = document.getElementById('railFill');
+  var counterCurrent= document.getElementById('counterCurrent');
+  var scrollHint    = document.getElementById('scrollHint');
+
+  var total = textSections.length;
+  if (!total) return;
+
+  /* ==========================================================
+     INITIAL STATES
+     Hidden text slides start lower and transparent.
+     Hidden clusters start rotated + translated off-screen.
+     ========================================================== */
+  gsap.set(textSections.slice(1), { opacity: 0, y: 30 });
+  gsap.set(clusters.slice(1), {
+    rotation: 45,
+    x: 180,
+    y: -180,
+    opacity: 0
+  });
+  gsap.set(clusters, { transformOrigin: '150% 120%' });
+
+  /* Only the first cluster is initially interactive */
+  clusters.forEach(function(c, i){
+    c.style.pointerEvents = i === 0 ? 'auto' : 'none';
   });
 
-  let loopWidth = 0;
-  let offset = 0;
-  let pendingShift = 0;
-  let lastTime = performance.now();
-  let paused = false;
-  const direction = marquee.dataset.direction === 'reverse' ? 1 : -1;
+  /* ==========================================================
+     MASTER TIMELINE — scrubbed by scroll, pinned
+     Each transition fades the previous text out and the next in,
+     and swings the previous cluster away while the next swings in.
+     ========================================================== */
+  var tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      start: 'top top',
+      end: '+=' + ((total - 1) * 100) + '%',
+      pin: true,
+      scrub: 1,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      onUpdate: function(self){
+        /* Which slide is active based on progress */
+        var active = Math.min(total - 1, Math.round(self.progress * (total - 1)));
 
-  const normaliseOffset = () => {
-    if (!loopWidth) return;
-    while (offset <= -loopWidth) offset += loopWidth;
-    while (offset > 0) offset -= loopWidth;
-  };
+        /* Only the active cluster receives pointer events */
+        clusters.forEach(function(c, i){
+          c.style.pointerEvents = (i === active) ? 'auto' : 'none';
+        });
 
-  const measure = () => {
-    // The first repeated card marks the exact point at which the sequence repeats.
-    loopWidth = cards[Math.floor(cards.length / 2)].offsetLeft - cards[0].offsetLeft;
-    if (!loopWidth) return;
-    offset = direction === 1 ? -loopWidth : 0;
-    track.style.transform = `translate3d(${offset}px, 0, 0)`;
-  };
+        /* Progress rail fill */
+        railFill.style.transform = 'scaleY(' + self.progress + ')';
 
-  shell.querySelectorAll('.slider-control').forEach((button) => {
-    button.addEventListener('click', () => {
-      const step = Math.min(cards[0].getBoundingClientRect().width * 0.9, marquee.clientWidth * 0.85);
-      pendingShift += button.dataset.slide === 'next' ? -step : step;
-    });
+        /* Counter */
+        counterCurrent.textContent = String(active + 1).padStart(2, '0');
+
+        /* Hide scroll hint once user starts scrolling */
+        if (self.progress > 0.02) {
+          scrollHint.classList.add('hidden');
+        } else {
+          scrollHint.classList.remove('hidden');
+        }
+      }
+    }
   });
 
-  shell.addEventListener('pointerenter', () => { paused = true; });
-  shell.addEventListener('pointerleave', () => { paused = false; });
-  shell.addEventListener('focusin', () => { paused = true; });
-  shell.addEventListener('focusout', () => { paused = false; });
-  window.addEventListener('resize', measure, { passive: true });
-  window.addEventListener('load', measure, { once: true });
+  /* Build a transition block per slide (skipping the first) */
+  textSections.forEach(function(textSec, i){
+    if (i === 0) return;
 
-  const animate = (time) => {
-    const elapsed = Math.min(time - lastTime, 64);
-    lastTime = time;
-    const nudge = pendingShift * Math.min(1, elapsed / 180);
-    pendingShift -= nudge;
-    const speed = paused || reduceMotion.matches ? 0 : direction * 0.035 * elapsed;
-    offset += speed + nudge;
-    normaliseOffset();
-    track.style.transform = `translate3d(${offset}px, 0, 0)`;
-    requestAnimationFrame(animate);
-  };
+    var prevText    = textSections[i - 1];
+    var prevCluster = clusters[i - 1];
+    var currentText = textSec;
+    var currentCluster = clusters[i];
 
-  measure();
-  requestAnimationFrame(animate);
-});
+    var label = 's' + i;
+    tl.add(label);
 
-const sliderImage = document.querySelectorAll('.work-card');
-const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    /* Previous text out */
+    tl.to(prevText, {
+      opacity: 0,
+      y: -30,
+      duration: 0.5,
+      ease: 'power2.out'
+    }, label);
 
-if (supportsHover) {
-  sliderImage.forEach((card) => {
-    const webLink = card.querySelector('.web-link');
+    /* Current text in (slightly delayed so the crossfade overlaps) */
+    tl.to(currentText, {
+      opacity: 1,
+      y: 0,
+      duration: 0.55,
+      ease: 'power2.out'
+    }, label + '+=0.25');
 
-    if (!webLink) return;
+    /* Previous cluster swings out (down-left) */
+    tl.to(prevCluster, {
+      rotation: -45,
+      x: -180,
+      y: 180,
+      opacity: 0,
+      duration: 0.95,
+      ease: 'power2.inOut'
+    }, label);
 
-    gsap.set(webLink, {
-      autoAlpha: 0,
-      scale: 0.75,
-      xPercent: -50,
-      yPercent: -50
-    });
-
-    const moveX = gsap.quickTo(webLink, 'left', {
-      duration: 0.28,
-      ease: 'power3.out'
-    });
-    const moveY = gsap.quickTo(webLink, 'top', {
-      duration: 0.28,
-      ease: 'power3.out'
-    });
-
-    const moveWebLink = (event) => {
-      const rect = card.getBoundingClientRect();
-      moveX(event.clientX - rect.left);
-      moveY(event.clientY - rect.top);
-    };
-
-    card.addEventListener('pointerenter', (event) => {
-      moveWebLink(event);
-      gsap.to(webLink, {
-        autoAlpha: 1,
-        scale: 1,
-        duration: 0.25,
-        ease: 'back.out(1.5)',
-        overwrite: 'auto'
-      });
-    });
-
-    card.addEventListener('pointermove', moveWebLink);
-    card.addEventListener('pointerleave', () => {
-      gsap.to(webLink, {
-        autoAlpha: 0,
-        scale: 0.75,
-        duration: 0.18,
-        ease: 'power2.in',
-        overwrite: 'auto'
-      });
-    });
+    /* Current cluster swings in to rest */
+    tl.to(currentCluster, {
+      rotation: 0,
+      x: 0,
+      y: 0,
+      opacity: 1,
+      duration: 0.95,
+      ease: 'power2.inOut'
+    }, label);
   });
-}
+
+  /* ==========================================================
+     REFRESH ON LOAD / RESIZE
+     ========================================================== */
+  window.addEventListener('load', function(){
+    ScrollTrigger.refresh();
+  });
+
+  /* ==========================================================
+     KEYBOARD ACCESSIBILITY
+     Space/Enter on cluster anchor works natively via <a href>.
+     We only need to ensure focus styles remain and pointer-events
+     are correctly assigned (handled in onUpdate above).
+     ========================================================== */
+
+})();
 
 
 // Page 4: show each project preview at the pointer on devices with a fine cursor.
