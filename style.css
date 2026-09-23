@@ -1231,7 +1231,7 @@ nav .nav-link:hover .letter {
 
 #second {
   width: 100%;
-  padding: clamp(5rem, 13vw, 12rem) 8vw 8vw 0;
+  padding: clamp(5rem, 13vw, 12rem) 8vw 8vw 2vw;
   color: #fff;
 }
 
@@ -2351,7 +2351,7 @@ textarea::placeholder {
 
 .pro6 .con-work h1,
 .pro6 .con-work p,
-.pro6 .con-work .view {
+.pro6 .con-work #pro-hub {
     position: relative;
     z-index: 1;
 }
@@ -2725,6 +2725,7 @@ textarea::placeholder {
 }
 
 @media (max-width: 768px) {
+
     .works {
         padding: 0 0 2.5rem;
     }
@@ -2746,8 +2747,7 @@ textarea::placeholder {
 
     .works-wrapper {
         height: auto;
-        display: grid;
-        /* gap: 1rem; */
+        display: block;
     }
 
     .works .pro {
@@ -2756,6 +2756,53 @@ textarea::placeholder {
         min-height: 0;
         height: auto;
         padding: 1rem;
+        display: block;
+    }
+
+    /* Keep the project list in the normal stacking context on small screens.
+       The desktop-only negative z-index can otherwise put it behind the page. */
+    .works .pro1 {
+        padding: 0;
+    }
+
+    .works .pro1 #main {
+        position: relative;
+        z-index: 0;
+    }
+
+    .works .pro1 #second {
+        padding: clamp(3.5rem, 12vw, 5rem) 1rem 2rem;
+    }
+
+    .works .pro1 .elem {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        padding: 1.5rem 1rem;
+    }
+
+    .works .pro1 .elem img {
+        grid-column: 1 / -1;
+        max-width: 20rem;
+    }
+    .works .work-h,
+    .works .pro1 .elem h1,
+    .works .pro6 .con-work h1 {
+        overflow: hidden;
+    }
+
+    .works .work-reveal-char {
+        display: inline-block;
+        will-change: transform, opacity;
+    }
+    .about1,
+    .about2,
+    .works .pro1 .elem,
+    .works .pro6 .con-work,
+    .contact .con-top,
+    .contact .con-bottom {
+        backface-visibility: hidden;
+        will-change: clip-path, transform, opacity;
     }
 
     .works .pro .card {
