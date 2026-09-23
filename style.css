@@ -3711,7 +3711,7 @@ textarea::placeholder {
 
     .contact{
     /* background-color:#ff0000; */
-    height: 70vh;
+    height: 75vh;
     min-height: 0;
     width: 100%;
     padding: 5vw 7vw 0 7vw;
@@ -3732,7 +3732,8 @@ textarea::placeholder {
     border-radius: 1rem;
     display: block;
     position: relative;
-    margin: 1rem 0 0 auto;
+    margin: 1rem 0 8vw auto;
+
 }
 
 }
@@ -3743,6 +3744,7 @@ textarea::placeholder {
 @media (max-width: 375px) {
   .contact{
     /* background-color:#c75a5a; */
+    height: auto;
     min-height: 75vh;
     width: 100%;
     padding: 5vw 7vw 0 7vw;
