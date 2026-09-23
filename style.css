@@ -3743,7 +3743,7 @@ textarea::placeholder {
 @media (max-width: 375px) {
   .contact{
     /* background-color:#c75a5a; */
-    height: 92vh;
+    min-height: 75vh;
     width: 100%;
     padding: 5vw 7vw 0 7vw;
     display: flex;
