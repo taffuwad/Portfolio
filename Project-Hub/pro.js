@@ -304,3 +304,282 @@ if (supportsFinePointer) {
     });
   });
 }
+
+
+// page5--------------------------------------------------------------------------------------------------
+
+
+/* =========================================================
+   TOONHUB — Hero carousel (responsive)
+   ========================================================= */
+(function () {
+  'use strict';
+
+  /* ---------- Data ---------- */
+  const IMAGES = [
+    {
+      src: 'https://images.unsplash.com/photo-1678690832871-8b9993c76aa8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      bg: '#111',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1542744095-291d1f67b221?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHdlYnNpdGUlMjBkZXNpZ258ZW58MHx8MHx8fDA%3D',
+      bg: '#2A2515',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1613068687893-5e85b4638b56?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fHdlYnNpdGUlMjBkZXNpZ258ZW58MHx8MHx8fDA%3D',
+      bg: '#8A741E',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1542744095-0d53267d353e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHdlYnNpdGUlMjBkZXNpZ258ZW58MHx8MHx8fDA%3D',
+      bg: '#FFD43B',
+    },
+  ];
+
+  /* ---------- Preload ---------- */
+  IMAGES.forEach(({ src }) => {
+    const img = new Image();
+    img.src = src;
+  });
+
+  /* ---------- State ---------- */
+  const state = {
+    activeIndex: 0,
+    isAnimating: false,
+    breakpoint: 'lg',      // recalculated on resize
+    vw: window.innerWidth,
+    vh: window.innerHeight,
+  };
+
+  /* ---------- Elements ---------- */
+  const root = document.getElementById('toonhubRoot');
+  const carousel = document.getElementById('toonhubCarousel');
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+
+  /* ---------- Build DOM for each image ---------- */
+  IMAGES.forEach((img, index) => {
+    const item = document.createElement('div');
+    item.className = 'toonhub-item';
+    item.dataset.imgIndex = String(index);
+    item.setAttribute('aria-hidden', 'true');
+
+    const el = document.createElement('img');
+    el.src = img.src;
+    el.alt = '';
+    el.draggable = false;
+    el.decoding = 'async';
+    el.fetchPriority = index === 0 ? 'high' : 'auto';
+
+    item.appendChild(el);
+    carousel.appendChild(item);
+  });
+
+  /* ---------- Breakpoints ----------
+     xs  : < 400px   (small phones)
+     sm  : 400–639px (regular phones)
+     md  : 640–1023px (tablets / small laptops)
+     lg  : 1024–1439px (laptops)
+     xl  : >= 1440px  (desktops)
+     uxl : >= 1920px  (ultra-wide)
+  */
+  function getBreakpoint(w) {
+    if (w < 400) return 'xs';
+    if (w < 640) return 'sm';
+    if (w < 1024) return 'md';
+    if (w < 1440) return 'lg';
+    if (w < 1920) return 'xl';
+    return 'uxl';
+  }
+
+  /* ---------- Role → style per breakpoint ----------
+     h  = height as % of stage
+     b  = bottom offset as % of stage
+     sc = transform scale
+     bl = blur px
+     op = opacity
+     z  = z-index
+     px = left position as %
+  */
+  const STYLES = {
+    xs: {
+      center: { h: '46%', b: '28%', sc: 1.05, bl: 0, op: 1,    z: 20, px: 50 },
+      left:   { h: '13%', b: '35%', sc: 0.85, bl: 2, op: 0.85, z: 10, px: 15 },
+      right:  { h: '13%', b: '35%', sc: 0.85, bl: 2, op: 0.85, z: 10, px: 85 },
+      back:   { h: '10%', b: '35%', sc: 0.9,  bl: 4, op: 1,    z: 5,  px: 50 },
+    },
+    sm: {
+      center: { h: '54%', b: '24%', sc: 1.15, bl: 0, op: 1,    z: 20, px: 50 },
+      left:   { h: '15%', b: '33%', sc: 0.9,  bl: 2, op: 0.85, z: 10, px: 18 },
+      right:  { h: '15%', b: '33%', sc: 0.9,  bl: 2, op: 0.85, z: 10, px: 82 },
+      back:   { h: '12%', b: '33%', sc: 0.95, bl: 4, op: 1,    z: 5,  px: 50 },
+    },
+    md: {
+      center: { h: '72%', b: '10%', sc: 1.4,  bl: 0, op: 1,    z: 20, px: 50 },
+      left:   { h: '22%', b: '18%', sc: 1,    bl: 2, op: 0.85, z: 10, px: 22 },
+      right:  { h: '22%', b: '18%', sc: 1,    bl: 2, op: 0.85, z: 10, px: 78 },
+      back:   { h: '16%', b: '18%', sc: 1,    bl: 4, op: 1,    z: 5,  px: 50 },
+    },
+    lg: {
+      center: { h: '88%', b: '0%',  sc: 1.6,  bl: 0, op: 1,    z: 20, px: 50 },
+      left:   { h: '26%', b: '12%', sc: 1,    bl: 2, op: 0.85, z: 10, px: 28 },
+      right:  { h: '26%', b: '12%', sc: 1,    bl: 2, op: 0.85, z: 10, px: 72 },
+      back:   { h: '20%', b: '12%', sc: 1,    bl: 4, op: 1,    z: 5,  px: 50 },
+    },
+    xl: {
+      center: { h: '92%', b: '0%',  sc: 1.68, bl: 0, op: 1,    z: 20, px: 50 },
+      left:   { h: '28%', b: '12%', sc: 1,    bl: 2, op: 0.85, z: 10, px: 30 },
+      right:  { h: '28%', b: '12%', sc: 1,    bl: 2, op: 0.85, z: 10, px: 70 },
+      back:   { h: '22%', b: '12%', sc: 1,    bl: 4, op: 1,    z: 5,  px: 50 },
+    },
+    uxl: {
+      center: { h: '94%', b: '0%',  sc: 1.72, bl: 0, op: 1,    z: 20, px: 50 },
+      left:   { h: '30%', b: '10%', sc: 1.05, bl: 2, op: 0.85, z: 10, px: 30 },
+      right:  { h: '30%', b: '10%', sc: 1.05, bl: 2, op: 0.85, z: 10, px: 70 },
+      back:   { h: '24%', b: '10%', sc: 1.05, bl: 4, op: 1,    z: 5,  px: 50 },
+    },
+  };
+
+  /* ---------- Role mapping ---------- */
+  function rolesFor(activeIndex) {
+    return {
+      center: activeIndex,
+      left: (activeIndex + 3) % 4,
+      right: (activeIndex + 1) % 4,
+      back: (activeIndex + 2) % 4,
+    };
+  }
+
+  /* ---------- Apply one style to one element ---------- */
+  function applyStyle(item, cfg) {
+    item.style.transform = `translateX(-50%) scale(${cfg.sc})`;
+    item.style.filter = cfg.bl ? `blur(${cfg.bl}px)` : 'none';
+    item.style.opacity = String(cfg.op);
+    item.style.zIndex = String(cfg.z);
+    item.style.left = cfg.px + '%';
+    item.style.height = cfg.h;
+    item.style.bottom = cfg.b;
+  }
+
+  /* ---------- Render ---------- */
+  function render() {
+    const bp = state.breakpoint;
+    const styles = STYLES[bp] || STYLES.lg;
+
+    // 1. Background color
+    root.style.backgroundColor = IMAGES[state.activeIndex].bg;
+
+    // 2. Role assignment
+    const roles = rolesFor(state.activeIndex);
+    const indexToRole = {};
+    Object.keys(roles).forEach((role) => {
+      indexToRole[roles[role]] = role;
+    });
+
+    // 3. Apply styles
+    const items = carousel.querySelectorAll('.toonhub-item');
+    items.forEach((item) => {
+      const idx = Number(item.dataset.imgIndex);
+      const role = indexToRole[idx] || 'back';
+      applyStyle(item, styles[role]);
+    });
+  }
+
+  /* ---------- Navigate ---------- */
+  function navigate(direction) {
+    if (state.isAnimating) return;
+    state.isAnimating = true;
+
+    state.activeIndex = direction === 'next'
+      ? (state.activeIndex + 1) % 4
+      : (state.activeIndex + 3) % 4;
+
+    render();
+
+    window.setTimeout(() => {
+      state.isAnimating = false;
+    }, 650);
+  }
+
+  /* ---------- Events ---------- */
+  btnPrev.addEventListener('click', () => navigate('prev'));
+  btnNext.addEventListener('click', () => navigate('next'));
+
+  // Keyboard support — ignore when typing in inputs (defensive, harmless here)
+  window.addEventListener('keydown', (e) => {
+    const tag = (e.target && e.target.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target?.isContentEditable) return;
+    if (e.key === 'ArrowLeft')  navigate('prev');
+    else if (e.key === 'ArrowRight') navigate('next');
+  });
+
+  // Touch swipe support on the stage (nice-to-have, matches the "carousel" feel)
+  (function attachSwipe() {
+    const stage = document.querySelector('.toonhub-stage');
+    if (!stage) return;
+    let startX = null, startY = null, locked = false;
+
+    stage.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      locked = false;
+    }, { passive: true });
+
+    stage.addEventListener('touchmove', (e) => {
+      if (startX === null || locked) return;
+      const dx = e.touches[0].clientX - startX;
+      const dy = e.touches[0].clientY - startY;
+      // Lock to horizontal only if horizontal movement dominates
+      if (!locked && Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+        locked = true;
+      }
+    }, { passive: true });
+
+    stage.addEventListener('touchend', (e) => {
+      if (startX === null || !locked) { startX = null; return; }
+      const endX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : startX;
+      const dx = endX - startX;
+      if (Math.abs(dx) > 50) {
+        navigate(dx < 0 ? 'next' : 'prev');
+      }
+      startX = null;
+      locked = false;
+    }, { passive: true });
+  })();
+
+  /* ---------- Resize handling ---------- */
+  let resizeTimer;
+  function onResize() {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const nextBp = getBreakpoint(w);
+
+      // Re-render only if breakpoint or dimensions meaningfully changed
+      const bpChanged = nextBp !== state.breakpoint;
+      const sizeChanged =
+        Math.abs(w - state.vw) > 40 || Math.abs(h - state.vh) > 40;
+
+      state.breakpoint = nextBp;
+      state.vw = w;
+      state.vh = h;
+
+      if (bpChanged || sizeChanged) {
+        render();
+      }
+    }, 120);
+  }
+
+  window.addEventListener('resize', onResize);
+  window.addEventListener('orientationchange', () => {
+    // Delay slightly so the new viewport dimensions are settled
+    window.setTimeout(onResize, 150);
+  });
+
+  /* ---------- Initial paint ---------- */
+  state.breakpoint = getBreakpoint(window.innerWidth);
+  state.vw = window.innerWidth;
+  state.vh = window.innerHeight;
+  render();
+})();

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#111" />
+<title>TOONHUB — Character Figurines</title>
+<meta name="description" content="TOONHUB — hand-crafted character figurines. A small collection of big personalities." />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  /* =========================================================
+     RESET
+     ========================================================= */
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0A0A08;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  img { display: block; max-width: 100%; }
+  button {
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+    border-radius: 999px;
+  }
+
+  /* =========================================================
+     ROOT / STAGE
+     ========================================================= */
+  .toonhub-root {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    transition: background-color 650ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .toonhub-stage {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  /* =========================================================
+     GRAIN OVERLAY
+     ========================================================= */
+  .toonhub-grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.4;
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  /* =========================================================
+     GIANT GHOST TEXT
+     ========================================================= */
+  .toonhub-ghost {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 26%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    user-select: none;
+    z-index: 2;
+    overflow: hidden;
+    padding-inline: 0.5rem;
+  }
+  .toonhub-ghost span {
+    font-family: 'Anton', sans-serif;
+    /* Responsive curve that stays inside the viewport from 320px to 2560px+ */
+    font-size: clamp(36px, 14vw, 380px);
+    font-weight: 900;
+    color: #fff;
+    opacity: 1;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    display: block;
+    max-width: 100vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* Slight nudge down on very tall / narrow viewports so it doesn't sit under the nav */
+  @media (max-aspect-ratio: 4/5) {
+    .toonhub-ghost { top: 30%; }
+  }
+
+  /* =========================================================
+     BRAND LABEL
+     ========================================================= */
+  .toonhub-brand {
+    position: absolute;
+    top: 1.25rem;
+    left: 1rem;
+    z-index: 60;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0.9;
+    letter-spacing: 0.18em;
+    line-height: 1;
+  }
+  @media (min-width: 640px) {
+    .toonhub-brand {
+      top: 1.5rem;
+      left: 2rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  /* =========================================================
+     CAROUSEL
+     ========================================================= */
+  .toonhub-carousel {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+  }
+  .toonhub-item {
+    position: absolute;
+    /* NOTE: intentionally no `top` — JS anchors items via `bottom` + `height`.
+       Having `top` set here would override `bottom` in the absolute-positioning
+       cascade and push the figurines off the top of the viewport. */
+    aspect-ratio: 0.7 / 1;
+    transition:
+      transform 650ms cubic-bezier(0.4, 0, 0.2, 1),
+      filter    650ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity   650ms cubic-bezier(0.4, 0, 0.2, 1),
+      left      650ms cubic-bezier(0.4, 0, 0.2, 1),
+      bottom    650ms cubic-bezier(0.4, 0, 0.2, 1),
+      height    650ms cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, filter, opacity, left, bottom, height;
+    transform-origin: bottom center;
+  }
+  .toonhub-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom center;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  /* =========================================================
+     BOTTOM-LEFT BLOCK (title + copy + nav)
+     ========================================================= */
+  .toonhub-bottom-left {
+    position: absolute;
+    bottom: 1.25rem;
+    left: 1rem;
+    z-index: 60;
+    max-width: 320px;
+  }
+  @media (min-width: 640px) {
+    .toonhub-bottom-left {
+      bottom: 5rem;
+      left: 6rem;
+    }
+  }
+  @media (min-width: 1440px) {
+    .toonhub-bottom-left {
+      left: clamp(6rem, 8vw, 10rem);
+    }
+  }
+
+  .toonhub-title {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.95rem;
+    color: #fff;
+    opacity: 0.95;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.1;
+  }
+  @media (min-width: 640px) {
+    .toonhub-title {
+      font-size: 22px;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+  }
+
+  .toonhub-copy {
+    display: none;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: #fff;
+    opacity: 0.85;
+    margin: 0 0 1rem 0;
+  }
+  @media (min-width: 640px) {
+    .toonhub-copy {
+      display: block;
+      font-size: 0.875rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  .toonhub-nav {
+    display: flex;
+    gap: 0.625rem;
+    align-items: center;
+  }
+  @media (min-width: 640px) {
+    .toonhub-nav { gap: 0.75rem; }
+  }
+
+  .toonhub-nav-btn {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    border: 2px solid #fff;
+    background: transparent;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      transform 150ms ease,
+      background-color 150ms ease;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
+  }
+  @media (min-width: 480px) {
+    .toonhub-nav-btn { width: 3rem; height: 3rem; }
+  }
+  @media (min-width: 640px) {
+    .toonhub-nav-btn { width: 4rem; height: 4rem; }
+  }
+  .toonhub-nav-btn:hover {
+    transform: scale(1.08);
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+  .toonhub-nav-btn:active {
+    transform: scale(0.96);
+  }
+  .toonhub-nav-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  @media (min-width: 640px) {
+    .toonhub-nav-btn svg { width: 26px; height: 26px; }
+  }
+
+  /* =========================================================
+     BOTTOM-RIGHT LINK
+     ========================================================= */
+  .toonhub-discover {
+    position: absolute;
+    bottom: 1.25rem;
+    right: 1rem;
+    z-index: 60;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(18px, 4.5vw, 56px);
+    font-weight: 400;
+    color: #fff;
+    opacity: 0.95;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+    transition: opacity 200ms ease;
+    -webkit-tap-highlight-color: transparent;
+    max-width: calc(100vw - 2rem);
+  }
+  @media (min-width: 640px) {
+    .toonhub-discover {
+      bottom: 5rem;
+      right: 2.5rem;
+      gap: 0.75rem;
+    }
+  }
+  @media (min-width: 1440px) {
+    .toonhub-discover {
+      right: clamp(2.5rem, 6vw, 8rem);
+    }
+  }
+  .toonhub-discover:hover { opacity: 1; }
+  .toonhub-discover span { white-space: nowrap; }
+  .toonhub-discover svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    flex-shrink: 0;
+  }
+  @media (min-width: 480px) {
+    .toonhub-discover svg { width: 1.35rem; height: 1.35rem; }
+  }
+  @media (min-width: 640px) {
+    .toonhub-discover svg { width: 2rem; height: 2rem; }
+  }
+
+  /* =========================================================
+     VERY SMALL SCREENS (< 400px)
+     — keep the two bottom blocks from colliding
+     ========================================================= */
+  @media (max-width: 400px) {
+    .toonhub-bottom-left {
+      max-width: 52vw;
+      bottom: 1rem;
+      left: 0.875rem;
+    }
+    .toonhub-title {
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.4rem;
+    }
+    .toonhub-nav { gap: 0.5rem; }
+    .toonhub-nav-btn {
+      width: 2.35rem;
+      height: 2.35rem;
+      border-width: 1.5px;
+    }
+    .toonhub-nav-btn svg { width: 16px; height: 16px; }
+
+    .toonhub-discover {
+      bottom: 1rem;
+      right: 0.875rem;
+      font-size: 18px;
+      gap: 0.3rem;
+    }
+    .toonhub-discover svg { width: 0.95rem; height: 0.95rem; }
+
+    .toonhub-brand {
+      top: 1rem;
+      left: 0.875rem;
+      font-size: 0.65rem;
+    }
+  }
+
+  /* =========================================================
+     LANDSCAPE PHONES (short viewports)
+     — reduce ghost text so it doesn't dominate
+     ========================================================= */
+  @media (max-height: 480px) and (orientation: landscape) {
+    .toonhub-ghost {
+      top: 18%;
+    }
+    .toonhub-ghost span {
+      font-size: clamp(28px, 10vh, 120px);
+    }
+    .toonhub-bottom-left { bottom: 0.75rem; }
+    .toonhub-discover { bottom: 0.75rem; font-size: clamp(16px, 5vh, 32px); }
+    .toonhub-nav-btn { width: 2.25rem; height: 2.25rem; }
+    .toonhub-nav-btn svg { width: 16px; height: 16px; }
+    .toonhub-copy { display: none; }
+  }
+
+  /* =========================================================
+     ULTRA-WIDE (>= 1920px) — scale content up a touch
+     ========================================================= */
+  @media (min-width: 1920px) {
+    .toonhub-brand { font-size: 0.85rem; }
+    .toonhub-title { font-size: 26px; }
+    .toonhub-copy { font-size: 1rem; }
+    .toonhub-nav-btn { width: 4.5rem; height: 4.5rem; }
+    .toonhub-nav-btn svg { width: 30px; height: 30px; }
+    .toonhub-discover { font-size: clamp(40px, 3vw, 72px); }
+  }
+
+  /* =========================================================
+     REDUCED MOTION
+     ========================================================= */
+  @media (prefers-reduced-motion: reduce) {
+    .toonhub-root,
+    .toonhub-item,
+    .toonhub-nav-btn,
+    .toonhub-discover {
+      transition-duration: 0.001ms !important;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="toonhub-root" id="toonhubRoot" style="background-color: #111;">
+
+  <div class="toonhub-stage">
+
+    <!-- 1. Grain overlay -->
+    <div class="toonhub-grain" aria-hidden="true"></div>
+
+    <!-- 2. Giant ghost text -->
+    <div class="toonhub-ghost" aria-hidden="true">
+      <span>Demo Website</span>
+    </div>
+
+    <!-- 3. Brand label -->
+    <div class="toonhub-brand">DEMO Sites</div>
+
+    <!-- 4. Carousel (items injected via JS) -->
+    <div class="toonhub-carousel" id="toonhubCarousel" aria-label="Character figurine carousel"></div>
+
+    <!-- 5. Bottom-left: title, copy, nav buttons -->
+    <div class="toonhub-bottom-left">
+      <p class="toonhub-title">Deno Landing Page</p>
+      <p class="toonhub-copy">
+        A bold, interactive experience crafted with precision. From the fluid motion to the
+        sharp visual details, every section was designed to feel seamless, modern, and alive.
+        Built to make an impression. Explore now.
+      </p>
+      <div class="toonhub-nav" role="group" aria-label="Carousel navigation">
+        <button class="toonhub-nav-btn" id="btnPrev" aria-label="Previous figurine">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m12 19-7-7 7-7" />
+            <path d="M19 12H5" />
+          </svg>
+        </button>
+        <button class="toonhub-nav-btn" id="btnNext" aria-label="Next figurine">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- 6. Bottom-right link -->
+    <a class="toonhub-discover" href="index.html/#contact" aria-label="Contact us">
+      <span>Contact us</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </svg>
+    </a>
+
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   TOONHUB — Hero carousel (responsive)
+   ========================================================= */
+(function () {
+  'use strict';
+
+  /* ---------- Data ---------- */
+  const IMAGES = [
+    {
+      src: 'https://images.unsplash.com/photo-1678690832871-8b9993c76aa8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      bg: '#111111',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1542744095-291d1f67b221?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHdlYnNpdGUlMjBkZXNpZ258ZW58MHx8MHx8fDA%3D',
+      bg: '#755C00',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1613068687893-5e85b4638b56?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fHdlYnNpdGUlMjBkZXNpZ258ZW58MHx8MHx8fDA%3D',
+      bg: '#D1A400',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1542744095-0d53267d353e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHdlYnNpdGUlMjBkZXNpZ258ZW58MHx8MHx8fDA%3D',
+      bg: '#FFD43B',
+    },
+  ];
+
+  /* ---------- Preload ---------- */
+  IMAGES.forEach(({ src }) => {
+    const img = new Image();
+    img.src = src;
+  });
+
+  /* ---------- State ---------- */
+  const state = {
+    activeIndex: 0,
+    isAnimating: false,
+    breakpoint: 'lg',      // recalculated on resize
+    vw: window.innerWidth,
+    vh: window.innerHeight,
+  };
+
+  /* ---------- Elements ---------- */
+  const root = document.getElementById('toonhubRoot');
+  const carousel = document.getElementById('toonhubCarousel');
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+
+  /* ---------- Build DOM for each image ---------- */
+  IMAGES.forEach((img, index) => {
+    const item = document.createElement('div');
+    item.className = 'toonhub-item';
+    item.dataset.imgIndex = String(index);
+    item.setAttribute('aria-hidden', 'true');
+
+    const el = document.createElement('img');
+    el.src = img.src;
+    el.alt = '';
+    el.draggable = false;
+    el.decoding = 'async';
+    el.fetchPriority = index === 0 ? 'high' : 'auto';
+
+    item.appendChild(el);
+    carousel.appendChild(item);
+  });
+
+  /* ---------- Breakpoints ----------
+     xs  : < 400px   (small phones)
+     sm  : 400–639px (regular phones)
+     md  : 640–1023px (tablets / small laptops)
+     lg  : 1024–1439px (laptops)
+     xl  : >= 1440px  (desktops)
+     uxl : >= 1920px  (ultra-wide)
+  */
+  function getBreakpoint(w) {
+    if (w < 400) return 'xs';
+    if (w < 640) return 'sm';
+    if (w < 1024) return 'md';
+    if (w < 1440) return 'lg';
+    if (w < 1920) return 'xl';
+    return 'uxl';
+  }
+
+  /* ---------- Role → style per breakpoint ----------
+     h  = height as % of stage
+     b  = bottom offset as % of stage
+     sc = transform scale
+     bl = blur px
+     op = opacity
+     z  = z-index
+     px = left position as %
+  */
+  const STYLES = {
+    xs: {
+      center: { h: '46%', b: '28%', sc: 1.05, bl: 0, op: 1,    z: 20, px: 50 },
+      left:   { h: '13%', b: '35%', sc: 0.85, bl: 2, op: 0.85, z: 10, px: 15 },
+      right:  { h: '13%', b: '35%', sc: 0.85, bl: 2, op: 0.85, z: 10, px: 85 },
+      back:   { h: '10%', b: '35%', sc: 0.9,  bl: 4, op: 1,    z: 5,  px: 50 },
+    },
+    sm: {
+      center: { h: '54%', b: '24%', sc: 1.15, bl: 0, op: 1,    z: 20, px: 50 },
+      left:   { h: '15%', b: '33%', sc: 0.9,  bl: 2, op: 0.85, z: 10, px: 18 },
+      right:  { h: '15%', b: '33%', sc: 0.9,  bl: 2, op: 0.85, z: 10, px: 82 },
+      back:   { h: '12%', b: '33%', sc: 0.95, bl: 4, op: 1,    z: 5,  px: 50 },
+    },
+    md: {
+      center: { h: '72%', b: '10%', sc: 1.4,  bl: 0, op: 1,    z: 20, px: 50 },
+      left:   { h: '22%', b: '18%', sc: 1,    bl: 2, op: 0.85, z: 10, px: 22 },
+      right:  { h: '22%', b: '18%', sc: 1,    bl: 2, op: 0.85, z: 10, px: 78 },
+      back:   { h: '16%', b: '18%', sc: 1,    bl: 4, op: 1,    z: 5,  px: 50 },
+    },
+    lg: {
+      center: { h: '88%', b: '0%',  sc: 1.6,  bl: 0, op: 1,    z: 20, px: 50 },
+      left:   { h: '26%', b: '12%', sc: 1,    bl: 2, op: 0.85, z: 10, px: 28 },
+      right:  { h: '26%', b: '12%', sc: 1,    bl: 2, op: 0.85, z: 10, px: 72 },
+      back:   { h: '20%', b: '12%', sc: 1,    bl: 4, op: 1,    z: 5,  px: 50 },
+    },
+    xl: {
+      center: { h: '92%', b: '0%',  sc: 1.68, bl: 0, op: 1,    z: 20, px: 50 },
+      left:   { h: '28%', b: '12%', sc: 1,    bl: 2, op: 0.85, z: 10, px: 30 },
+      right:  { h: '28%', b: '12%', sc: 1,    bl: 2, op: 0.85, z: 10, px: 70 },
+      back:   { h: '22%', b: '12%', sc: 1,    bl: 4, op: 1,    z: 5,  px: 50 },
+    },
+    uxl: {
+      center: { h: '94%', b: '0%',  sc: 1.72, bl: 0, op: 1,    z: 20, px: 50 },
+      left:   { h: '30%', b: '10%', sc: 1.05, bl: 2, op: 0.85, z: 10, px: 30 },
+      right:  { h: '30%', b: '10%', sc: 1.05, bl: 2, op: 0.85, z: 10, px: 70 },
+      back:   { h: '24%', b: '10%', sc: 1.05, bl: 4, op: 1,    z: 5,  px: 50 },
+    },
+  };
+
+  /* ---------- Role mapping ---------- */
+  function rolesFor(activeIndex) {
+    return {
+      center: activeIndex,
+      left: (activeIndex + 3) % 4,
+      right: (activeIndex + 1) % 4,
+      back: (activeIndex + 2) % 4,
+    };
+  }
+
+  /* ---------- Apply one style to one element ---------- */
+  function applyStyle(item, cfg) {
+    item.style.transform = `translateX(-50%) scale(${cfg.sc})`;
+    item.style.filter = cfg.bl ? `blur(${cfg.bl}px)` : 'none';
+    item.style.opacity = String(cfg.op);
+    item.style.zIndex = String(cfg.z);
+    item.style.left = cfg.px + '%';
+    item.style.height = cfg.h;
+    item.style.bottom = cfg.b;
+  }
+
+  /* ---------- Render ---------- */
+  function render() {
+    const bp = state.breakpoint;
+    const styles = STYLES[bp] || STYLES.lg;
+
+    // 1. Background color
+    root.style.backgroundColor = IMAGES[state.activeIndex].bg;
+
+    // 2. Role assignment
+    const roles = rolesFor(state.activeIndex);
+    const indexToRole = {};
+    Object.keys(roles).forEach((role) => {
+      indexToRole[roles[role]] = role;
+    });
+
+    // 3. Apply styles
+    const items = carousel.querySelectorAll('.toonhub-item');
+    items.forEach((item) => {
+      const idx = Number(item.dataset.imgIndex);
+      const role = indexToRole[idx] || 'back';
+      applyStyle(item, styles[role]);
+    });
+  }
+
+  /* ---------- Navigate ---------- */
+  function navigate(direction) {
+    if (state.isAnimating) return;
+    state.isAnimating = true;
+
+    state.activeIndex = direction === 'next'
+      ? (state.activeIndex + 1) % 4
+      : (state.activeIndex + 3) % 4;
+
+    render();
+
+    window.setTimeout(() => {
+      state.isAnimating = false;
+    }, 650);
+  }
+
+  /* ---------- Events ---------- */
+  btnPrev.addEventListener('click', () => navigate('prev'));
+  btnNext.addEventListener('click', () => navigate('next'));
+
+  // Keyboard support — ignore when typing in inputs (defensive, harmless here)
+  window.addEventListener('keydown', (e) => {
+    const tag = (e.target && e.target.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target?.isContentEditable) return;
+    if (e.key === 'ArrowLeft')  navigate('prev');
+    else if (e.key === 'ArrowRight') navigate('next');
+  });
+
+  // Touch swipe support on the stage (nice-to-have, matches the "carousel" feel)
+  (function attachSwipe() {
+    const stage = document.querySelector('.toonhub-stage');
+    if (!stage) return;
+    let startX = null, startY = null, locked = false;
+
+    stage.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      locked = false;
+    }, { passive: true });
+
+    stage.addEventListener('touchmove', (e) => {
+      if (startX === null || locked) return;
+      const dx = e.touches[0].clientX - startX;
+      const dy = e.touches[0].clientY - startY;
+      // Lock to horizontal only if horizontal movement dominates
+      if (!locked && Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+        locked = true;
+      }
+    }, { passive: true });
+
+    stage.addEventListener('touchend', (e) => {
+      if (startX === null || !locked) { startX = null; return; }
+      const endX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : startX;
+      const dx = endX - startX;
+      if (Math.abs(dx) > 50) {
+        navigate(dx < 0 ? 'next' : 'prev');
+      }
+      startX = null;
+      locked = false;
+    }, { passive: true });
+  })();
+
+  /* ---------- Resize handling ---------- */
+  let resizeTimer;
+  function onResize() {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const nextBp = getBreakpoint(w);
+
+      // Re-render only if breakpoint or dimensions meaningfully changed
+      const bpChanged = nextBp !== state.breakpoint;
+      const sizeChanged =
+        Math.abs(w - state.vw) > 40 || Math.abs(h - state.vh) > 40;
+
+      state.breakpoint = nextBp;
+      state.vw = w;
+      state.vh = h;
+
+      if (bpChanged || sizeChanged) {
+        render();
+      }
+    }, 120);
+  }
+
+  window.addEventListener('resize', onResize);
+  window.addEventListener('orientationchange', () => {
+    // Delay slightly so the new viewport dimensions are settled
+    window.setTimeout(onResize, 150);
+  });
+
+  /* ---------- Initial paint ---------- */
+  state.breakpoint = getBreakpoint(window.innerWidth);
+  state.vw = window.innerWidth;
+  state.vh = window.innerHeight;
+  render();
+})();
+</script>
+
+</body>
+</html>
