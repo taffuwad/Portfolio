@@ -318,19 +318,19 @@ if (supportsFinePointer) {
   /* ---------- Data ---------- */
   const IMAGES = [
     {
-      src: 'https://images.unsplash.com/photo-1678690832871-8b9993c76aa8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      src: 'pro-component/p5-images/real-state-demo.jpg',
       bg: '#111',
     },
     {
-      src: 'https://images.unsplash.com/photo-1542744095-291d1f67b221?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHdlYnNpdGUlMjBkZXNpZ258ZW58MHx8MHx8fDA%3D',
+      src: 'pro-component/p5-images/returent-demo.jpg',
       bg: '#2A2515',
     },
     {
-      src: 'https://images.unsplash.com/photo-1613068687893-5e85b4638b56?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fHdlYnNpdGUlMjBkZXNpZ258ZW58MHx8MHx8fDA%3D',
+      src: 'pro-component/p5-images/gym-demo.jpg',
       bg: '#8A741E',
     },
     {
-      src: 'https://images.unsplash.com/photo-1542744095-0d53267d353e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHdlYnNpdGUlMjBkZXNpZ258ZW58MHx8MHx8fDA%3D',
+      src: 'pro-component/p5-images/clinic-demo.jpg',
       bg: '#FFD43B',
     },
   ];
@@ -353,8 +353,8 @@ if (supportsFinePointer) {
   /* ---------- Elements ---------- */
   const root = document.getElementById('toonhubRoot');
   const carousel = document.getElementById('toonhubCarousel');
-  const btnPrev = document.getElementById('btnPrev');
-  const btnNext = document.getElementById('btnNext');
+  let btnPrev = document.getElementById('btnPrev');
+  let btnNext = document.getElementById('btnNext');
 
   /* ---------- Build DOM for each image ---------- */
   IMAGES.forEach((img, index) => {
@@ -483,6 +483,90 @@ if (supportsFinePointer) {
       applyStyle(item, styles[role]);
     });
   }
+
+
+
+  // -------------interactive images----------------
+  const demoLinks = ['https://realstatedemo01.netlify.app/', 'https://sairacafe.netlify.app/', 'https://new-gym-demo.vercel.app/', 'https://democlinic001.netlify.app/'];
+  const demoWeb = document.querySelectorAll('.toonhub-item');
+  demoWeb.forEach((item, idx) => {
+    item.addEventListener('click', () => {
+      window.open(demoLinks[idx], '_blank');
+    });
+  });
+
+
+  // -------------p5-bgtext-----------
+
+
+  const demowebNames = [
+    'Real State',
+    'Cafe',
+    'GYM',
+    'Clinic'
+  ];
+
+  const p5BgText = document.getElementById('p5-bg-text');
+
+  let currentIndex = 0;
+
+  p5BgText.textContent = demowebNames[currentIndex];
+
+  btnNext.addEventListener('click', () => {
+    currentIndex++;
+
+    // Loop back to the first item
+    if (currentIndex >= demowebNames.length) {
+      currentIndex = 0;
+    }
+
+    updateDemo();
+    // p5BgText.textContent = demowebNames[currentIndex];
+  });
+
+  btnPrev.addEventListener('click', () => {
+    currentIndex--;
+
+    // Loop to the last item
+    if (currentIndex < 0) {
+      currentIndex = demowebNames.length - 1;
+    }
+
+    updateDemo();
+
+    // p5BgText.textContent = demowebNames[currentIndex];
+  });
+
+    function updateDemo() {
+    gsap.to(p5BgText, {
+      opacity: 0,
+      y: 50,
+      scale: 0.9,
+      duration: 0.3,
+      ease: "power3",
+      onComplete: () => {
+        p5BgText.textContent = demowebNames[currentIndex];
+
+        gsap.fromTo(
+          p5BgText,
+          {
+            opacity: 0,
+            y: -50,
+            scale: 1.2
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.5,
+            ease: "power3"
+          }
+        );
+      }
+    });
+  }
+  
+
 
   /* ---------- Navigate ---------- */
   function navigate(direction) {
