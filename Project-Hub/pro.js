@@ -667,3 +667,98 @@ if (supportsFinePointer) {
   state.vh = window.innerHeight;
   render();
 })();
+
+
+
+
+
+
+
+
+
+
+// page4----------------------------------------------------------------------------------------------------------------
+
+
+const webs = document.querySelectorAll('.elem');
+const webLinks = [
+    'https://restaurent-lac-theta.vercel.app/',
+    'https://realstatedemo01.netlify.app/',
+    'https://maisonclo.netlify.app/',
+];
+
+webs.forEach((web, index)=>{
+    web.addEventListener('click',()=>{
+        window.open(webLinks[index], '_blank');
+    })
+})
+
+// footer----------------------------------------------
+
+document.addEventListener('DOMContentLoaded', () => {
+      // Respect prefers-reduced-motion
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion || typeof gsap === 'undefined') {
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Master Timeline triggered when footer reaches 80% of viewport
+      const footerTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#site-footer',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+
+      // 1. Column labels subtle reveal
+      footerTl.from('.col-label', {
+        opacity: 0,
+        y: 12,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power3.out'
+      })
+      // 2. Navigation links stagger upward
+      .from('.foot-nav-list li', {
+        opacity: 0,
+        y: 20,
+        duration: 0.7,
+        stagger: 0.08,
+        ease: 'power3.out'
+      }, '-=0.4')
+      // 3. Skill titles reveal
+      .from('.foot-skills-list li', {
+        opacity: 0,
+        y: 20,
+        duration: 0.7,
+        stagger: 0.08,
+        ease: 'power3.out'
+      }, '-=0.55')
+      // 4. Social links reveal
+      .from('.foot-social-list li', {
+        opacity: 0,
+        y: 20,
+        duration: 0.7,
+        stagger: 0.08,
+        ease: 'power3.out'
+      }, '-=0.55')
+      // 5. Huge FUWAD typography reveals with bold power4 ease
+      .from('#footer-wordmark', {
+        opacity: 0,
+        yPercent: 75,
+        duration: 1.2,
+        ease: 'power4.out'
+      }, '-=0.5')
+      // 6. Bottom copyright row fades in
+      .from('.footer-bottom-bar > div', {
+        opacity: 0,
+        y: 10,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power2.out'
+      }, '-=0.6');
+    });
+
