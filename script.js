@@ -346,9 +346,9 @@ if (supportsFinePointer) {
 
 const webs = document.querySelectorAll('.elem');
 const webLinks = [
-    'https://taffuwad.github.io/Brand-Designer-Portfolio/',
-    'https://melt-chocolate-website.vercel.app/',
-    'https://taffuwad.github.io/Animated-Cookie-Landing-page/'
+    'https://restaurent-lac-theta.vercel.app/',
+    'https://realstatedemo01.netlify.app/',
+    'https://maisonclo.netlify.app/',
 ];
 
 webs.forEach((web, index)=>{
