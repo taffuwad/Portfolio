@@ -318,7 +318,7 @@ if (supportsFinePointer) {
   /* ---------- Data ---------- */
   const IMAGES = [
     {
-      src: 'pro-component/p5-images/real-state-demo.jpg',
+      src: 'pro-component/p5-images/tenis.png',
       bg: '#111',
     },
     {
@@ -487,7 +487,7 @@ if (supportsFinePointer) {
 
 
   // -------------interactive images----------------
-  const demoLinks = ['https://realstatedemo01.netlify.app/', 'https://sairacafe.netlify.app/', 'https://new-gym-demo.vercel.app/', 'https://democlinic001.netlify.app/'];
+  const demoLinks = ['https://tenishub-inky.vercel.app/', 'https://sairacafe.netlify.app/', 'https://new-gym-demo.vercel.app/', 'https://democlinic001.netlify.app/'];
   const demoWeb = document.querySelectorAll('.toonhub-item');
   demoWeb.forEach((item, idx) => {
     item.addEventListener('click', () => {
@@ -500,7 +500,7 @@ if (supportsFinePointer) {
 
 
   const demowebNames = [
-    'Real State',
+    'Tenis',
     'Cafe',
     'GYM',
     'Clinic'
