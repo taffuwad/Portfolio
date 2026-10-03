@@ -323,15 +323,15 @@ if (supportsFinePointer) {
     },
     {
       src: 'pro-component/p5-images/returent-demo.jpg',
-      bg: '#2A2515',
+      bg: '#111',
     },
     {
       src: 'pro-component/p5-images/gym-demo.jpg',
-      bg: '#8A741E',
+      bg: '#111',
     },
     {
       src: 'pro-component/p5-images/clinic-demo.jpg',
-      bg: '#FFD43B',
+      bg: '#111',
     },
   ];
 
