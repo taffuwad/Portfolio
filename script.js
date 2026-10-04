@@ -675,7 +675,94 @@ talk.addEventListener('click', ()=>{
   "https://wa.me/8801920409685?text=Hello%20Fuwad%2C%20I%20want%20to%20work%20with%20you.",
   "_blank"
 );
-})
+});
+
+// Resume Download Button Interaction -----------------------------------------------
+(() => {
+    const resumeBtn = document.querySelector('.resume-btn');
+    if (!resumeBtn) return;
+
+    let resetTimer = null;
+    let isProcessing = false;
+
+    const handleDownload = (event) => {
+        if (event) event.preventDefault();
+
+        if (isProcessing) return;
+        isProcessing = true;
+
+        const btnText = resumeBtn.querySelector('.btn-text') || resumeBtn.querySelector('span:not(.btn-progress)');
+        const btnIcon = resumeBtn.querySelector('i');
+        const progressBar = resumeBtn.querySelector('.btn-progress');
+
+        const originalText = 'DOWNLOAD RESUME';
+        const originalIconClass = 'ri-download-2-line';
+
+        if (resetTimer) clearTimeout(resetTimer);
+
+        // Reset progress bar instantly before starting
+        if (progressBar) {
+            progressBar.style.transition = 'none';
+            progressBar.style.width = '0%';
+            void progressBar.offsetWidth;
+            progressBar.style.transition = '';
+        }
+
+        // 1. Enter Downloading state
+        resumeBtn.classList.remove('is-success');
+        resumeBtn.classList.add('is-downloading');
+        if (btnText) btnText.textContent = 'DOWNLOADING...';
+        if (btnIcon) btnIcon.className = 'ri-loader-4-line';
+
+        // 2. Trigger the file download
+        const downloadUrl = resumeBtn.getAttribute('href') || 'components/resume.pdf';
+        const downloadName = resumeBtn.getAttribute('download') || 'Fuwad-Talukder-Resume.pdf';
+
+        const triggerDownload = () => {
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = (!downloadName || downloadName === 'true') ? 'Fuwad-Talukder-Resume.pdf' : downloadName;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        };
+
+        // Small delay to ensure browser paints initial downloading state
+        setTimeout(triggerDownload, 150);
+
+        // 3. Switch to Success state once progress animation completes (~950ms)
+        setTimeout(() => {
+            resumeBtn.classList.remove('is-downloading');
+            resumeBtn.classList.add('is-success');
+            if (btnText) btnText.textContent = 'DOWNLOADED!';
+            if (btnIcon) btnIcon.className = 'ri-check-line';
+
+            // 4. Auto-reset back to original state after 2.5s
+            resetTimer = setTimeout(() => {
+                resumeBtn.classList.remove('is-success');
+                if (btnText) btnText.textContent = originalText;
+                if (btnIcon) btnIcon.className = originalIconClass;
+                if (progressBar) {
+                    progressBar.style.transition = 'none';
+                    progressBar.style.width = '0%';
+                    void progressBar.offsetWidth;
+                    progressBar.style.transition = '';
+                }
+                isProcessing = false;
+            }, 2500);
+        }, 950);
+    };
+
+    resumeBtn.addEventListener('click', handleDownload);
+
+    // Keyboard accessibility for Space key
+    resumeBtn.addEventListener('keydown', (e) => {
+        if (e.key === ' ' || e.key === 'Spacebar') {
+            e.preventDefault();
+            handleDownload(e);
+        }
+    });
+})();
 
 
 
