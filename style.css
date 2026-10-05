@@ -899,6 +899,7 @@ nav .nav-link:hover .letter {
     z-index: 99;
     font-size: clamp(0.72rem, 1vw, 1rem);
     line-height: 1.5;
+    color: #222;
 }
 .about1 .left .resume-btn{
     position: relative;
@@ -1168,6 +1169,7 @@ nav .nav-link:hover .letter {
     font-size: clamp(1.05rem, 2.1vw, 2.15rem);
     font-weight: 300;
     line-height: 1.35;
+    color: #111;
 }
 .about1 .right p{
     font-size: clamp(1rem, 2vw, 2rem);
