@@ -1,0 +1,11 @@
+# robots.txt for Fuwad Talukder Portfolio
+User-agent: *
+Allow: /
+
+# Disallow internal components or raw assets if needed (allow all public portfolio assets)
+Allow: /components/
+Allow: /Project-Hub/
+
+# Sitemap location
+Sitemap: https://fuwadtalukder.vercel.app/sitemap.xml
+

@@ -1,0 +1,23 @@
+{
+  "name": "Fuwad Talukder — Frontend Developer & Creative Web Engineer",
+  "short_name": "Fuwad",
+  "description": "Portfolio of Fuwad Talukder, Frontend Developer & Creative Web Engineer specializing in modern JavaScript, React, GSAP, and interactive digital experiences.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f5f2ea",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "components/hero-images/hero-about.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "components/hero-images/hero-about.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
+
