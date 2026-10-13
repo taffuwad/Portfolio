@@ -1421,6 +1421,7 @@ nav .nav-link:hover .letter {
 
   .elem h1 {
     width: 100%;
+
   }
 
   .elem img {
@@ -1948,7 +1949,7 @@ nav .nav-link:hover .letter {
     /* background-color:#c75a5a; */
     min-height: 100vh;
     width: 100%;
-    padding: 4vw 3.7vw 0 3.7vw;
+    padding: 8vw 3.7vw 0 4vw;
     display: flex;
     flex-direction: column;
     gap: 4vw;
@@ -3798,7 +3799,7 @@ textarea::placeholder {
 
     .contact{
     /* background-color:#ff0000; */
-    height: 75vh;
+    height: clamp(rem,75vh,50rem);
     min-height: 0;
     width: 100%;
     padding: 5vw 7vw 0 7vw;
@@ -3830,11 +3831,10 @@ textarea::placeholder {
 /* Very small mobile */
 @media (max-width: 375px) {
   .contact{
-    /* background-color:#c75a5a; */
-    height: auto;
-    min-height: 75vh;
+    height: clamp(rem,40rem,50rem);
+    min-height: 0;
     width: 100%;
-    padding: 5vw 7vw 0 7vw;
+    padding: 5vw 7vw 2vw 7vw;
     display: flex;
     flex-direction: column;
     gap: 10vw;
